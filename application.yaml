@@ -11,7 +11,7 @@ spec:
     path: Kind/charts/dev/nginx
   destination:
     server: 'https://kubernetes.default.svc'
-    # namespace: webserver-ns
+    namespace: webserver-ns
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

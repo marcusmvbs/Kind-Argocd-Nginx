@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-nginx
+  name: my-app
   namespace: argocd-ns
 spec:
   project: argocd-rollouts
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
     targetRevision: main
-    path: Kind/charts/dev # Path to your Helm chart directory
+    path: Kind/charts/dev/nginx
   destination:
     server: 'https://kubernetes.default.svc'
     # namespace: webserver-ns

@@ -1,5 +1,5 @@
 deployment:
-  # namespace: webserver-ns
+  namespace: webserver-ns
   name: nginx-argo
   replicas: 3
   image: nginx:1.25

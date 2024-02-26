@@ -1,15 +1,16 @@
-deployment:
-  namespace: webserver-ns
-  name: nginx-argo
-  replicas: 3
-  image: bitnami/nginx
-  cpu: 1
-  memory: 128Mi
-  ports:
-    port1: 80
-    port2: 443
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
+nginx:
+  deployment:
+    namespace: webserver-ns
+    name: nginx-argo
+    replicas: 3
+    image: nginx:latest
+    cpu: "1"
+    memory: "128Mi"
+    ports:
+      port1: 80
+      port2: 443
+    dnsPolicy: ClusterFirst
+    restartPolicy: Always
 
     # ingress:
   #   enabled: true

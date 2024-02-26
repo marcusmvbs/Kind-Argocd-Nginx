@@ -9,8 +9,11 @@ $apply_app      = "kubectl apply -f application.yaml"
 $kyverno_config = "kubectl apply -f kind-config/charts/dev/kyverno/deployment.yaml"
 
 # Docker Variables
-$DockerBuildCmd = "docker build -t $imageName ."
-$DockerRunCmd   = "docker run -d $network_type -v $socket_volume --name $containerName $imageName"
+$KindDelCmd      = "docker exec -it $containerName sh -c 'kind delete cluster'"
+$DockerStopCmd   = "docker stop $containerName"
+$DockerRemoveCmd = "docker rm $containerName"
+$DockerBuildCmd  = "docker build -t $imageName ."
+$DockerRunCmd    = "docker run -d $network_type -v $socket_volume --name $containerName $imageName"
 
 # Ansible Variables
 $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
@@ -24,12 +27,16 @@ $Apply_Kyverno = "docker exec -it $containerName sh -c '$kyverno_config'"
 
 ## RUN commands ##
 
-# Build Docker container
-Invoke-Expression -Command $DockerBuildCmd
-# Run Docker container
-Invoke-Expression -Command $DockerRunCmd
+# Execute Docker container to delete kind cluster
+Invoke-Expression -Command $KindDelCmd
+# Stop the Docker container
+Invoke-Expression -Command $DockerStopCmd
+# Remove the Docker container
+Invoke-Expression -Command $DockerRemoveCmd
 
-# Execute Ansible tasks
+# Rebuild
+Invoke-Expression -Command $DockerBuildCmd
+Invoke-Expression -Command $DockerRunCmd
 Invoke-Expression -Command $AnsiblePlaybook
 Start-Sleep -Seconds 10
 

@@ -10,13 +10,13 @@
 
     - name: Download Kind binary
       get_url:
-        url: "https://github.com/kubernetes-sigs/kind/releases/download/v0.12.0/kind-linux-amd64"
+        url: "https://github.com/kubernetes-sigs/kind/releases/download/v0.21.0/kind-linux-amd64"
         dest: "/usr/local/bin/kind"
         mode: '0755'
 
     - name: Download kubectl binary
       get_url:
-        url: "https://storage.googleapis.com/kubernetes-release/release/v1.24.1/bin/linux/amd64/kubectl"
+        url: "https://storage.googleapis.com/kubernetes-release/release/v1.29.2/bin/linux/amd64/kubectl"
         dest: "/usr/local/bin/kubectl"
         mode: '0755'
       
@@ -30,7 +30,7 @@
         src: "/tmp/helm.tar.gz"
         dest: "/tmp/"
 
-    - name: Move Helm binary to /usr/local/bin/
+    - name: Move Helm binary
       ansible.builtin.copy:
         src: "/tmp/linux-amd64/helm"
         dest: "/usr/local/bin/helm"
@@ -75,7 +75,7 @@
     - name: Helm installing postgreSQL...
       ansible.builtin.command: helm install my-postgresql bitnami/postgresql --namespace database-ns
 
-    - name: Helm installing postgreSQL...
+    - name: Helm installing kyverno...
       ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
 
     # - name: Helm installing Prometheus...

@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-LABEL maintainer="Marcus Barros da Silva <marcus.mvbs@gmail.com>"
+LABEL maintainer="Marcus Vinicius Barros da Silva <marcus.mvbs@gmail.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 

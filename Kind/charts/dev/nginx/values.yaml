@@ -1,10 +1,10 @@
 deployment:
   namespace: webserver-ns
-  name: nginx-deploy
+  name: nginx-argo
   replicas: 3
   image: nginx:1.25
-  cpu: 1
-  memory: 128Mi
+  # cpu: 1
+  # memory: 128Mi
   ports:
     port1: 80
     port2: 443

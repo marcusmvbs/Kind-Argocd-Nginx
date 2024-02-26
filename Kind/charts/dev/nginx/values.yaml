@@ -1,24 +1,15 @@
 nginx:
+  namespace: webserver-ns
+  service:
+    name: nginx-svc
+    annotations: {}
+    ports:
+      - containerPort1: 80
   deployment:
-    namespace: webserver-ns
     name: nginx-argo
     replicas: 3
     image: nginx:latest
-    cpu: "1"
-    memory: "128Mi"
-    ports:
-      port1: 80
-      port2: 443
-    dnsPolicy: ClusterFirst
-    restartPolicy: Always
 
-    # ingress:
+  # ingress:
   #   enabled: true
   #   namespace: webserver-ns
-  
-  # service:
-  #   annotations: {}
-  #   name: nginx-svc
-  #   ports:
-  #     - containerPort1: 80
-  #     - containerPort2: 443

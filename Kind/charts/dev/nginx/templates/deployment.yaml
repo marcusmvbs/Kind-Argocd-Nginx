@@ -2,9 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.nginx.deployment.name }}
-  namespace: {{ .Values.nginx.deployment.namespace }}
-  labels:
-    app: nginx
+  namespace: {{ .Values.nginx.namespace }}
 spec:
   replicas: {{ .Values.nginx.deployment.replicas }}
   selector:
@@ -18,12 +16,3 @@ spec:
       containers:
       - name: nginx
         image: {{ .Values.nginx.deployment.image }}
-        resources: 
-          limits:
-            cpu: {{ .Values.nginx.deployment.cpu }}
-            memory: {{ .Values.nginx.deployment.memory }}
-        ports:
-        - containerPort: {{ .Values.nginx.deployment.ports.port1 }}
-        - containerPort: {{ .Values.nginx.deployment.ports.port2 }}
-      dnsPolicy: {{ .Values.nginx.deployment.dnsPolicy }}
-      restartPolicy: {{ .Values.nginx.deployment.restartPolicy }}

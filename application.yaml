@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: webapp
+  namespace: argocd-ns
+spec:
+  project: argocd-rollouts
+  source:
+    repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
+    targetRevision: main
+    path: Kind/charts/dev
+  destination:
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=false
+    automated:
+      selfHeal: true
+      prune: true

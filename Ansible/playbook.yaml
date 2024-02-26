@@ -1,0 +1,91 @@
+---
+- name: Kind dependencies, Helm install, cluster config
+  hosts: localhost
+  become: yes
+  tasks:
+    # Container tasks
+    - name: Update Container Packages
+      apt:
+        update_cache: yes
+
+    - name: Download Kind binary
+      get_url:
+        url: "https://github.com/kubernetes-sigs/kind/releases/download/v0.12.0/kind-linux-amd64"
+        dest: "/usr/local/bin/kind"
+        mode: '0755'
+
+    - name: Download kubectl binary
+      get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/v1.24.1/bin/linux/amd64/kubectl"
+        dest: "/usr/local/bin/kubectl"
+        mode: '0755'
+      
+    - name: Download Helm binary
+      get_url:
+        url: "https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz"
+        dest: "/tmp/helm.tar.gz"
+
+    - name: Extract Helm binary
+      ansible.builtin.unarchive:
+        src: "/tmp/helm.tar.gz"
+        dest: "/tmp/"
+
+    - name: Move Helm binary to /usr/local/bin/
+      ansible.builtin.copy:
+        src: "/tmp/linux-amd64/helm"
+        dest: "/usr/local/bin/helm"
+        mode: '0755'
+
+    - name: Redis/SQL/Nginx Helm Repo
+      ansible.builtin.command: helm repo add bitnami https://charts.bitnami.com/bitnami
+
+    - name: Kyverno Helm Repo
+      ansible.builtin.command: helm repo add kyverno https://kyverno.github.io/kyverno/
+
+    # - name: Prometheus Helm Repo
+    #   ansible.builtin.command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+    # - name: Fluent Bit Helm Repo
+    #   ansible.builtin.command: helm repo add fluent https://fluent.github.io/helm-charts
+
+    # - name: Strimzi Helm Repo
+    #   ansible.builtin.command: helm repo add strimzi https://strimzi.io/charts/
+
+    - name: Search Helm Charts
+      ansible.builtin.command: helm search repo
+
+    - name: Update Helm Repositories
+      ansible.builtin.command: helm repo update
+
+    # Cluster tasks
+    - name: Create Kind cluster
+      ansible.builtin.command: kind create cluster --config=../kind-config/kind-config.yaml
+
+    - name: Create namespaces
+      ansible.builtin.command: kubectl create namespace {{ item }}
+      loop:
+        - webserver-ns
+        - database-ns
+        - kyverno-ns
+        - argocd-ns
+
+    - name: Helm installing nginx...
+      ansible.builtin.command: helm install my-nginx bitnami/nginx --namespace webserver-ns
+
+    - name: Helm installing postgreSQL...
+      ansible.builtin.command: helm install my-postgresql bitnami/postgresql --namespace database-ns
+
+    - name: Helm installing postgreSQL...
+      ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
+
+    # - name: Helm installing Prometheus...
+    #   ansible.builtin.command: helm install my-prometheus prometheus-community/prometheus --namespace monitoring-ns
+
+    # - name: Helm installing Fluent Bit...
+    #   ansible.builtin.command: helm install my-fluent-bit fluent/fluent-bit --namespace logs-ns
+
+    # - name: Helm installing Redis...
+    #   ansible.builtin.command: helm install my-redis bitnami/redis --namespace cache-ns
+
+    # - name: Helm installing Strimzi Kafka Operator...
+    #   ansible.builtin.command: helm install my-strimzi strimzi/strimzi-kafka-operator --namespace kafka-ns

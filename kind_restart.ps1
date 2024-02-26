@@ -43,7 +43,7 @@ Start-Sleep -Seconds 10
 # Argocd install and manifest application ##
 Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
-Start-Sleep -Seconds 120
 
 # Apply Kubernetes config
-# Invoke-Expression -Command $Apply_Kyverno
+Start-Sleep -Seconds 120
+Invoke-Expression -Command $Apply_Kyverno

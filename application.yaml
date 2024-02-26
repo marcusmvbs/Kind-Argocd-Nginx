@@ -8,14 +8,13 @@ spec:
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
     targetRevision: main
-    path: Kind/charts/dev/nginx
-    # helm:
-    #   valueFiles:
-    #     - values.yaml
+    path: Kind/charts/dev # Path to your Helm chart directory
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: webserver-ns
+    # namespace: webserver-ns
   syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
     automated:
       selfHeal: true
       prune: true

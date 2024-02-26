@@ -23,9 +23,7 @@ spec:
             cpu: {{ .Values.nginx.deployment.cpu }}
             memory: {{ .Values.nginx.deployment.memory }}
         ports:
-        - name: http
-          containerPort: {{ .Values.nginx.deployment.ports.port1 }}
-        - name: https
-          containerPort: {{ .Values.nginx.deployment.ports.port2 }}
+        - containerPort: {{ .Values.nginx.deployment.ports.port1 }}
+        - containerPort: {{ .Values.nginx.deployment.ports.port2 }}
       dnsPolicy: {{ .Values.nginx.deployment.dnsPolicy }}
       restartPolicy: {{ .Values.nginx.deployment.restartPolicy }}

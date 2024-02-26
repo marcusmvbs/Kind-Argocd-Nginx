@@ -23,9 +23,7 @@ spec:
             cpu: 1
             memory: 128Mi
         ports:
-        - name: http
-          containerPort: 80
-        - name: https
-          containerPort: 443
+        - containerPort: 80
+        - containerPort: 443
       dnsPolicy: ClusterFirst
       restartPolicy: Always

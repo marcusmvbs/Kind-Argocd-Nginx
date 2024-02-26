@@ -8,7 +8,7 @@ $argocd_install = "kubectl apply -n argocd-ns -f https://raw.githubusercontent.c
 $apply_app      = "kubectl apply -f application.yaml"
 $kubectl_pods   = "kubectl get pods -A"
 $kyverno_config = "kubectl apply -f Kind/charts/dev/kyverno/templates/clusterpolicy.yaml"
-$nginx_config   = "kubectl apply -f Kind/charts/dev/nginx/templates/deployment.yaml"
+$nginx_config   = "kubectl apply -f hard_deploy_nginx.yaml"
 
 # Docker Variables
 $KindDelCmd      = "docker exec -it $containerName sh -c 'kind delete cluster'"
@@ -25,9 +25,9 @@ $Apply_ArgoCD  = "docker exec -it $containerName sh -c '$argocd_install'"
 $Apply_ArgoApp = "docker exec -it $containerName sh -c '$apply_app'"
 
 # Kubernetes Environment Variables
-$KubectlGetPods  = "docker exec -it $containerName sh -c '$kubectl_pods'"
-$Apply_Kyverno = "docker exec -it $containerName sh -c '$kyverno_config'"
-$Apply_Nginx   = "docker exec -it $containerName sh -c '$nginx_config'"
+$KubectlGetPods = "docker exec -it $containerName sh -c '$kubectl_pods'"
+$Apply_Kyverno  = "docker exec -it $containerName sh -c '$kyverno_config'"
+$Apply_Nginx    = "docker exec -it $containerName sh -c '$nginx_config'"
 
 ## RUN commands ##
 

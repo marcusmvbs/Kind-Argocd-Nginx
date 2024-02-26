@@ -7,11 +7,11 @@ spec:
   project: argocd-rollouts
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
-    # targetRevision: main
+    targetRevision: main
     path: Kind/charts/dev/nginx
-    # helm:
-    #   valueFiles:
-    #     - values.yaml
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: webserver-ns

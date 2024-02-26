@@ -2,7 +2,7 @@ deployment:
   namespace: webserver-ns
   name: nginx-argo
   replicas: 3
-  image: nginx:1.25
+  image: bitnami/nginx
   cpu: 1
   memory: 128Mi
   ports:

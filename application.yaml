@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
     targetRevision: main
-    path: Kind/charts/dev/nginx
+    path: Kind/charts/dev
   destination:
     server: 'https://kubernetes.default.svc'
     # namespace: webserver-ns

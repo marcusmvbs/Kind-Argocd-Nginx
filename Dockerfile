@@ -23,7 +23,7 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
 RUN mkdir -p /ansible /kind-config
 COPY Ansible/ /ansible/
 COPY Kind/ /kind-config/
-COPY application.yaml ./application.yaml
+COPY hard_deploy.yaml ./hard_deploy_nginx.yaml
 
 # WORKDIR /kind-config/
 

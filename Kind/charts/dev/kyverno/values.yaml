@@ -1,0 +1,8 @@
+kyverno:
+  clusterpolicy:
+    name: limits-required
+    validationFailureAction: Enforce
+    kinds: Pod
+    message: "The cpu and memory limits are not defined"
+    memory: "?*"
+    cpu: "?*"

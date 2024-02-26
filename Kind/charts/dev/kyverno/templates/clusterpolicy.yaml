@@ -2,17 +2,17 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy 
 # kind: Policy (Would be applied only in this namespace)
 metadata:
-  name: precisa-cpu-limits
+  name: {{ .Values.kyverno.clusterpolicy.name }}
 spec:
-  validationFailureAction: Enforce
+  validationFailureAction: {{ .Values.kyverno.clusterpolicy.validationFailureAction }}
   rules:
   - name: validate-limits
     match:
       resources:
         kinds:
-        - Pod
+        - {{ .Values.kyverno.clusterpolicy.kinds }}
     validate:
-      message: "The cpu and memory limits are not defined"
+      message: {{ .Values.kyverno.clusterpolicy.message }}
       pattern:
         spec:
           containers:
@@ -20,5 +20,5 @@ spec:
             resources:
               limits:
               # The limits must be defined for all pods
-                memory: "?*" 
-                cpu: "?*"
+                memory: {{ .Values.kyverno.clusterpolicy.memory }}
+                cpu: {{ .Values.kyverno.clusterpolicy.cpu }}

@@ -1,0 +1,23 @@
+nginx:
+  # ingress:
+  #   enabled: true
+  #   namespace: webserver-ns
+  
+  # service:
+  #   annotations: {}
+  #   name: nginx-svc
+  #   ports:
+  #     - containerPort1: 80
+  #     - containerPort2: 443
+
+  deployment:
+    name: nginx-deploy
+    replicas: 2
+    image: bitnami/nginx
+    cpu: 1
+    memory: 128Mi
+    ports:
+      - containerPort1: 80
+      - containerPort2: 443
+    dnsPolicy: ClusterFirst
+    restartPolicy: Always

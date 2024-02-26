@@ -9,12 +9,12 @@ spec:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
     targetRevision: main
     path: Kind/charts/dev/nginx
-    helm:
-      valueFiles:
-        - values.yaml
+    # helm:
+    #   valueFiles:
+    #     - values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: webserver-ns
+    # namespace: webserver-ns
   syncPolicy:
     automated:
       selfHeal: true

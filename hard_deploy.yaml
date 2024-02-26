@@ -17,11 +17,11 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: bitnami/nginx
-        resources: 
-          limits:
-            cpu: 1
-            memory: 128Mi
+        image: nginx:1.25
+        # resources: 
+        #   limits:
+        #     cpu: 1
+        #     memory: 128Mi
         ports:
         - containerPort: 80
         - containerPort: 443

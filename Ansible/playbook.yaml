@@ -72,7 +72,7 @@
       ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
 
     - name: Helm installing nginx...
-      ansible.builtin.command: helm template my-nginx ../Kind/charts/dev/nginx/deployment.yaml --values values.yaml
+      ansible.builtin.command: helm template my-nginx ../Kind/charts/dev/nginx/templates/deployment.yaml --values values.yaml
 
     # - name: Helm installing postgreSQL...
     #   ansible.builtin.command: helm install postgresql-deploy bitnami/postgresql --namespace database-ns

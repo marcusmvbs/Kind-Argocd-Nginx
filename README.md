@@ -12,6 +12,8 @@ Fluentbit
 Strimzi
 
 kubectl apply -f hard_deploy_nginx.yaml
+kubectl logs argocd-server-6ff68795c6-28qck -n argocd-ns
+kubectl apply --dry-run=client -f application.yaml ## To validate ##
 kubectl get clusterpolicies.kyverno.io
 
 ##Next command creates a default nginx pod with no cache and add a yaml file as a template## 

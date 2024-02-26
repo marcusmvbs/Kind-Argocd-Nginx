@@ -64,19 +64,17 @@
     - name: Create namespaces
       ansible.builtin.command: kubectl create namespace {{ item }}
       loop:
-        - webserver-ns
-        - database-ns
         - kyverno-ns
-        - argocd-ns
+        - webserver-ns
+
+    - name: Helm installing kyverno...
+      ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
 
     - name: Helm installing nginx...
       ansible.builtin.command: helm install my-nginx bitnami/nginx --namespace webserver-ns
 
-    - name: Helm installing postgreSQL...
-      ansible.builtin.command: helm install postgresql-deploy bitnami/postgresql --namespace database-ns
-
-    - name: Helm installing kyverno...
-      ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
+    # - name: Helm installing postgreSQL...
+    #   ansible.builtin.command: helm install postgresql-deploy bitnami/postgresql --namespace database-ns
 
     # - name: Helm installing Prometheus...
     #   ansible.builtin.command: helm install my-prometheus prometheus-community/prometheus --namespace monitoring-ns

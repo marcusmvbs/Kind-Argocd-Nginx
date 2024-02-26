@@ -10,7 +10,6 @@ $KindExecCommand = "docker exec -it $containerName /bin/bash"
 
 ## Run Commands ##
 Invoke-Expression -Command $KubectlGetPods
-
 # Invoke-Expression -Command $KubectlKyverno
 
 # Execute Kind Cluster

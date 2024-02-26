@@ -3,8 +3,8 @@ deployment:
   name: nginx-deploy
   replicas: 3
   image: bitnami/nginx
-  # cpu: 1
-  # memory: 128Mi
+  cpu: 1
+  memory: 128Mi
   ports:
     port1: 80
     port2: 443

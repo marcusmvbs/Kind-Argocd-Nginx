@@ -2,10 +2,14 @@
 Docker > Ansible > Kind > ... > Argocd
 
 # Needed 
-Prometheus -> kube prom, grafana -> loki & mimi
-Ingress, Cert Manager & Lets encrypt
-Trivy - Scan container image (Security)
-Kyverno - Native Policy Management (Validate, Change or Create new resources)
+✓ Kyverno    -> Native Policy Management (Validate, Change or Create new resources)
+Ingress      ->
+Prometheus   -> kube prom
+Grafana      -> loki & mimi
+Cert Manager -> Lets encrypt
+Trivy        -> Scan container image (Security)
+Fluentbit
+Strimzi
 
 kubectl apply -f kind-config/charts/dev/kyverno/templates/deployment.yaml
 kubectl get clusterpolicies.kyverno.io

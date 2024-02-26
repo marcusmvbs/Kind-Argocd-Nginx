@@ -1,5 +1,18 @@
 nginx:
-  # ingress:
+  deployment:
+    namespace: webserver-ns
+    name: nginx-deploy
+    replicas: 3
+    image: nginx:1.25
+    # cpu: 1
+    # memory: 128Mi
+    # ports:
+    #   - containerPort1: 80
+    #   - containerPort2: 443
+    # dnsPolicy: ClusterFirst
+    # restartPolicy: Always
+
+    # ingress:
   #   enabled: true
   #   namespace: webserver-ns
   
@@ -9,15 +22,3 @@ nginx:
   #   ports:
   #     - containerPort1: 80
   #     - containerPort2: 443
-
-  deployment:
-    name: nginx-deploy
-    replicas: 2
-    image: bitnami/nginx
-    cpu: 1
-    memory: 128Mi
-    ports:
-      - containerPort1: 80
-      - containerPort2: 443
-    dnsPolicy: ClusterFirst
-    restartPolicy: Always

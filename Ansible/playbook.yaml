@@ -59,7 +59,7 @@
 
     # Cluster tasks
     - name: Create Kind cluster
-      ansible.builtin.command: kind create cluster --config=../kind-config/kind-config.yaml
+      ansible.builtin.command: kind create cluster --config=../Kind/kind-config.yaml
 
     - name: Create namespaces
       ansible.builtin.command: kubectl create namespace {{ item }}

@@ -15,8 +15,8 @@ spec:
     automated:
       selfHeal: true
       prune: true
-  dependencies:
-  - src:
-      namespace: kyverno-ns
-      kind: ClusterPolicy
-      name: limits-required
+  # dependencies:
+  # - src:
+  #     namespace: kyverno-ns
+  #     kind: ClusterPolicy
+  #     name: limits-required

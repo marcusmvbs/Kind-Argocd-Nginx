@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hard-deploy-nginx
-  namespace: webserver-ns
+  # namespace: webserver-ns
   labels:
     app: nginx
 spec:

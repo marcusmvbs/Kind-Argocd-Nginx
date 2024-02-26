@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
     targetRevision: HEAD
-    path: ./kind-config/charts/dev/
+    path: Kind/charts/dev/nginx
     helm:
       valueFiles:
         - values.yaml

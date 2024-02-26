@@ -17,13 +17,15 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.25
+        image: bitnami/nginx
         resources: 
           limits:
             cpu: 1
             memory: 128Mi
         ports:
-        - port1: 80
-        - port2: 443
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
       dnsPolicy: ClusterFirst
       restartPolicy: Always

@@ -3,12 +3,12 @@ nginx:
     namespace: webserver-ns
     name: nginx-deploy
     replicas: 3
-    image: nginx:1.25
-    cpu: 1
-    memory: 128Mi
+    image: bitnami/nginx
+    # cpu: 1
+    # memory: 128Mi
     ports:
-      - containerPort1: 80
-      - containerPort2: 443
+        port1: 80
+        port2: 443
     dnsPolicy: ClusterFirst
     restartPolicy: Always
 

@@ -1,7 +1,5 @@
 # Common Variables
 $containerName = "kind_container"
-
-# Versions
 $kubectl_pods       = "kubectl get pods -A"
 $k_kyverno_policies = "kubectl get clusterpolicies.kyverno.io"
 

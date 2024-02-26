@@ -23,7 +23,7 @@ spec:
             cpu: {{ .Values.nginx.deployment.cpu }}
             memory: {{ .Values.nginx.deployment.memory }}
         ports:
-        - containerPort1: {{ .Values.nginx.deployment.ports.containerPort1 }}
-        - containerPort2: {{ .Values.nginx.deployment.ports.containerPort2 }}
+        - port1: {{ .Values.nginx.deployment.ports.port1 }}
+        - port2: {{ .Values.nginx.deployment.ports.port2 }}
       dnsPolicy: {{ .Values.nginx.deployment.dnsPolicy }}
       restartPolicy: {{ .Values.nginx.deployment.restartPolicy }}

@@ -7,7 +7,7 @@ spec:
   project: argocd-rollouts
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
-    targetRevision: HEAD
+    targetRevision: main
     path: Kind/charts/dev
     # helm:
     #   valueFiles:

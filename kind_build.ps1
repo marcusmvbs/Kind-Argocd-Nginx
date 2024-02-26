@@ -6,8 +6,8 @@ $socket_volume  = "/var/run/docker.sock:/var/run/docker.sock"
 $playbook_exec  = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
 $argocd_install = "kubectl apply -n argocd-ns -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
 $apply_app      = "kubectl apply -f application.yaml"
-$kyverno_config = "kubectl apply -f kind-config/charts/dev/kyverno/templates/deployment.yaml"
-$nginx_config   = "kubectl apply -f kind-config/charts/dev/nginx/templates/pod.yaml"
+$kyverno_config = "kubectl apply -f kind-config/charts/dev/kyverno/templates/clusterpolicy.yaml"
+$nginx_config   = "kubectl apply -f kind-config/charts/dev/nginx/templates/deployment.yaml"
 
 # Docker Variables
 $DockerBuildCmd = "docker build -t $imageName ."
@@ -39,9 +39,9 @@ Start-Sleep -Seconds 10
 Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
 
-# Apply Kubernetes config
-Start-Sleep -Seconds 120
-Invoke-Expression -Command $Apply_Kyverno
+# # Apply Kubernetes config
+# Start-Sleep -Seconds 120
+# Invoke-Expression -Command $Apply_Kyverno
 
-# Create nginx pod using Kyverno policy of cpu and memory defined
-Invoke-Expression -Command $Apply_Nginx
+# # Create nginx pod using Kyverno policy of cpu and memory defined
+# Invoke-Expression -Command $Apply_Nginx

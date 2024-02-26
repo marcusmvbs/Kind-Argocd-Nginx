@@ -4,8 +4,8 @@ nginx:
     name: nginx-deploy
     replicas: 3
     image: nginx:1.25
-    # cpu: 1
-    # memory: 128Mi
+    cpu: 1
+    memory: 128Mi
     ports:
       - containerPort1: 80
       - containerPort2: 443

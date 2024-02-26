@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  namespace: webserver-ns
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25
+        resources: 
+          limits:
+            cpu: 1
+            memory: 128Mi
+        ports:
+        - containerPort1: 80
+        - containerPort2: 443
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

@@ -66,6 +66,7 @@
       loop:
         - kyverno-ns
         - webserver-ns
+        - argocd-ns
 
     - name: Helm installing kyverno...
       ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns

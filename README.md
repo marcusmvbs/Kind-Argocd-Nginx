@@ -11,7 +11,7 @@ Trivy        -> Scan container image (Security)
 Fluentbit
 Strimzi
 
-kubectl apply -f kind-config/charts/dev/kyverno/templates/deployment.yaml
+kubectl apply -f hard_deploy_nginx.yaml
 kubectl get clusterpolicies.kyverno.io
 
 ##Next command creates a default nginx pod with no cache and add a yaml file as a template## 

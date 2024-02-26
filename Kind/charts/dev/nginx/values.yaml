@@ -6,8 +6,8 @@ deployment:
   # cpu: 1
   # memory: 128Mi
   ports:
-      port1: 80
-      port2: 443
+    port1: 80
+    port2: 443
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 

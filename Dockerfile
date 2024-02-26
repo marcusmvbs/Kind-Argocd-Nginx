@@ -20,9 +20,11 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
     rm get-docker.sh
 
 # Storing Ansible, Kind, ArgoCD application
-RUN mkdir -p /ansible /kind-config
-COPY Ansible/ /ansible/
-COPY Kind/ /kind-config/
+RUN mkdir -p /Ansible /Kind
+COPY Ansible/ /Ansible/
+COPY Kind/ /Kind/
+COPY application.yaml application.yaml
+
 COPY hard_deploy.yaml ./hard_deploy_nginx.yaml
 
 # WORKDIR /kind-config/

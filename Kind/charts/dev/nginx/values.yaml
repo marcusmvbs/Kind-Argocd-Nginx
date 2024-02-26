@@ -6,11 +6,11 @@ nginx:
     image: nginx:1.25
     # cpu: 1
     # memory: 128Mi
-    # ports:
-    #   - containerPort1: 80
-    #   - containerPort2: 443
-    # dnsPolicy: ClusterFirst
-    # restartPolicy: Always
+    ports:
+      - containerPort1: 80
+      - containerPort2: 443
+    dnsPolicy: ClusterFirst
+    restartPolicy: Always
 
     # ingress:
   #   enabled: true

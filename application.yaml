@@ -4,12 +4,12 @@ metadata:
   name: nginx-app
   namespace: argocd-ns
 spec:
-  project: default
+  project: argocd-features
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: webserver-ns
   source:
-    repoURL: https://gitlab.com/projects_mvbs/argocd-rollouts.git
+    repoURL: https://github.com/marcusmvbs/argocd-features.git
     targetRevision: main
     path: charts/dev/nginx
   syncPolicy:

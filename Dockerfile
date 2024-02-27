@@ -24,11 +24,7 @@ RUN mkdir -p /ansible /kind /charts
 COPY ansible/ /ansible/
 COPY kind/ /kind/
 COPY charts/ /charts/
-
 COPY application.yaml application.yaml
-COPY .credentials.txt .gitlab_access_token.txt
-COPY gitlab_access.sh gitlab_access.sh
-RUN chmod +x gitlab_access.sh
 
 # Set up an entrypoint script to initialize Kind cluster
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh

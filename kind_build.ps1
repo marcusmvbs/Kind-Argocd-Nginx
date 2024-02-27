@@ -24,7 +24,6 @@ $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
 $Apply_ArgoCD     = "docker exec -it $containerName sh -c '$argocd_install'"
 $Apply_ArgoApp    = "docker exec -it $containerName sh -c '$apply_app'"
 $Remove_ArgoApp   = "docker exec -it $containerName sh -c '$remove_app'"
-$Argocd_Gitlab    = "docker exec -it $containerName sh -c '$gitlab_token'"
 $Kube_URL_enabled = "docker exec -it $containerName sh -c '$argo_server_pf'"
 # $Remove_GitlabCreds = "docker exec -it $containerName sh -c '$rm_access_token'"
 
@@ -50,8 +49,7 @@ Invoke-Expression -Command $Remove_ArgoApp
 # Invoke-Expression -Command $Remove_GitlabCreds
 
 # Login to ArgoCD using the personal access token
-Invoke-Expression -Command $Kube_URL_enabled
-Invoke-Expression -Command $Argocd_Gitlab
+# Invoke-Expression -Command $Kube_URL_enabled
 
 Start-Sleep -Seconds 15
 Invoke-Expression -Command $KubectlGetPods

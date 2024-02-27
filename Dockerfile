@@ -29,5 +29,4 @@ COPY application.yaml application.yaml
 # Expose any necessary ports
 EXPOSE 6443
 
-# Set the entrypoint script
 ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]

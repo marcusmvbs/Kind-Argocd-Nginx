@@ -4,15 +4,13 @@ nginx:
 
   service:
     name: nginx-svc
-    namespace: webserver-ns
     port1: 80
     port2: 443
     annotations: {}
 
   deployment:
     name: nginx-deploy
-    namespace: webserver-ns
-    replicas: 2
+    replicas: 3
     image: bitnami/nginx
 
   # ingress:

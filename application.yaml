@@ -2,13 +2,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: my-app
-  namespace: argocd-ns
+  namespace: argocd
 spec:
   project: argocd-rollouts
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
     targetRevision: main
-    path: Kind/charts/dev/nginx
+    path: charts/dev
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: webserver-ns

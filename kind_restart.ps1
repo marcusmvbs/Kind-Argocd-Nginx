@@ -54,6 +54,6 @@ Invoke-Expression -Command $KubectlGetPods
 # Invoke-Expression -Command $Apply_Kyverno
 
 # # Create nginx pod using Kyverno policy of cpu and memory defined
-Invoke-Expression -Command $Apply_Nginx
-Start-Sleep -Seconds 5
-Invoke-Expression -Command $KubectlGetPods
+# Invoke-Expression -Command $Apply_Nginx
+# Start-Sleep -Seconds 5
+# Invoke-Expression -Command $KubectlGetPods

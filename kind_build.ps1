@@ -3,12 +3,12 @@ $imageName      = "kind_docker_image"
 $containerName  = "kind_container"
 $network_type   = "--network=host"
 $socket_volume  = "/var/run/docker.sock:/var/run/docker.sock"
-$playbook_exec  = "ansible-playbook -i Ansible/inventory.ini Ansible/playbook.yaml"
-$argocd_install = "kubectl apply -n argocd-ns -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
+$playbook_exec  = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
+$argocd_install = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
 $kubectl_pods   = "kubectl get pods -A"
 $apply_app      = "kubectl apply -f application.yaml"
-$kyverno_config = "kubectl apply -f Kind/charts/dev/kyverno/templates/clusterpolicy.yaml"
-$nginx_config   = "kubectl apply -f Kind/charts/dev/nginx/templates/deployment.yaml"
+$kyverno_config = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
+$nginx_config   = "kubectl apply -f charts/dev/nginx/templates/deployment.yaml"
 
 # Docker Variables
 $DockerBuildCmd = "docker build -t $imageName ."
@@ -47,6 +47,6 @@ Invoke-Expression -Command $KubectlGetPods
 # Invoke-Expression -Command $Apply_Kyverno
 
 # # Create nginx pod using Kyverno policy of cpu and memory defined
-Invoke-Expression -Command $Apply_Nginx
-Start-Sleep -Seconds 5
-Invoke-Expression -Command $KubectlGetPods
+# Invoke-Expression -Command $Apply_Nginx
+# Start-Sleep -Seconds 5
+# Invoke-Expression -Command $KubectlGetPods

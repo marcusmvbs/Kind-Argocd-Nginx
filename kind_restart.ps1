@@ -3,11 +3,11 @@ $imageName      = "kind_docker_image"
 $containerName  = "kind_container"
 $network_type   = "--network=host"
 $socket_volume  = "/var/run/docker.sock:/var/run/docker.sock"
-$playbook_exec  = "ansible-playbook -i Ansible/inventory.ini Ansible/playbook.yaml"
+$playbook_exec  = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
 $argocd_install = "kubectl apply -n argocd-ns -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
 $apply_app      = "kubectl apply -f application.yaml"
 $kubectl_pods   = "kubectl get pods -A"
-$kyverno_config = "kubectl apply -f Kind/charts/dev/kyverno/templates/clusterpolicy.yaml"
+$kyverno_config = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
 $nginx_config   = "kubectl apply -f hard_deploy_nginx.yaml"
 
 # Docker Variables

@@ -1,20 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
-  namespace: argocd
+  name: nginx-app
+  namespace: argocd-ns
 spec:
-  project: argocd-rollouts
+  project: default
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: webserver-ns
   source:
     repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
     targetRevision: main
     path: charts/dev
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: webserver-ns
   syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
     automated:
       selfHeal: true
       prune: true

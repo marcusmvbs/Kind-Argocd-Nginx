@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: {{ .Values.nginx.deployment.image }}
         ports:
         - containerPort: {{ .Values.nginx.service.port }}

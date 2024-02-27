@@ -8,5 +8,7 @@ spec:
     app: nginx
   ports:
     - protocol: TCP
-      port: {{ .Values.nginx.service.port }}
-      targetPort: {{ .Values.nginx.service.port }}
+      port: {{ .Values.nginx.service.port1 }}
+      targetPort: {{ .Values.nginx.service.port1 }}
+      port: {{ .Values.nginx.service.port2 }}
+      targetPort: {{ .Values.nginx.service.port2 }}

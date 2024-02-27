@@ -17,4 +17,5 @@ spec:
         - name: nginx
           image: {{ .Values.nginx.deployment.image }}
           ports:
-            - containerPort: {{ .Values.nginx.service.port }}
+            - containerPort: {{ .Values.nginx.service.port1 }}
+            - containerPort: {{ .Values.nginx.service.port2 }}

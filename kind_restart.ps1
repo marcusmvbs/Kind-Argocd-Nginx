@@ -52,7 +52,7 @@ Invoke-Expression -Command $Apply_ArgoApp
 Invoke-Expression -Command $Remove_ArgoApp
 
 # Login to ArgoCD using the personal access token
-# Invoke-Expression -Command $Kube_URL_enabled
+Invoke-Expression -Command $Kube_URL_enabled
 
 Start-Sleep -Seconds 15
 Invoke-Expression -Command $KubectlGetPods

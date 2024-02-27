@@ -8,7 +8,7 @@ $argocd_install  = "kubectl apply -n argocd-ns -f https://raw.githubusercontent.
 $kubectl_pods    = "kubectl get pods -n webserver-ns"
 $apply_app       = "kubectl apply -f application.yaml"
 $remove_app      = "rm application.yaml"
-$argo_server_pf  = "kubectl port-forward service/argocd-server -n argocd-ns 8080:443"
+$argo_server_pf  = "kubectl port-forward service/argocd-server-6ff68795c6-7kcrc -n argocd-ns 8080:443"
 # $rm_access_token = "rm gitlab_creds.txt"
 $kyverno_config  = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
 

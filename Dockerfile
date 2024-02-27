@@ -25,8 +25,9 @@ COPY ansible/ /ansible/
 COPY kind/ /kind/
 COPY charts/ /charts/
 COPY application.yaml application.yaml
+COPY .credentials.txt .github_creds.txt
 
 # Expose any necessary ports
-EXPOSE 6443
+EXPOSE 8080 6443
 
 ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]

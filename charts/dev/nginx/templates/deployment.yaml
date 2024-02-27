@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-argo-depl
-  namespace: webserver-ns
+  name: {{ .Values.nginx.deployment.name }}
+  namespace: {{ .Values.nginx.namespace }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.nginx.deployment.replicas }}
   selector:
     matchLabels:
       app: nginx
@@ -17,4 +17,4 @@ spec:
       - name: nginx
         image: nginx:latest
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Values.nginx.service.port }}

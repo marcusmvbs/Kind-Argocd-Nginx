@@ -52,8 +52,8 @@ Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
 
 Start-Sleep -Seconds 15
-Invoke-Expression -Command $Apply_svc_nginx
-Invoke-Expression -Command $Apply_depl_nginx
+# Invoke-Expression -Command $Apply_svc_nginx
+# Invoke-Expression -Command $Apply_depl_nginx
 Invoke-Expression -Command $KubectlGetPods
 # # Apply Kubernetes config
 # Start-Sleep -Seconds 120

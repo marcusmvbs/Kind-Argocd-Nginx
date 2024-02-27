@@ -9,6 +9,8 @@ $apply_app      = "kubectl apply -f application.yaml"
 $kubectl_pods   = "kubectl get pods -A"
 $kyverno_config = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
 $nginx_config   = "kubectl apply -f hard_deploy_nginx.yaml"
+$nginx_svc      = "kubectl apply -f charts/dev/nginx/service.yaml"
+$nginx_depl     = "kubectl apply -f charts/dev/nginx/deployment.yaml"
 
 # Docker Variables
 $KindDelCmd      = "docker exec -it $containerName sh -c 'kind delete cluster'"
@@ -27,7 +29,8 @@ $Apply_ArgoApp = "docker exec -it $containerName sh -c '$apply_app'"
 # Kubernetes Environment Variables
 $KubectlGetPods = "docker exec -it $containerName sh -c '$kubectl_pods'"
 $Apply_Kyverno  = "docker exec -it $containerName sh -c '$kyverno_config'"
-$Apply_Nginx    = "docker exec -it $containerName sh -c '$nginx_config'"
+$Apply_svc_nginx  = "docker exec -it $containerName sh -c '$nginx_svc'"
+$Apply_depl_nginx = "docker exec -it $containerName sh -c '$nginx_depl'"
 
 ## RUN commands ##
 
@@ -47,13 +50,11 @@ Start-Sleep -Seconds 5
 # Argocd install and manifest application ##
 Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
+
 Start-Sleep -Seconds 15
+Invoke-Expression -Command $Apply_svc_nginx
+Invoke-Expression -Command $Apply_depl_nginx
 Invoke-Expression -Command $KubectlGetPods
 # # Apply Kubernetes config
 # Start-Sleep -Seconds 120
 # Invoke-Expression -Command $Apply_Kyverno
-
-# # Create nginx pod using Kyverno policy of cpu and memory defined
-# Invoke-Expression -Command $Apply_Nginx
-# Start-Sleep -Seconds 5
-# Invoke-Expression -Command $KubectlGetPods

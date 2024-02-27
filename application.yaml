@@ -9,7 +9,7 @@ spec:
     server: 'https://kubernetes.default.svc'
     namespace: webserver-ns
   source:
-    repoURL: https://github.com/marcusmvbs/argocd-rollouts.git
+    repoURL: https://gitlab.com/projects_mvbs/argocd-rollouts.git
     targetRevision: main
     path: charts/dev
   syncPolicy:

@@ -20,7 +20,7 @@ argocd app get <application-name> -n <namespace>
 kubectl get clusterpolicies.kyverno.io
 
 ##Next command creates a default nginx pod with no cache and add a yaml file as a template## 
-kubectl run nginx --image nginx --dry-run=client -o yaml > /kind-config/charts/dev/nginx/templates/pod.yaml
+kubectl run nginx --image nginx --dry-run=client -o yaml > /charts/dev/nginx/templates/pod.yaml
 
 
 Fix nginx helm inside cluster direct

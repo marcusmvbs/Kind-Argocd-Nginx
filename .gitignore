@@ -2,3 +2,4 @@
 .vscode/
 
 # Ignore credentials
+.credentials.txt

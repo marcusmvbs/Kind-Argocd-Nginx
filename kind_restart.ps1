@@ -6,6 +6,8 @@ $socket_volume  = "/var/run/docker.sock:/var/run/docker.sock"
 $playbook_exec  = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
 $argocd_install = "kubectl apply -n argocd-ns -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
 $apply_app      = "kubectl apply -f application.yaml"
+$gitlab_token   = "gitlab_access.sh"
+$argo_server_pf = "kubectl port-forward service/argocd-server -n argocd-ns 8080:443"
 $kubectl_pods   = "kubectl get pods -n webserver-ns"
 $remove_app     = "rm application.yaml"
 $kyverno_config = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
@@ -21,9 +23,11 @@ $DockerRunCmd    = "docker run -d $network_type -v $socket_volume --name $contai
 $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
 
 # ArgoCD variables
-$Apply_ArgoCD   = "docker exec -it $containerName sh -c '$argocd_install'"
-$Apply_ArgoApp  = "docker exec -it $containerName sh -c '$apply_app'"
-$Remove_ArgoApp = "docker exec -it $containerName sh -c '$remove_app'"
+$Apply_ArgoCD     = "docker exec -it $containerName sh -c '$argocd_install'"
+$Apply_ArgoApp    = "docker exec -it $containerName sh -c '$apply_app'"
+$Remove_ArgoApp   = "docker exec -it $containerName sh -c '$remove_app'"
+$Argocd_Gitlab    = "docker exec -it $containerName sh -c '$gitlab_token'"
+$Kube_URL_enabled = "docker exec -it $containerName sh -c '$argo_server_pf'"
 
 # Kubernetes Environment Variables
 $KubectlGetPods   = "docker exec -it $containerName sh -c '$kubectl_pods'"
@@ -48,6 +52,10 @@ Start-Sleep -Seconds 5
 Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
 Invoke-Expression -Command $Remove_ArgoApp
+
+# Login to ArgoCD using the personal access token
+Invoke-Expression -Command $Kube_URL_enabled
+Invoke-Expression -Command $Argocd_Gitlab
 
 Start-Sleep -Seconds 15
 Invoke-Expression -Command $KubectlGetPods

@@ -22,5 +22,7 @@ kubectl get clusterpolicies.kyverno.io
 ##Next command creates a default nginx pod with no cache and add a yaml file as a template## 
 kubectl run nginx --image nginx --dry-run=client -o yaml > /charts/dev/nginx/templates/pod.yaml
 
-kubectl port-forward argocd-server -n argocd-ns 6443:443
-kubectl port-forward nginx-deploy -n webserver-ns 80:80
+kubectl port-forward svc/argocd-server -n argocd-ns 8080:443
+argocd login localhost:8080
+
+kubectl port-forward svc/nginx-svc -n webserver-ns 80:80

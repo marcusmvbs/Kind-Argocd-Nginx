@@ -8,5 +8,5 @@ nginx:
 
   deployment:
     name: nginx-deploy
-    replicas: 3
+    replicas: 4
     image: bitnami/nginx

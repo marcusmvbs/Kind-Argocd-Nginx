@@ -10,5 +10,6 @@ spec:
     - protocol: TCP
       port: {{ .Values.nginx.service.port1 }}
       targetPort: {{ .Values.nginx.service.port1 }}
+    - protocol: TCP
       port: {{ .Values.nginx.service.port2 }}
       targetPort: {{ .Values.nginx.service.port2 }}

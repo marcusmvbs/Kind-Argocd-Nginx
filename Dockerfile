@@ -28,6 +28,6 @@ COPY application.yaml application.yaml
 COPY .credentials.txt .github_creds.txt
 
 # Expose any necessary ports
-EXPOSE 8080 6443
+EXPOSE 80 6443 22
 
 ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]

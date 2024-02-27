@@ -7,4 +7,6 @@ spec:
   selector:
     app: nginx
   ports:
-    - containerPort: {{ .Values.nginx.service.port }}
+    - protocol: TCP
+      port: {{ .Values.nginx.service.port }}
+      targetPort: {{ .Values.nginx.service.port }}

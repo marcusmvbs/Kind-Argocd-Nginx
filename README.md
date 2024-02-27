@@ -23,4 +23,4 @@ kubectl get clusterpolicies.kyverno.io
 kubectl run nginx --image nginx --dry-run=client -o yaml > /charts/dev/nginx/templates/pod.yaml
 
 kubectl port-forward argocd-server -n argocd-ns 6443:443
-kubectl port-forward nginx-deploy -n webserver-ns 8080:8080
+kubectl port-forward nginx-deploy -n webserver-ns 80:80

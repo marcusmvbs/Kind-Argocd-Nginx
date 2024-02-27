@@ -26,12 +26,8 @@ COPY kind/ /kind/
 COPY charts/ /charts/
 COPY application.yaml application.yaml
 
-# Set up an entrypoint script to initialize Kind cluster
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
-
 # Expose any necessary ports
 EXPOSE 6443
 
 # Set the entrypoint script
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]

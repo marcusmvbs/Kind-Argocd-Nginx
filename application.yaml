@@ -7,7 +7,7 @@ spec:
   project: default
   destination:
     server: 'https://kubernetes.default.svc'
-    # namespace: webserver-ns
+    namespace: webserver-ns
   source:
     repoURL: https://gitlab.com/projects_mvbs/argocd-rollouts.git
     targetRevision: main

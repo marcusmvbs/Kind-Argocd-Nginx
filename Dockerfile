@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \ 
     apt-get install -y --no-install-recommends \
-    gnupg curl wget ca-certificates apt-utils apt-transport-https \
+    gnupg curl wget ca-certificates apt-utils apt-transport-https vim \
     python3 python3-pip python3-apt \
     ansible \
     && rm -rf /var/lib/apt/lists/*

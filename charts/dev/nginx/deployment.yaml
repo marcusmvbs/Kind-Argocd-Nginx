@@ -4,7 +4,7 @@ metadata:
   name: nginx-argo-depl
   namespace: webserver-ns
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: nginx

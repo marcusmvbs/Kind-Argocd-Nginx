@@ -5,13 +5,13 @@ metadata:
   namespace: argocd-ns
 spec:
   project: argocd-features
-  destination:
-    server: https://kubernetes.default.svc
-    # namespace: webserver-ns
   source:
     repoURL: https://github.com/marcusmvbs/argocd-features.git
     targetRevision: main
     path: charts/dev/nginx
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: webserver-ns
   syncPolicy:
     automated:
       selfHeal: true

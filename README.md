@@ -22,19 +22,27 @@ kubectl get clusterpolicies.kyverno.io
 ##Next command creates a default nginx pod with no cache and add a yaml file as a template## 
 kubectl run nginx --image nginx --dry-run=client -o yaml > /charts/dev/nginx/templates/pod.yaml
 
-# ArgoCD steps
+# ArgoCD steps - https://argo-cd.readthedocs.io/en/stable/getting_started/
 
 kubectl port-forward svc/argocd-server -n argocd-ns 8080:443
+
+argocd admin initial-password -n argocd-ns
 kubectl get secret argocd-initial-admin-secret -n argocd-ns -o jsonpath="{.data.password}" | base64 -d
+
 argocd login localhost:8080 -y
 - username: admin
-- password: q117iO211IcrfsXs -> decrypt using base64
+- password: 9E5iSNhTC1TRbG4A -> decrypt using base64
 
-kubectl config current-context
-argocd cluster add kind-kind -y
+#kubectl config current-context
+kubectl apply -f kind/clusterrole.yaml
+argocd cluster add kind-kind
+-y  --in-cluster 
 argocd cluster list
 
 argocd app create nginx-app --repo https://github.com/marcusmvbs/argocd-features.git --path . --dest-server cluster_name_added dest-namespace webserver-ns
+argocd app get nginx-app
+argocd app sync nginx-app
+argocd app delete nginx-app
 
 # Nginx steps
 

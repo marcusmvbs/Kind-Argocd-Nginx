@@ -43,7 +43,7 @@
         mode: "0755"
 
     # helm search repo bitnami/aspnet-core  || https://helm.sh/docs/
-    - name: Redis/SQL/Nginx Helm Repo
+    - name: Aspnet-Core Helm Repo
       ansible.builtin.command: helm repo add bitnami https://charts.bitnami.com/bitnami
 
     - name: Kyverno Helm Repo
@@ -78,8 +78,8 @@
     # - name: Helm installing kyverno...
     #   ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
 
-    - name: Helm installing nginx...
-      ansible.builtin.command: helm install my-nginx ../charts/dev/nginx --values ../charts/dev/nginx/values.yaml
+    - name: Helm installing aspnet...
+      ansible.builtin.command: helm install my-aspnet ../charts/dev/aspnet --values ../charts/dev/aspnet/values.yaml
 
     # - name: Helm installing nginx...
     #   ansible.builtin.command: helm install my-nginx bitnami/nginx --namespace webserver-ns

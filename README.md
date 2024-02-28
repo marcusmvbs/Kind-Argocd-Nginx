@@ -47,7 +47,7 @@ argocd cluster list
 ---
 #helm search repo bitnami
 <!-- argocd app create nginx-ingress --repo https://charts.helm.sh/stable --helm-chart nginx-ingress --revision 1.24.3 --dest-namespace nginx-ingress --dest-server 172.22.0.4:6443 -->
-argocd app create aspnet-core --repo https://charts.helm.sh/stable --helm-chart aspnet-core --revision 1.9.6 --dest-namespace webserver --dest-server 172.22.0.4:6443
+argocd app create aspnet-core --repo https://charts.helm.sh/stable --helm-chart aspnet-core --revision 8.0.2 --dest-namespace webserver --dest-server 172.22.0.4:6443
 ## CURRENT TASK ##
 argocd app get nginx-app
 argocd app sync nginx-app

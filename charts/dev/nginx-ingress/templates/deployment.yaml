@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.controller.deployment.name }}
+  namespace: {{ .Values.controller.namespace }}
+spec:
+  replicas: {{ .Values.controller.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: nginx-ingress
+  template:
+    metadata:
+      labels:
+        app: nginx-ingress
+    spec:
+      containers:
+        - name: nginx-ingress-controller
+          image: {{ .Values.controller.deployment.image }}
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+    #       volumeMounts:
+    #         - name: nginx-load-balancer-conf
+    #           mountPath: /nginx-load-balancer-conf
+    #   volumes:
+    #     - name: nginx-load-balancer-conf
+    #       configMap:
+    #         name: nginx-load-balancer-conf

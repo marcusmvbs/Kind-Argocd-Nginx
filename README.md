@@ -39,19 +39,18 @@ vim ~/.kube/config
 kubectl config set-context --current --namespace=argocd
 argocd admin initial-password -n argocd
 kubectl port-forward --address 0.0.0.0 service/argocd-server -n argocd 6443:443 &
-argocd login 172.23.0.4:6443 --username admin --password WvJ7ouXcOd9Dncl3 --core
+argocd login 172.23.0.4:6443 --username admin --password lakw7lE38yRiCAWh --core
 argocd cluster add kind-kind --server=172.23.0.4:6443 --insecure
 argocd cluster list
 ---
-#helm search repo bitnami
-<!-- argocd app create nginx-ingress --repo https://charts.helm.sh/stable --helm-chart nginx-ingress --revision 1.24.3 --dest-namespace nginx-ingress --dest-server 172.23.0.4:6443 -->
-argocd app create nginx-app --repo https://charts.helm.sh/stable --helm-chart nginx --revision 15.12.2 --values /charts/dev/nginx/values.yaml --dest-namespace webserver --dest-server https://172.23.0.4:6443
-
+#helm search repo bitnami/nginx
+<!-- argocd app create nginx-ingress --repo https://charts.helm.sh/stable --helm-chart nginx-ingress --revision 1.24.3 --dest-namespace nginx-ingress --dest-server https://172.23.0.4:6443  -->
+argocd app create nginx-ingress --repo https://github.com/marcusmvbs/argocd-features.git --path charts/dev/nginx-ingress --values values.yaml --dest-namespace nginx-ingress --dest-server https://172.23.0.4:6443
+<!-- argocd app create nginx-webapp --repo https://github.com/marcusmvbs/argocd-features.git --path charts/dev/nginx --values values.yaml --dest-namespace webserver --dest-server https://172.23.0.4:6443 -->
 ## CURRENT TASK ##
-argocd app get nginx-app
-argocd app sync nginx-app
-argocd app delete nginx-app
+argocd app get nginx-ingress
+argocd app sync nginx-ingress
+argocd app delete nginx-ingress
 
-# Aspnet steps
-
+# Nginx steps
 kubectl port-forward nginx-deploy-7d57d8f-j2ggw -n webserver 8443:443 &

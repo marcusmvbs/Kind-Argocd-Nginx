@@ -43,7 +43,7 @@
         mode: "0755"
 
     # helm search repo bitnami/aspnet-core  || https://helm.sh/docs/
-    - name: Bitnami Helm Repo (nginx/argo-cd)
+    - name: Bitnami Helm Repo (nginx/nginx-ingress-controller)
       ansible.builtin.command: helm repo add bitnami https://charts.bitnami.com/bitnami
 
     - name: Kyverno Helm Repo

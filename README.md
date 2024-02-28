@@ -24,23 +24,35 @@ kubectl run nginx --image nginx --dry-run=client -o yaml > /charts/dev/nginx/tem
 
 # ArgoCD steps - https://argo-cd.readthedocs.io/en/stable/getting_started/
 
-kubectl port-forward svc/argocd-server -n argocd 6443:443 --address 0.0.0.0 &
-
+<!-- 
 argocd admin initial-password -n argocd
-kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
-argocd login 0.0.0.0:644
+#kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+kubectl port-forward svc/argocd-server -n argocd 6443:443 # --username=admin --password=A_SENHA_POR_FAVOR
+argocd login 172.22.0.4:6443
 username: admin
-password: 9E5iSNhTC1TRbG4A -> decrypt using base64
----
-argocd cluster add kind-kind
+password: 9E5iSNhTC1TRbG4A -> decrypt using base64 
+#argocd login 127.0.0.1:8080 --username admin --password "$ARGOCD_INITIAL_PASSWORD"
+#kubectl config view
+--> 
+<k8s_endpoint> <admin_pswd>
+
+kubectl get endpoints
+vim ~/.kube/config
 kubectl config set-context --current --namespace=argocd
+argocd admin initial-password -n argocd
+kubectl port-forward --address 0.0.0.0 service/argocd-server -n argocd 6443:443 &
+*argocd login <k8s_endpoint> --username admin --password <admin_pswd> --core
+*argocd cluster add kind-kind --server=<k8s_endpoint> --insecure
 argocd cluster list
 ---
-argocd app create nginx-app --repo https://github.com/marcusmvbs/argocd-features.git --path . --dest-server cluster_name_added dest-namespace webserver
+#helm search repo bitnami
+<!-- argocd app create nginx-ingress --repo https://charts.helm.sh/stable --helm-chart nginx-ingress --revision 1.24.3 --dest-namespace nginx-ingress --dest-server 172.22.0.4:6443 -->
+argocd app create aspnet-core --repo https://charts.helm.sh/stable --helm-chart aspnet-core --revision 1.9.6 --dest-namespace webserver --dest-server 172.22.0.4:6443
+## CURRENT TASK ##
 argocd app get nginx-app
 argocd app sync nginx-app
 argocd app delete nginx-app
 
 # Nginx steps
 
-kubectl port-forward svc/nginx-svc -n webserver-ns 80:80
+kubectl port-forward nginx-deploy-7d57d8f-j2ggw -n webserver 8443:443 &

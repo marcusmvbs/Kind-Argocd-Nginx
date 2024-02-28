@@ -4,7 +4,7 @@ nginx:
 
   service:
     name: nginx-svc
-    port: 80
+    port: 443
 
   deployment:
     name: nginx-deploy

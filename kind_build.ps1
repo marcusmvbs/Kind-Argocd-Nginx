@@ -46,7 +46,7 @@ Invoke-Expression -Command $Remove_ArgoApp
 
 # Login to ArgoCD using the personal access token
 
-Start-Sleep -Seconds 15
+Start-Sleep -Seconds 5
 Invoke-Expression -Command $KubectlGetPods
 
 # # Apply Kyverno config

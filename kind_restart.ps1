@@ -49,9 +49,14 @@ Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
 Invoke-Expression -Command $Remove_ArgoApp
 
-Start-Sleep -Seconds 15
+Start-Sleep -Seconds 5
 Invoke-Expression -Command $KubectlGetPods
 
 # # Apply Kubernetes config
-# Start-Sleep -Seconds 120
+# kubectl config set-context --current --namespace=argocd
+# Start-Sleep -Seconds 50
+# kubectl port-forward svc/argocd-server -n argocd 8080:80 &
+# argocd admin initial-password -n argocd
+
+
 # Invoke-Expression -Command $Apply_Kyverno

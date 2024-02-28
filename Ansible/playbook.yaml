@@ -42,6 +42,7 @@
         dest: "/usr/local/bin/argocd"
         mode: "0755"
 
+    # helm search repo bitnami/aspnet-core  || https://helm.sh/docs/
     - name: Redis/SQL/Nginx Helm Repo
       ansible.builtin.command: helm repo add bitnami https://charts.bitnami.com/bitnami
 

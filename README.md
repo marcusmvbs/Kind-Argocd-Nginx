@@ -28,7 +28,7 @@ kubectl port-forward svc/argocd-server -n argocd-ns 8080:443
 kubectl get secret argocd-initial-admin-secret -n argocd-ns -o jsonpath="{.data.password}" | base64 -d
 argocd login localhost:8080 -y
 - username: admin
-- password: -xyRVy8w1CcUQaLl -> decrypt using base64
+- password: q117iO211IcrfsXs -> decrypt using base64
 
 kubectl config current-context
 argocd cluster add kind-kind -y

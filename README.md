@@ -24,21 +24,18 @@ kubectl run nginx --image nginx --dry-run=client -o yaml > /charts/dev/nginx/tem
 
 # ArgoCD steps - https://argo-cd.readthedocs.io/en/stable/getting_started/
 
-kubectl port-forward svc/argocd-server -n argocd 8080:443 --address 0.0.0.0 &
+kubectl port-forward svc/argocd-server -n argocd 6443:443 --address 0.0.0.0 &
 
 argocd admin initial-password -n argocd
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
-argocd login 0.0.0.0:8080
-- username: admin
-- password: 9E5iSNhTC1TRbG4A -> decrypt using base64
-
+argocd login 0.0.0.0:644
+username: admin
+password: 9E5iSNhTC1TRbG4A -> decrypt using base64
 ---
-
-#kubectl config current-context
 argocd cluster add kind-kind
--y  --in-cluster 
+kubectl config set-context --current --namespace=argocd
 argocd cluster list
-
+---
 argocd app create nginx-app --repo https://github.com/marcusmvbs/argocd-features.git --path . --dest-server cluster_name_added dest-namespace webserver
 argocd app get nginx-app
 argocd app sync nginx-app

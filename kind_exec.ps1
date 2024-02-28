@@ -1,5 +1,5 @@
 # Common Variables
-$containerName = "kind_container"
+$containerName      = "kind_container"
 $kubectl_pods       = "kubectl get pods -A"
 $k_kyverno_policies = "kubectl get clusterpolicies.kyverno.io"
 

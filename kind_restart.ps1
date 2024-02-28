@@ -1,14 +1,15 @@
 # Common Variables
-$imageName      = "kind_docker_image"
-$containerName  = "kind_container"
-$network_type   = "--network=host"
-$socket_volume  = "/var/run/docker.sock:/var/run/docker.sock"
-$playbook_exec  = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
-$argocd_install = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
-$apply_app      = "kubectl apply -f application.yaml"
-$kubectl_pods   = "kubectl get pods -n webserver"
-$remove_app     = "rm application.yaml"
-$kyverno_config = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
+$imageName         = "kind_docker_image"
+$containerName     = "kind_container"
+$network_type      = "--network=host"
+$socket_volume     = "/var/run/docker.sock:/var/run/docker.sock"
+$playbook_exec     = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
+$argocd_install    = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
+$apply_app         = "kubectl apply -f application.yaml"
+$kubectl_pods      = "kubectl get pods -n webserver"
+$remove_app        = "rm application.yaml"
+$kubectl_endpoints = "kubectl get endpoints"
+$kyverno_config    = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
 
 # Docker Variables
 $KindDelCmd      = "docker exec -it $containerName sh -c 'kind delete cluster'"
@@ -27,6 +28,7 @@ $Remove_ArgoApp   = "docker exec -it $containerName sh -c '$remove_app'"
 
 # Kubernetes Environment Variables
 $KubectlGetPods   = "docker exec -it $containerName sh -c '$kubectl_pods'"
+$K8s_Endpoints    = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
 $Apply_Kyverno    = "docker exec -it $containerName sh -c '$kyverno_config'"
 
 ## RUN commands ##
@@ -51,6 +53,7 @@ Invoke-Expression -Command $Remove_ArgoApp
 
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $KubectlGetPods
+Invoke-Expression -Command $K8s_Endpoints
 
 # # Apply Kubernetes config
 # kubectl config set-context --current --namespace=argocd

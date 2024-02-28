@@ -1,12 +1,12 @@
-aspnet:
+nginx:
   enabled: true
   namespace: webserver
 
   service:
-    name: aspnet-svc
-    port: 443
+    name: nginx-svc
+    port: 80
 
   deployment:
-    name: aspnet-deploy
+    name: nginx-deploy
     replicas: 2
-    image: aspnet-core:8.0.2
+    image: nginx:1.25.4

@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nginx-app
-  namespace: argocd-ns
+  namespace: argocd
 spec:
   project: argocd-features
   source:
@@ -11,7 +11,6 @@ spec:
     path: charts/dev/nginx
   destination:
     server: https://kubernetes.default.svc
-    namespace: webserver-ns
   syncPolicy:
     automated:
       selfHeal: true

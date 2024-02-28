@@ -35,14 +35,12 @@ password: 9E5iSNhTC1TRbG4A -> decrypt using base64
 #kubectl config view
 --> 
 <k8s_endpoint> <admin_pswd>
-
-kubectl get endpoints
 vim ~/.kube/config
 kubectl config set-context --current --namespace=argocd
 argocd admin initial-password -n argocd
 kubectl port-forward --address 0.0.0.0 service/argocd-server -n argocd 6443:443 &
-argocd login <k8s_endpoint> --username admin --password <admin_pswd> --core
-argocd cluster add kind-kind --server=<k8s_endpoint> --insecure
+argocd login 172.23.0.4:6443 --username admin --password <admin_pswd> --core
+argocd cluster add kind-kind --server=172.23.0.4:6443 --insecure
 argocd cluster list
 ---
 #helm search repo bitnami

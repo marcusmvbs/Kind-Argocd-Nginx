@@ -36,8 +36,14 @@
         dest: "/usr/local/bin/helm"
         mode: '0755'
 
+    - name: Download Argocd cli
+      get_url:
+        url: "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64"
+        dest: "/usr/local/bin/argocd"
+        mode: "0755"
+
     # helm search repo bitnami/aspnet-core  || https://helm.sh/docs/
-    - name: Aspnet-Core Helm Repo
+    - name: Bitnami Helm Repo (nginx/argo-cd)
       ansible.builtin.command: helm repo add bitnami https://charts.bitnami.com/bitnami
 
     - name: Kyverno Helm Repo
@@ -75,8 +81,8 @@
     - name: Helm installing nginx...
       ansible.builtin.command: helm install my-nginx ../charts/dev/nginx --values ../charts/dev/nginx/values.yaml
 
-    - name: Helm installing argocd...
-      ansible.builtin.command: helm install my-argocd bitnami/argo-cd --version 5.9.1 --namespace argocd
+    # - name: Helm installing argocd...
+    #   ansible.builtin.command: helm install my-argocd bitnami/argo-cd --version 5.9.1 --namespace argocd
 
     # - name: Helm installing postgreSQL...
     #   ansible.builtin.command: helm install postgresql-deploy bitnami/postgresql --namespace database-ns

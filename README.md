@@ -39,13 +39,14 @@ vim ~/.kube/config
 kubectl config set-context --current --namespace=argocd
 argocd admin initial-password -n argocd
 kubectl port-forward --address 0.0.0.0 service/argocd-server -n argocd 6443:443 &
-argocd login 172.23.0.4:6443 --username admin --password <admin_pswd> --core
+argocd login 172.23.0.4:6443 --username admin --password WvJ7ouXcOd9Dncl3 --core
 argocd cluster add kind-kind --server=172.23.0.4:6443 --insecure
 argocd cluster list
 ---
 #helm search repo bitnami
-<!-- argocd app create nginx-ingress --repo https://charts.helm.sh/stable --helm-chart nginx-ingress --revision 1.24.3 --dest-namespace nginx-ingress --dest-server 172.22.0.4:6443 -->
-argocd app create nginx-app --repo https://charts.helm.sh/stable --helm-chart nginx --revision 1.25.4 --dest-namespace webserver --dest-server 172.22.0.4:6443
+<!-- argocd app create nginx-ingress --repo https://charts.helm.sh/stable --helm-chart nginx-ingress --revision 1.24.3 --dest-namespace nginx-ingress --dest-server 172.23.0.4:6443 -->
+argocd app create nginx-app --repo https://charts.helm.sh/stable --helm-chart nginx --revision 15.12.2 --values /charts/dev/nginx/values.yaml --dest-namespace webserver --dest-server https://172.23.0.4:6443
+
 ## CURRENT TASK ##
 argocd app get nginx-app
 argocd app sync nginx-app

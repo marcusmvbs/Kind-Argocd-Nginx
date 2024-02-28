@@ -11,6 +11,7 @@ spec:
     path: charts/dev/nginx
   destination:
     server: https://kubernetes.default.svc
+    namespace: webserver
   syncPolicy:
     automated:
       selfHeal: true

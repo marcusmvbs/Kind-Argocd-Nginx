@@ -41,17 +41,17 @@ vim ~/.kube/config
 kubectl config set-context --current --namespace=argocd
 argocd admin initial-password -n argocd
 kubectl port-forward --address 0.0.0.0 service/argocd-server -n argocd 6443:443 &
-*argocd login 172.22.0.4:6443 --username admin --password 387BmrOBFz47fnyF --core
-*argocd cluster add kind-kind --server=172.22.0.4:6443 --insecure
+argocd login <k8s_endpoint> --username admin --password <admin_pswd> --core
+argocd cluster add kind-kind --server=<k8s_endpoint> --insecure
 argocd cluster list
 ---
 #helm search repo bitnami
 <!-- argocd app create nginx-ingress --repo https://charts.helm.sh/stable --helm-chart nginx-ingress --revision 1.24.3 --dest-namespace nginx-ingress --dest-server 172.22.0.4:6443 -->
-argocd app create aspnet-core --repo https://charts.helm.sh/stable --helm-chart nginx --revision 1.25.4 --dest-namespace webserver --dest-server 172.22.0.4:6443
+argocd app create nginx-app --repo https://charts.helm.sh/stable --helm-chart nginx --revision 1.25.4 --dest-namespace webserver --dest-server 172.22.0.4:6443
 ## CURRENT TASK ##
-argocd app get aspnet-core
-argocd app sync aspnet-core
-argocd app delete aspnet-core
+argocd app get nginx-app
+argocd app sync nginx-app
+argocd app delete nginx-app
 
 # Aspnet steps
 

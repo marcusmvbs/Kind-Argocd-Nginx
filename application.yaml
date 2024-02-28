@@ -7,7 +7,7 @@ spec:
   project: argocd-features
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: webserver-ns
+    # namespace: webserver-ns
   source:
     repoURL: https://github.com/marcusmvbs/argocd-features.git
     targetRevision: main

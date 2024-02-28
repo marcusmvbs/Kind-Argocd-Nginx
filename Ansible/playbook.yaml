@@ -36,6 +36,12 @@
         dest: "/usr/local/bin/helm"
         mode: '0755'
 
+    - name: Download Argocd cli
+      get_url:
+        url: "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64"
+        dest: "/usr/local/bin/argocd"
+        mode: "0755"
+
     - name: Redis/SQL/Nginx Helm Repo
       ansible.builtin.command: helm repo add bitnami https://charts.bitnami.com/bitnami
 
@@ -91,9 +97,3 @@
 
     # - name: Helm installing Strimzi Kafka Operator...
     #   ansible.builtin.command: helm install my-strimzi strimzi/strimzi-kafka-operator --namespace kafka-ns
-
-    - name: Download Argo CLI binary
-      get_url:
-        url: "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64"
-        dest: "/usr/local/bin/argocd"
-        mode: "0755"

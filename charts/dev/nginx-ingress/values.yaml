@@ -9,5 +9,5 @@ controller:
     enabled: true
     port1: 80
     port2: 443
-  metrics:
-    enabled: true
+  # metrics:
+  #   enabled: true

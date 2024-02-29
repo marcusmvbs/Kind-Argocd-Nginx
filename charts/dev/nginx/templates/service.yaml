@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: {{ .Values.nginx.service.name }}
   namespace: {{ .Values.nginx.namespace }}
+  annotations: {}
 spec:
   selector:
     app: nginx

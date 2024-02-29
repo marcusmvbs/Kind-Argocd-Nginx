@@ -49,6 +49,9 @@
     - name: Kyverno Helm Repo
       ansible.builtin.command: helm repo add kyverno https://kyverno.github.io/kyverno/
 
+    - name: Open-Telemetry Helm Repo
+      ansible.builtin.command: helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+
     # - name: Prometheus Helm Repo
     #   ansible.builtin.command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
@@ -71,18 +74,21 @@
     - name: Create namespaces
       ansible.builtin.command: kubectl create namespace {{ item }}
       loop:
-        - nginx-ingress
         - webserver
+        - telemetry
         - argocd
-
-    # - name: Helm installing kyverno...
-    #   ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
-
-    - name: Helm installing nginx-ingress...
-      ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 10.5.2 --namespace nginx-ingress
 
     - name: Helm installing nginx...
       ansible.builtin.command: helm install my-nginx ../charts/dev/nginx --values ../charts/dev/nginx/values.yaml
+
+    - name: Helm installing open-telemetry...
+      ansible.builtin.command: helm install otel open-telemetry/opentelemetry-operator --version 0.48.0 --namespace telemetry
+
+    # - name: Helm installing nginx-ingress...
+    #   ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 10.5.2 --namespace nginx-ingress
+
+    # - name: Helm installing kyverno...
+    #   ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
 
     # - name: Helm installing argocd...
     #   ansible.builtin.command: helm install my-argocd bitnami/argo-cd --version 5.9.1 --namespace argocd

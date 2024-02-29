@@ -10,8 +10,27 @@ spec:
     targetRevision: HEAD
     path: charts/dev/nginx
   destination:
-    server: https://kubernetes.default.svc
+    server: https://172.24.0.4:6443
     namespace: webserver
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/marcusmvbs/argocd-features.git
+    targetRevision: HEAD
+    path: charts/dev/nginx-ingress
+  destination:
+    server: https://172.24.0.4:6443
+    namespace: nginx-ingress
   syncPolicy:
     automated:
       selfHeal: true

@@ -55,11 +55,4 @@ Start-Sleep -Seconds 5
 Invoke-Expression -Command $KubectlGetPods
 Invoke-Expression -Command $K8s_Endpoints
 
-# # Apply Kubernetes config
-# kubectl config set-context --current --namespace=argocd
-# Start-Sleep -Seconds 50
-# kubectl port-forward svc/argocd-server -n argocd 8080:80 &
-# argocd admin initial-password -n argocd
-
-
 # Invoke-Expression -Command $Apply_Kyverno

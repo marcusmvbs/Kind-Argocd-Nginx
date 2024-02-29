@@ -45,8 +45,6 @@ Invoke-Expression -Command $Apply_ArgoCD
 # Invoke-Expression -Command $Remove_ArgoApp
 # Invoke-Expression -Command $Remove_GitlabCreds
 
-# Login to ArgoCD using the personal access token
-
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $KubectlGetPods
 Invoke-Expression -Command $K8s_Endpoints

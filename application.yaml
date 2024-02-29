@@ -4,15 +4,17 @@ metadata:
   name: nginx-app
   namespace: argocd
 spec:
-  project: argocd-features
+  project: default
   source:
     repoURL: https://github.com/marcusmvbs/argocd-features.git
-    targetRevision: main
+    targetRevision: HEAD
     path: charts/dev/nginx
   destination:
     server: https://kubernetes.default.svc
     namespace: webserver
   syncPolicy:
+    syncOptions:
+    - ServerSideApply=true
     automated:
       selfHeal: true
       prune: true

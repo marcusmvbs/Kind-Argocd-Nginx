@@ -8,5 +8,5 @@ nginx:
 
   deployment:
     name: nginx-deploy
-    replicas: 1
+    replicas: 3
     image: nginx:1.25.4

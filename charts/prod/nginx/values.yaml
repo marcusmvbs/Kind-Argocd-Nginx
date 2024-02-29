@@ -1,0 +1,12 @@
+nginx:
+  enabled: true
+  namespace: webserver
+
+  service:
+    name: nginx-svc
+    port: 80
+
+  deployment:
+    name: nginx-deploy
+    replicas: 2
+    image: nginx:1.25.4

@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: {{ .Values.nginx.deployment.name }}
   namespace: {{ .Values.nginx.namespace }}
-  annotations: {}
 spec:
   replicas: {{ .Values.nginx.deployment.replicas }}
   selector:

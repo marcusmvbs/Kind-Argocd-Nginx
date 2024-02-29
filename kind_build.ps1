@@ -42,7 +42,7 @@ Start-Sleep -Seconds 10
 # Argocd install and manifest application ##
 Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
-Invoke-Expression -Command $Remove_ArgoApp
+# Invoke-Expression -Command $Remove_ArgoApp
 # Invoke-Expression -Command $Remove_GitlabCreds
 
 # Login to ArgoCD using the personal access token

@@ -49,7 +49,7 @@ Start-Sleep -Seconds 5
 # Argocd install and manifest application ##
 Invoke-Expression -Command $Apply_ArgoCD
 Invoke-Expression -Command $Apply_ArgoApp
-Invoke-Expression -Command $Remove_ArgoApp
+# Invoke-Expression -Command $Remove_ArgoApp
 
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $KubectlGetPods

@@ -1,9 +1,12 @@
 # ArgoCD-Rollouts
-Docker > Ansible > Kind > ... > Argocd
+Docker ✓ > Ansible ✓ > Kind ✓ > Helm Tools (kyverno ✓/nginx ✓/cert-manager X/argo-workflows X/nginx-ingress X) > 
+Argocd ✓ > Gitops-Github ✓
+
+
+# Difficulties
+- Argocd UI connection not completed.
 
 # Needed 
-✓ Kyverno    -> Native Policy Management (Validate, Change or Create new resources)
-Ingress      ->
 Prometheus   -> kube prom
 Grafana      -> loki & mimi
 Cert Manager -> Lets encrypt

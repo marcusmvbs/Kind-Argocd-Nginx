@@ -22,7 +22,7 @@
       
     - name: Download Helm binary
       get_url:
-        url: "https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz"
+        url: "https://get.helm.sh/helm-v3.14.2-linux-amd64.tar.gz"
         dest: "/tmp/helm.tar.gz"
 
     - name: Extract Helm binary
@@ -74,36 +74,20 @@
     - name: Create namespaces
       ansible.builtin.command: kubectl create namespace {{ item }}
       loop:
+        - kyverno
         - webserver
-        - telemetry
+        - argo-workflows
         - argocd
+        - cert-manager
 
-    - name: Helm installing nginx...
+    # - name: Helm installing kyverno... Test completed
+    #   ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno --version 3.1.4
+
+    - name: Helm installing nginx... ## Current Task ##
       ansible.builtin.command: helm install my-nginx ../charts/dev/nginx --values ../charts/dev/nginx/values.yaml
 
-    - name: Helm installing open-telemetry...
-      ansible.builtin.command: helm install otel open-telemetry/opentelemetry-operator --version 0.48.0 --namespace telemetry
+    - name: Helm installing argo-workflows...
+      ansible.builtin.command: helm install argo-workflows bitnami/argo-workflows --version 6.7.0 --namespace argo-workflows
 
-    # - name: Helm installing nginx-ingress...
-    #   ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 10.5.2 --namespace nginx-ingress
-
-    # - name: Helm installing kyverno...
-    #   ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno-ns
-
-    # - name: Helm installing argocd...
-    #   ansible.builtin.command: helm install my-argocd bitnami/argo-cd --version 5.9.1 --namespace argocd
-
-    # - name: Helm installing postgreSQL...
-    #   ansible.builtin.command: helm install postgresql-deploy bitnami/postgresql --namespace database-ns
-
-    # - name: Helm installing Prometheus...
-    #   ansible.builtin.command: helm install my-prometheus prometheus-community/prometheus --namespace monitoring-ns
-
-    # - name: Helm installing Fluent Bit...
-    #   ansible.builtin.command: helm install my-fluent-bit fluent/fluent-bit --namespace logs-ns
-
-    # - name: Helm installing Redis...
-    #   ansible.builtin.command: helm install my-redis bitnami/redis --namespace cache-ns
-
-    # - name: Helm installing Strimzi Kafka Operator...
-    #   ansible.builtin.command: helm install my-strimzi strimzi/strimzi-kafka-operator --namespace kafka-ns
+    - name: Helm installing cert-manager...
+      ansible.builtin.command: helm install cert-manager bitnami/cert-manager --version 0.22.1 --namespace cert-manager

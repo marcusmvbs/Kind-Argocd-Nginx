@@ -11,14 +11,16 @@
 # argocd app create nginx-webapp --repo https://github.com/marcusmvbs/argocd-features.git --path charts/dev/nginx --values values.yaml --dest-namespace webserver --dest-server https://172.24.0.4:6443
 # argocd app sync nginx-webapp
 
-## ARGOCD GITOPS - Config ##
-# Step 1: Get the Kubernetes endpoint from kubectl config, and modify the application.yaml file
-endpoint=$(kubectl config view --minify --output 'jsonpath={.clusters[0].cluster.server}')
-sed -i "s#https://kubernetes.default.svc#$endpoint#g" application.yaml
+## ARGOCD GITOPS - Config ## https://argo-cd.readthedocs.io/en/stable/getting_started/
+
+# Collect the Kubernetes endpoint using kubectl get endpoint
+ENDPOINT=$(kubectl get endpoints kubernetes --namespace=default -o=jsonpath='{.subsets[0].addresses[0].ip}{"\n"}https://')
+# Replace the server configuration in the kubeconfig file
+sed -i "s#server:.*#server: $ENDPOINT#g" ~/.kube/config
 # Step 2: Apply the modified YAML file
 kubectl apply -f application.yaml
 # Step 3: Set the cluster configuration
-kubectl config set-cluster kind-kind --server=$endpoint
+kubectl config set-cluster kind-kind --server=$K8S_ENDPOINT
 # Step 4: Set the context namespace
 kubectl config set-context --current --namespace=argocd
 # Step 5: Generate initial password for ArgoCD admin
@@ -31,7 +33,8 @@ argocd login localhost:8080 --username admin --password "$initialPassword" --ins
 # Step 8: Add the cluster to ArgoCD
 argocd cluster add kind-kind --server=localhost:8080 --insecure
 # Step 9: Create and sync the application
-argocd app create nginx-webapp --repo https://github.com/marcusmvbs/argocd-features.git --path charts/dev/nginx --values values.yaml --dest-namespace webserver --dest-server $endpoint
+GITHUB_REPO=https://github.com/marcusmvbs/argocd-features.git
+argocd app create nginx-webapp --repo GITHUB_REPO --path charts/dev/nginx --values values.yaml --dest-namespace webserver --dest-server $K8S_ENDPOINT
 argocd app sync nginx-webapp
 
 # # helm search repo bitnami/nginx

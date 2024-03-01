@@ -1,6 +1,6 @@
 # Argocd Configuration
 $containerName  = "kind_container"
-$INIT_PASSWORD  = "argocd admin initial-password -n argocd | awk 'NR==1 {print $1}'"
+$init_argo_pswd = "argocd admin initial-password -n argocd | awk 'NR==1 {print $1}'"
 $endpoint       = "kubectl get endpoints kubernetes -o=jsonpath='{.subsets[0].addresses[0].ip}:{.subsets[0].ports[0].port}'"
 $ENDPOINT       = "https://$endpoint"
 $kube_config    = "awk -v endpoint=$ENDPOINT '/server: /{$2 = endpoint} 1' ~/.kube/config > temp && mv temp ~/.kube/config"
@@ -12,6 +12,7 @@ $config_context = "kubectl config set-context --current --namespace=argocd"
 
 $port_forward   = "kubectl port-forward service/argocd-server -n argocd 8080:443 &"
 
+$INIT_PASSWORD    = "docker exec -it $containerName sh -c '$init_argo_pswd'"
 $K8S_Endpoint     = "docker exec -it $containerName sh -c '$endpoint'"
 $Edit_KubeConfig  = "docker exec -it $containerName sh -c '$kube_config'"
 $Indentation_Fix  = "docker exec -it $containerName sh -c '$kube_fix'"

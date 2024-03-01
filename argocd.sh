@@ -2,19 +2,20 @@
 
 # Argocd Configuration
 $kubectl_argo_pods="$(kubectl get pods -n argocd)"
-init_argo_pswd="$(argocd admin initial-password -n argocd | awk 'NR==1 {print $1}')"
+init_argo_pswd="argocd admin initial-password -n argocd | awk 'NR==1 {print $1}'"
 endpoint="$(kubectl get endpoints kubernetes -o=jsonpath='{.subsets[0].addresses[0].ip}:{.subsets[0].ports[0].port}')"
 endpoint_k="https://$endpoint"
-kube_config="$(awk -v endpoint="$endpoint_k" '/server: /{$2 = endpoint} 1' ~/.kube/config > temp && mv temp ~/.kube/config)"
+kube_config="$(awk -v endpoint_k8s="$endpoint_k" '/server: /{$2 = endpoint_k8s} 1' ~/.kube/config > temp && mv temp ~/.kube/config)"
 kube_fix="$(sed -i 's/\(^ *server:\)/    \1/' ~/.kube/config)"
-app_edition="$(sed -i 's#https://kubernetes.default.svc#$endpoint#' application.yaml)"
+app_edition="$(sed -i 's#https://kubernetes.default.svc#$endpoint_k#' application.yaml)"
 apply_app="$(kubectl apply -f application.yaml)"
 config_set="$(kubectl config set-cluster kind-kind --server=$endpoint_k)"
 config_context="$(kubectl config set-context --current --namespace=argocd)"
 port_forward="$(kubectl port-forward service/argocd-server -n argocd 8080:443 &)"
 
 # Execution
-# $kubectl_argo_pods
+echo "Starting argocd script..."
+$kubectl_argo_pods
 $init_argo_pswd
 sleep 5
 $endpoint

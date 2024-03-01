@@ -1,6 +1,10 @@
-# Dot Sourcing
-. ".\kind_build.ps1"
-. ".\kind_remove.ps1"
+# Common Variable
+$containerName  = "kind_container"
+
+# Clean up variables
+$KindDelCmd        = "docker exec -it $containerName sh -c 'kind delete cluster'"
+$DockerStopCmd     = "docker stop $containerName"
+$DockerRemoveCmd   = "docker rm $containerName"
 
 ## RUN commands ##
 # Clean up
@@ -9,18 +13,5 @@ Invoke-Expression -Command $DockerStopCmd
 Invoke-Expression -Command $DockerRemoveCmd
 
 ## Rebuild ##
-Invoke-Expression -Command $DockerBuildCmd
-Invoke-Expression -Command $DockerRunCmd
-Invoke-Expression -Command $AnsiblePlaybook
-
-## Argocd install ##
-Invoke-Expression -Command $Install_ArgoCD
-Write-Output "Waiting for argocd pods creation..."
-Start-Sleep -Seconds 80
-
-Write-Output "Cluster kubernetes is ready for argocd configuration!"
-Invoke-Expression -Command $Bad_Interp_Fix
-Invoke-Expression -Command $K8s_Endpoints
-
-## Execution continues in the file below ##
-& ".\argocd_config.ps1"
+# Dot Sourcing - Execution continues in the file below
+. .\kind_build.ps1

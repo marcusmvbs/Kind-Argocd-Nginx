@@ -1,13 +1,14 @@
 # Common Variables
-$imageName         = "kind_docker_image"
-$containerName     = "kind_container"
-$network_type      = "--network=host"
-$socket_volume     = "/var/run/docker.sock:/var/run/docker.sock"
-$playbook_exec     = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
-$argocd_install    = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
-$kubectl_endpoints = "kubectl get endpoints"
-$dos2unix          = "dos2unix argocd/argocd.sh"
-$kyverno_config    = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
+$imageName           = "kind_docker_image"
+$containerName       = "kind_container"
+$network_type        = "--network=host"
+$socket_volume       = "/var/run/docker.sock:/var/run/docker.sock"
+$playbook_exec       = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
+$argocd_install      = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
+$kubectl_endpoints   = "kubectl get endpoints"
+$dos2unix_argocd     = "dos2unix kind/argocd_config.sh"
+$dos2unix_nginx_sync = "dos2unix kind/argo_nginx_sync.sh"
+$kyverno_config      = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
 
 # Docker Variables
 $DockerBuildCmd = "docker build -t $imageName ."
@@ -20,9 +21,10 @@ $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
 $Install_ArgoCD = "docker exec -it $containerName sh -c '$argocd_install'"
 
 # Kubernetes Environment Variables
-$K8s_Endpoints  = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
-$Bad_Interp_Fix = "docker exec -it $containerName sh -c '$dos2unix'"
-$Apply_Kyverno  = "docker exec -it $containerName sh -c '$kyverno_config'"
+$K8s_Endpoints   = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
+$Bad_Interp_Fix1 = "docker exec -it $containerName sh -c '$dos2unix_argocd'"
+$Bad_Interp_Fix2 = "docker exec -it $containerName sh -c '$dos2unix_nginx_sync'"
+$Apply_Kyverno   = "docker exec -it $containerName sh -c '$kyverno_config'"
 
 ## RUN commands ##
 
@@ -41,5 +43,6 @@ Write-Output "Waiting for argocd pods creation..."
 Start-Sleep -Seconds 80
 
 Write-Output "Cluster kubernetes is ready for argocd configuration!"
-Invoke-Expression -Command $Bad_Interp_Fix
+Invoke-Expression -Command $Bad_Interp_Fix1
+Invoke-Expression -Command $Bad_Interp_Fix2
 Invoke-Expression -Command $K8s_Endpoints

@@ -1,11 +1,11 @@
-# Common Variables
+# Common Variable
 $containerName  = "kind_container"
 
 # Docker Variables
-$KindDelCmd      = "docker exec -it $containerName sh -c 'kind delete cluster'"
-$DockerStopCmd   = "docker stop $containerName"
-$DockerRemoveCmd = "docker rm $containerName"
-$DockerImagePrune = "docker image prune --all --force"
+$KindDelCmd        = "docker exec -it $containerName sh -c 'kind delete cluster'"
+$DockerStopCmd     = "docker stop $containerName"
+$DockerRemoveCmd   = "docker rm $containerName"
+$DockerImagePrune  = "docker image prune --all --force"
 $DockerSystemPrune = "docker system prune -f"
 
 # Execute Docker container to delete kind cluster

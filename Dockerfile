@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \ 
     apt-get install -y --no-install-recommends \
-    gnupg curl wget ca-certificates apt-utils apt-transport-https vim \
+    gnupg curl wget ca-certificates apt-utils apt-transport-https dos2unix vim \
     python3 python3-pip python3-apt \
     ansible \
     && rm -rf /var/lib/apt/lists/*
@@ -20,11 +20,14 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
     rm get-docker.sh
 
 # Storing Ansible, Kind, ArgoCD application
-RUN mkdir -p /ansible /kind /charts
+RUN mkdir -p /ansible /kind /charts /argocd
 COPY ansible/ /ansible/
 COPY kind/ /kind/
 COPY charts/ /charts/
 COPY application.yaml application.yaml
+
+COPY argocd.sh /argocd/argocd.sh
+RUN chmod +x argocd/argocd.sh
 
 # COPY .credentials.txt .github_creds.txt
 

@@ -53,4 +53,9 @@ Invoke-Expression -Command $Apply_ArgoCD
 # Invoke-Expression -Command $KubectlGetPods
 Invoke-Expression -Command $K8s_Endpoints
 
+$Bad_Interp_Fix  = "docker exec -it $containerName sh -c 'dos2unix argocd/argocd.sh'"
+$Argocd_Script   = "docker exec -it $containerName sh -c './argocd/argocd.sh'"
+Invoke-Expression -Command $Bad_Interp_Fix
+Invoke-Expression -Command $Argocd_Script
+
 # Invoke-Expression -Command $Apply_Kyverno

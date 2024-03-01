@@ -17,7 +17,7 @@ $DockerRunCmd   = "docker run -d $network_type -v $socket_volume --name $contain
 $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
 
 # ArgoCD variables
-$Install_ArgoCD     = "docker exec -it $containerName sh -c '$argocd_install'"
+$Install_ArgoCD = "docker exec -it $containerName sh -c '$argocd_install'"
 
 # Kubernetes Environment Variables
 $K8s_Endpoints  = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
@@ -44,4 +44,6 @@ Write-Output "Cluster kubernetes is ready for argocd configuration!"
 Invoke-Expression -Command $Bad_Interp_Fix
 Invoke-Expression -Command $K8s_Endpoints
 
+## Execution continues in the file below ##
+& ".\argocd_config.ps1"
 # Invoke-Expression -Command $Apply_Kyverno

@@ -4,21 +4,22 @@ $ENDPOINT = "https://$endpoint"
 
 # Argocd Configuration
 $containerName  = "kind_container"
-$kube_config    = "awk -v endpoint='$ENDPOINT' '/server: /{$2 = endpoint} 1' ~/.kube/config > temp && mv temp ~/.kube/config"
+$kube_config    = "awk -v endpoint=$ENDPOINT '/server: /{$2 = endpoint} 1' ~/.kube/config > temp && mv temp ~/.kube/config"
 $kube_fix       = "sed -i 's/\(^ *server:\)/    \1/' ~/.kube/config"
 $app_edition    = "sed -i 's#https://kubernetes.default.svc#$ENDPOINT#' application.yaml"
 $apply_app      = "kubectl apply -f application.yaml"
-$config_set     = "kubectl config set-cluster kind-kind --server='$ENDPOINT'"
+$config_set     = "kubectl config set-cluster kind-kind --server=$ENDPOINT"
 $config_context = "kubectl config set-context --current --namespace=argocd"
+####### TASK 
 $port_forward   = "kubectl port-forward service/argocd-server -n argocd 8080:443 &"
 
-$Edit_KubeConfig  = "docker exec -it $containerName sh -c '$kube_config'"
-$Indentation_Fix  = "docker exec -it $containerName sh -c '$kube_fix'"
-$Edit_ArgoApp     = "docker exec -it $containerName sh -c '$app_edition'"
-$Apply_ArgoApp    = "docker exec -it $containerName sh -c '$apply_app'"
-$Set_Cluster      = "docker exec -it $containerName sh -c '$config_set'"
-$Set_Context      = "docker exec -it $containerName sh -c '$config_context'"
-$Argo_PortForward = "docker exec -it $containerName sh -c '$port_forward'"
+$Edit_KubeConfig  = "docker exec -it $containerName sh -c $kube_config"
+$Indentation_Fix  = "docker exec -it $containerName sh -c $kube_fix"
+$Edit_ArgoApp     = "docker exec -it $containerName sh -c $app_edition"
+$Apply_ArgoApp    = "docker exec -it $containerName sh -c $apply_app"
+$Set_Cluster      = "docker exec -it $containerName sh -c $config_set"
+$Set_Context      = "docker exec -it $containerName sh -c $config_context"
+$Argo_PortForward = "docker exec -it $containerName sh -c $port_forward"
 
 # Execution
 Start-Sleep -Seconds 50
@@ -37,15 +38,15 @@ $ARGOCD_SERVER = "localhost:8080"
 $INIT_PASSWORD = "$(argocd admin initial-password -n argocd | awk 'NR==1 {print $1}')"
 $GITHUB_REPO   = "https://github.com/marcusmvbs/argocd-features.git"
 
-$argo_login  = "argocd login '$ARGOCD_SERVER' --username admin --password '$INIT_PASSWORD' --insecure"
-$argo_add    = "argocd cluster add kind-kind --server='$ARGOCD_SERVER' --insecure -y"
+$argo_login  = "argocd login $ARGOCD_SERVER --username admin --password $INIT_PASSWORD --insecure"
+$argo_add    = "argocd cluster add kind-kind --server=$ARGOCD_SERVER --insecure -y"
 $argo_create = "argocd app create nginx-webapp --repo '$GITHUB_REPO' --path charts/dev/nginx --values values.yaml --dest-namespace webserver --dest-server '$ENDPOINT'"
 $argo_sync   = "argocd app sync nginx-webapp"
 
-$Argo_Login      = "docker exec -it $containerName sh -c '$argo_login'"
-$Argo_ClusterAdd = "docker exec -it $containerName sh -c '$argo_add'"
-$Argo_AppCreate  = "docker exec -it $containerName sh -c '$argo_create'"
-$Argo_AppSync    = "docker exec -it $containerName sh -c '$argo_sync'"
+$Argo_Login      = "docker exec -it $containerName sh -c $argo_login"
+$Argo_ClusterAdd = "docker exec -it $containerName sh -c $argo_add"
+$Argo_AppCreate  = "docker exec -it $containerName sh -c $argo_create"
+$Argo_AppSync    = "docker exec -it $containerName sh -c $argo_sync"
 
 # Execution
 Start-Sleep -Seconds 50

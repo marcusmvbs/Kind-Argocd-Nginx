@@ -26,6 +26,7 @@ COPY kind/ /kind/
 COPY charts/ /charts/
 COPY application.yaml application.yaml
 
+USER root
 COPY argocd.sh /argocd/argocd.sh
 RUN chmod +x argocd/argocd.sh
 

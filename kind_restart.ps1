@@ -56,6 +56,8 @@ Invoke-Expression -Command $K8s_Endpoints
 $Bad_Interp_Fix  = "docker exec -it $containerName sh -c 'dos2unix argocd/argocd.sh'"
 $Argocd_Script   = "docker exec -it $containerName sh -c './argocd/argocd.sh'"
 Invoke-Expression -Command $Bad_Interp_Fix
+Write-Host "Waiting for argocd pods creation..."
+Start-Sleep -Seconds 70
 Invoke-Expression -Command $Argocd_Script
 
 # Invoke-Expression -Command $Apply_Kyverno

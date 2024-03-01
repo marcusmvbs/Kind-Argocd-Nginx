@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: charts/dev/nginx
   destination:
-    server: https://172.24.0.4:6443
+    server: https://kubernetes.default.svc
     namespace: webserver
   syncPolicy:
     automated:

@@ -5,6 +5,7 @@ $network_type        = "--network=host"
 $socket_volume       = "/var/run/docker.sock:/var/run/docker.sock"
 $playbook_exec       = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
 $argocd_install      = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
+$kubectl_pods        = "kubectl get pods -n argocd"
 $kubectl_endpoints   = "kubectl get endpoints"
 $dos2unix_argocd     = "dos2unix kind/argocd_config.sh"
 $dos2unix_nginx_sync = "dos2unix kind/argo_nginx_sync.sh"
@@ -19,6 +20,7 @@ $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
 
 # ArgoCD variables
 $Install_ArgoCD = "docker exec -it $containerName sh -c '$argocd_install'"
+$Argo_Pods      = "docker exec -it $containerName sh -c '$kubectl_pods'"
 
 # Kubernetes Environment Variables
 $K8s_Endpoints   = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
@@ -41,6 +43,7 @@ Start-Sleep -Seconds 10
 Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
 Start-Sleep -Seconds 80
+Invoke-Expression -Command $Argo_Pods
 
 Write-Output "Cluster kubernetes is ready for argocd configuration!"
 Invoke-Expression -Command $Bad_Interp_Fix1

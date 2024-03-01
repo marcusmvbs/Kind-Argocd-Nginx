@@ -37,13 +37,11 @@ Start-Sleep -Seconds 10
 
 # Argocd config
 Invoke-Expression -Command $Install_ArgoCD
-
-Invoke-Expression -Command $K8s_Endpoints
-
 Write-Output "Waiting for argocd pods creation..."
 Start-Sleep -Seconds 80
 
 Write-Output "Cluster kubernetes is ready for argocd configuration!"
 Invoke-Expression -Command $Bad_Interp_Fix
+Invoke-Expression -Command $K8s_Endpoints
 
 # Invoke-Expression -Command $Apply_Kyverno

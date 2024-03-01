@@ -6,7 +6,7 @@ $socket_volume     = "/var/run/docker.sock:/var/run/docker.sock"
 $playbook_exec     = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
 $argocd_install    = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
 $apply_app         = "kubectl apply -f application.yaml"
-$kubectl_pods      = "kubectl get pods -A"
+
 $remove_app        = "rm application.yaml"
 $kubectl_endpoints = "kubectl get endpoints"
 $kyverno_config    = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
@@ -27,7 +27,6 @@ $Apply_ArgoApp  = "docker exec -it $containerName sh -c '$apply_app'"
 $Remove_ArgoApp = "docker exec -it $containerName sh -c '$remove_app'"
 
 # Kubernetes Environment Variables
-$KubectlGetPods = "docker exec -it $containerName sh -c '$kubectl_pods'"
 $K8s_Endpoints  = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
 $Bad_Interp_Fix = "docker exec -it $containerName sh -c 'dos2unix argocd/argocd.sh'"
 $Argocd_Script  = "docker exec -it $containerName sh -c 'argocd/argocd.sh'"
@@ -49,14 +48,11 @@ Invoke-Expression -Command $AnsiblePlaybook
 
 # Argocd install and manifest application ##
 Invoke-Expression -Command $Install_ArgoCD
-
-# Invoke-Expression -Command $KubectlGetPods
-Invoke-Expression -Command $K8s_Endpoints
-
 Write-Output "Waiting for argocd pods creation..."
 Start-Sleep -Seconds 80
 
 Write-Output "Cluster kubernetes is ready for argocd configuration!"
 Invoke-Expression -Command $Bad_Interp_Fix
+Invoke-Expression -Command $K8s_Endpoints
 
 # Invoke-Expression -Command $Apply_Kyverno

@@ -14,7 +14,6 @@ config_context="$(kubectl config set-context --current --namespace=argocd)"
 port_forward="$(kubectl port-forward service/argocd-server -n argocd 8080:443 &)"
 
 # Execution
-echo "Starting argocd script..."
 sleep 5
 $kubectl_argo_pods
 sleep 5
@@ -22,8 +21,6 @@ $init_argo_pswd
 sleep 5
 $endpoint
 sleep 5
-echo "$endpoint_k"
-
 $kube_config
 sleep 5
 $kube_fix
@@ -37,7 +34,6 @@ sleep 5
 $config_context
 # $port_forward
 sleep 2
-echo "Argocd Configuration Completed."
 
 # Argocd App Creation
 ARGOCD_SERVER="localhost:8080"
@@ -54,5 +50,3 @@ $argo_add
 $argo_create
 sleep 10
 $argo_sync 
-
-echo "Argocd Nginx Application Syncronized with Github Repository."

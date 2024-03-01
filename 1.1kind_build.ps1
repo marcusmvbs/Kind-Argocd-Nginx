@@ -49,4 +49,4 @@ Invoke-Expression -Command $Bad_Interp_Fix2
 Invoke-Expression -Command $K8s_Endpoints
 
 Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue argocd configuration:`n"
-Write-Output "           powershell.exe -File .\2.0argocd_config.ps1'`n"
+Write-Output "      $ powershell.exe -File .\2.0argocd_config.ps1'`n"

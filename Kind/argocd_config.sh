@@ -13,8 +13,20 @@ sed -i 's/\(^ *server:\)/    \1/' ~/.kube/config
 sed -i "s#https://kubernetes.default.svc#$endpoint_k#" ../application.yaml
 
 # # Apply configuration changes
-apply_app_output=$(kubectl apply -f application.yaml)
-config_set_output=$(kubectl config set-cluster kind-kind --server=$endpoint_k)
-config_context_output=$(kubectl config set-context --current --namespace=argocd)
+kubectl apply -f application.yaml
+kubectl config set-cluster kind-kind --server=$endpoint_k
+kubectl config set-context --current --namespace=argocd
 
-# port_forward="$(kubectl port-forward service/argocd-server -n argocd 8080:443 &)"
+kubectl port-forward service/argocd-server -n argocd 8080:443 &
+sleep 10
+## Argocd App Creation ##
+ARGOCD_SERVER="localhost:8080"
+GITHUB_REPO="https://github.com/marcusmvbs/argocd-features.git"
+# Login to ArgoCD server
+argocd login $ARGOCD_SERVER --username admin --password $init_argo_pswd --skip-test-tls --insecure
+sleep 10
+argocd cluster add kind-kind --server=$ARGOCD_SERVER --insecure -y
+sleep 10
+argocd app create nginx-webapp --repo $GITHUB_REPO --path charts/dev/nginx --values values.yaml --dest-namespace webserver --dest-server $endpoint_k
+sleep 10
+argocd app sync nginx-webapp

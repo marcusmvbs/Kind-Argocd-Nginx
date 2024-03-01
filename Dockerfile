@@ -26,9 +26,10 @@ COPY kind/ /kind/
 COPY charts/ /charts/
 COPY application.yaml application.yaml
 
-USER root
-COPY argocd.sh /argocd/argocd.sh
-RUN chmod +x argocd/argocd.sh
+COPY kind/argocd.sh /argocd/argocd_config.sh
+RUN chmod +x /argocd/argocd_config.sh
+COPY kind/argo_nginx_sync.sh /argocd/argo_nginx_sync.sh
+RUN chmod +x /argocd/argo_nginx_sync.sh
 
 # COPY .credentials.txt .github_creds.txt
 

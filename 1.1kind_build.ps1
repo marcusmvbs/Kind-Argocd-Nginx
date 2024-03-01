@@ -44,8 +44,9 @@ Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
 Start-Sleep -Seconds 80
 Invoke-Expression -Command $Argo_Pods
-
-Write-Output "Cluster kubernetes is ready for argocd configuration!"
 Invoke-Expression -Command $Bad_Interp_Fix1
 Invoke-Expression -Command $Bad_Interp_Fix2
 Invoke-Expression -Command $K8s_Endpoints
+
+Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue argocd configuration:`n"
+Write-Output "           powershell.exe -File .\2.0argocd_config.ps1'`n"

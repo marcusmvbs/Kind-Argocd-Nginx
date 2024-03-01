@@ -1,6 +1,6 @@
-# Sourcing
-. ./argocd_config.sh
-
+# Kubernetes endpoint
+echo "Endpoint for Kubernetes: $endpoint_k"
+echo $init_argo_pswd_output
 ## Argocd App Creation ##
 ARGOCD_SERVER="localhost:8080"
 GITHUB_REPO="https://github.com/marcusmvbs/argocd-features.git"

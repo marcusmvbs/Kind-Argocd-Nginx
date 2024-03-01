@@ -1,4 +1,4 @@
-# Argocd create application and syncronize with Github repo
+# Argocd create nignx server and syncronize with Github repo
 $containerName = "kind_container"
 $Argocd_Script   = "docker exec -it $containerName sh -c 'kind/argo_nginx_sync.sh'"
 

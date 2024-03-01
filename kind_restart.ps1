@@ -22,14 +22,16 @@ $DockerRunCmd    = "docker run -d $network_type -v $socket_volume --name $contai
 $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
 
 # ArgoCD variables
-$Apply_ArgoCD     = "docker exec -it $containerName sh -c '$argocd_install'"
-$Apply_ArgoApp    = "docker exec -it $containerName sh -c '$apply_app'"
-$Remove_ArgoApp   = "docker exec -it $containerName sh -c '$remove_app'"
+$Install_ArgoCD = "docker exec -it $containerName sh -c '$argocd_install'"
+$Apply_ArgoApp  = "docker exec -it $containerName sh -c '$apply_app'"
+$Remove_ArgoApp = "docker exec -it $containerName sh -c '$remove_app'"
 
 # Kubernetes Environment Variables
-$KubectlGetPods   = "docker exec -it $containerName sh -c '$kubectl_pods'"
-$K8s_Endpoints    = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
-$Apply_Kyverno    = "docker exec -it $containerName sh -c '$kyverno_config'"
+$KubectlGetPods = "docker exec -it $containerName sh -c '$kubectl_pods'"
+$K8s_Endpoints  = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
+$Bad_Interp_Fix = "docker exec -it $containerName sh -c 'dos2unix argocd/argocd.sh'"
+$Argocd_Script  = "docker exec -it $containerName sh -c 'argocd/argocd.sh'"
+$Apply_Kyverno  = "docker exec -it $containerName sh -c '$kyverno_config'"
 
 ## RUN commands ##
 
@@ -46,18 +48,15 @@ Invoke-Expression -Command $DockerRunCmd
 Invoke-Expression -Command $AnsiblePlaybook
 
 # Argocd install and manifest application ##
-Invoke-Expression -Command $Apply_ArgoCD
-# Invoke-Expression -Command $Apply_ArgoApp
-# Invoke-Expression -Command $Remove_ArgoApp
+Invoke-Expression -Command $Install_ArgoCD
 
 # Invoke-Expression -Command $KubectlGetPods
 Invoke-Expression -Command $K8s_Endpoints
 
-$Bad_Interp_Fix  = "docker exec -it $containerName sh -c 'dos2unix argocd/argocd.sh'"
-$Argocd_Script   = "docker exec -it $containerName sh -c './argocd/argocd.sh'"
+Write-Output "Waiting for argocd pods creation..."
+Start-Sleep -Seconds 80
+
+Write-Output "Cluster kubernetes is ready for argocd configuration!"
 Invoke-Expression -Command $Bad_Interp_Fix
-Write-Host "Waiting for argocd pods creation..."
-Start-Sleep -Seconds 70
-Invoke-Expression -Command $Argocd_Script
 
 # Invoke-Expression -Command $Apply_Kyverno

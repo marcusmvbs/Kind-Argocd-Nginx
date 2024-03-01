@@ -20,8 +20,6 @@ kubectl config set-context --current --namespace=argocd
 kubectl port-forward service/argocd-server -n argocd 8080:443 &
 sleep 10
 
-# ---
-
 ## Argocd App Creation ##
 ARGOCD_SERVER="localhost:8080"
 GITHUB_REPO="https://github.com/marcusmvbs/argocd-features.git"

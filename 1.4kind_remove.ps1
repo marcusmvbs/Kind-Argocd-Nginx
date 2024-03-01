@@ -1,5 +1,5 @@
 # Common Variable
-$containerName  = "kind_container"
+$containerName = "kind_container"
 
 # Docker Variables
 $KindDelCmd        = "docker exec -it $containerName sh -c 'kind delete cluster'"

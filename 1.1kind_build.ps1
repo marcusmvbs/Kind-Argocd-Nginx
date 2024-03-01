@@ -9,7 +9,6 @@ $kubectl_pods        = "kubectl get pods -n argocd"
 $kubectl_endpoints   = "kubectl get endpoints"
 $dos2unix_argocd     = "dos2unix kind/argocd_config.sh"
 $dos2unix_nginx_sync = "dos2unix kind/argo_nginx_sync.sh"
-$kyverno_config      = "kubectl apply -f charts/dev/kyverno/templates/clusterpolicy.yaml"
 
 # Docker Variables
 $DockerBuildCmd = "docker build -t $imageName ."
@@ -26,10 +25,8 @@ $Argo_Pods      = "docker exec -it $containerName sh -c '$kubectl_pods'"
 $K8s_Endpoints   = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
 $Bad_Interp_Fix1 = "docker exec -it $containerName sh -c '$dos2unix_argocd'"
 $Bad_Interp_Fix2 = "docker exec -it $containerName sh -c '$dos2unix_nginx_sync'"
-$Apply_Kyverno   = "docker exec -it $containerName sh -c '$kyverno_config'"
 
 ## RUN commands ##
-
 # Build Docker container
 Invoke-Expression -Command $DockerBuildCmd
 # Run Docker container

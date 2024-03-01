@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \ 
     apt-get install -y --no-install-recommends \
-    gnupg curl wget ca-certificates apt-utils apt-transport-https dos2unix vim \
+    gnupg curl wget ca-certificates apt-utils apt-transport-https dos2unix \
     python3 python3-pip python3-apt \
     ansible \
     && rm -rf /var/lib/apt/lists/*
@@ -23,14 +23,11 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
 RUN mkdir -p /ansible /kind /charts
 COPY ansible/ /ansible/
 COPY kind/ /kind/
-RUN chmod +x /kind/argocd_config.sh
-RUN chmod +x /kind/argo_nginx_sync.sh
 COPY charts/ /charts/
 COPY application.yaml application.yaml
-
-# COPY .credentials.txt .github_creds.txt
+RUN chmod +x /kind/argocd_config.sh
 
 # Expose any necessary ports
-EXPOSE 8080 6443 22 80
+EXPOSE 8080 6443
 
 ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]

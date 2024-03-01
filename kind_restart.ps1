@@ -44,15 +44,13 @@ Invoke-Expression -Command $DockerRemoveCmd
 Invoke-Expression -Command $DockerBuildCmd
 Invoke-Expression -Command $DockerRunCmd
 Invoke-Expression -Command $AnsiblePlaybook
-Start-Sleep -Seconds 5
 
 # Argocd install and manifest application ##
 Invoke-Expression -Command $Apply_ArgoCD
 # Invoke-Expression -Command $Apply_ArgoApp
 # Invoke-Expression -Command $Remove_ArgoApp
 
-Start-Sleep -Seconds 5
-Invoke-Expression -Command $KubectlGetPods
+# Invoke-Expression -Command $KubectlGetPods
 Invoke-Expression -Command $K8s_Endpoints
 
 # Invoke-Expression -Command $Apply_Kyverno

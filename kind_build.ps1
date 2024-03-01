@@ -45,10 +45,7 @@ Invoke-Expression -Command $Apply_ArgoCD
 # Invoke-Expression -Command $Remove_ArgoApp
 # Invoke-Expression -Command $Remove_GitlabCreds
 
-Start-Sleep -Seconds 5
-Invoke-Expression -Command $KubectlGetPods
+# Invoke-Expression -Command $KubectlGetPods
 Invoke-Expression -Command $K8s_Endpoints
 
-# # Apply Kyverno config
-# Start-Sleep -Seconds 120
 # Invoke-Expression -Command $Apply_Kyverno

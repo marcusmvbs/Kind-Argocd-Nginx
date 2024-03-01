@@ -24,10 +24,7 @@ RUN mkdir -p /ansible /kind /charts
 COPY ansible/ /ansible/
 COPY kind/ /kind/
 COPY charts/ /charts/
-
 COPY application.yaml application.yaml
-COPY argocd.sh argocd.sh
-RUN chmod +x argocd.sh
 
 # COPY .credentials.txt .github_creds.txt
 

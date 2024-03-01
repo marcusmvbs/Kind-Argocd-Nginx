@@ -16,6 +16,7 @@ port_forward="$(kubectl port-forward service/argocd-server -n argocd 8080:443 &)
 # Execution
 echo "Starting argocd script..."
 $kubectl_argo_pods
+sleep 5
 $init_argo_pswd
 sleep 5
 $endpoint

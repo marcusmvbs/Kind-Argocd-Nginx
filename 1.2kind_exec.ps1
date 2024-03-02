@@ -1,6 +1,6 @@
 # Common Variables
 $containerName = "kind_container"
-$kubectl_pods  = "kubectl get pods -n argocd"
+$kubectl_pods  = "kubectl get pods -A"
 
 # Docker exec bash
 $KubectlGetPods  = "docker exec -it $containerName sh -c '$kubectl_pods'"
@@ -12,3 +12,5 @@ Write-Output "`nDocker container env, welcome aboard! =)`n"
 
 # Execute Kind Cluster
 Invoke-Expression -Command $KindExecCommand
+$Rollout = "docker exec -it $containerName sh -c 'kubectl argo rollouts get rollout nginx-deploy -n webserver --watch'"
+Invoke-Expression -Command $Rollout

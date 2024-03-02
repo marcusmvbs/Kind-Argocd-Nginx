@@ -8,5 +8,6 @@ nginx:
 
   deployment:
     name: nginx-deploy
-    replicas: 1
+    replicas: 10
+    revisionHistoryLimit: 2
     image: nginx:1.25.4

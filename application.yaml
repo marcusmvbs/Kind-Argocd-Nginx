@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: nginx-canary-app
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/marcusmvbs/argocd-features.git
     targetRevision: HEAD
-    path: charts/dev/nginx
+    path: charts/dev/nginx-canary
   destination:
     server: https://kubernetes.default.svc
     namespace: webserver

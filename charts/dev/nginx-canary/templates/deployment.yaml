@@ -1,21 +1,22 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: apps/v1
+# apiVersion: argoproj.io/v1alpha1
+kind: Deployment # Rollout
 metadata:
   name: {{ .Values.nginx.deployment.name }}
   namespace: {{ .Values.nginx.namespace }}
 spec:
   replicas: {{ .Values.nginx.deployment.replicas }}
-  strategy:
-    canary:
-      steps:
-      - setWeight: 20
-      - pause: {}
-      - setWeight: 50
-      - pause: {duration: 60}
-      - setWeight: 80
-      - pause: {duration: 60}
-      - setWeight: 100
-  revisionHistoryLimit: {{ .Values.nginx.deployment.revisionHistoryLimit }}
+  # strategy:
+  #   canary:
+  #     steps:
+  #     - setWeight: 20
+  #     - pause: {}
+  #     - setWeight: 50
+  #     - pause: {duration: 60}
+  #     - setWeight: 80
+  #     - pause: {duration: 60}
+  #     - setWeight: 100
+  # revisionHistoryLimit: {{ .Values.nginx.deployment.revisionHistoryLimit }}
   selector:
     matchLabels:
       app: nginx-canary

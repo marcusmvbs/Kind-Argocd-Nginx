@@ -5,9 +5,10 @@ nginx:
   service:
     name: nginx-svc
     port: 80
+    nodePort: 32000 
 
   deployment:
-    name: nginx-deploy
-    replicas: 1
-    revisionHistoryLimit: 2
+    name: nginx-canary
+    replicas: 2
+    # revisionHistoryLimit: 2
     image: nginx:1.25.4

@@ -32,3 +32,10 @@ spec:
         - name: http
           containerPort: {{ .Values.nginx.service.port }}
           protocol: TCP
+      #   volumeMounts:
+      #     - name: web-files
+      #       mountPath: /usr/share/nginx/
+      # volumes:
+      #   - name: web-files
+      #     configMap:
+      #       name: web-files

@@ -52,6 +52,9 @@
     - name: Kyverno Helm Repo
       ansible.builtin.command: helm repo add kyverno https://kyverno.github.io/kyverno/
 
+    # - name: Web dependency build
+    #   ansible.builtin.command: helm dependency build ../charts/dev/nginx-canary/
+
     - name: Search Helm Charts
       ansible.builtin.command: helm search repo
 

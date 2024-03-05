@@ -3,10 +3,13 @@ kind: Cluster
 nodes:
 - role: control-plane
   extraPortMappings:
-  - containerPort: 30000
-    hostPort: 30000
-    listenAddress: "0.0.0.0"
+  - containerPort: 32000 # Nginx Pod
+    hostPort: 32000
+    protocol: TCP
+  - containerPort: 8443 # Kubernetes Dashboard
+    hostPort: 8443
+    protocol: TCP
+  - containerPort: 8080 # ArgoCD UI
+    hostPort: 8080
     protocol: TCP
 - role: worker
-  labels:
-    tier: backend

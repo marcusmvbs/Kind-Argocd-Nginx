@@ -6,7 +6,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \ 
     apt-get install -y --no-install-recommends \
-    gnupg curl wget ca-certificates apt-utils apt-transport-https dos2unix vim \
+    gnupg curl wget ca-certificates \
+    apt-utils apt-transport-https dos2unix vim \
+    net-tools \
     python3 python3-pip python3-apt \
     ansible \
     && rm -rf /var/lib/apt/lists/*
@@ -28,6 +30,6 @@ COPY application.yaml application.yaml
 RUN chmod +x /kind/argocd_config.sh
 
 # Expose any necessary ports
-EXPOSE 80 443 6443 30000-32767
+EXPOSE 6443 8080 8443 32000
 
 ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]

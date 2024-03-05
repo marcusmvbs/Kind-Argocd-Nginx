@@ -89,8 +89,3 @@
 
     # - name: Helm installing cert-manager...
     #   ansible.builtin.command: helm install cert-manager bitnami/cert-manager --version 0.22.1 --namespace cert-manager
-
-    ## TEST - CURRENT TASK ##
-
-    - name: Helm installing nginx with canary deployment strategy...
-      ansible.builtin.command: helm install my-nginx bitnami/nginx --namespace webserver

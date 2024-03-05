@@ -8,7 +8,6 @@ $argocd_install      = "kubectl apply -n argocd -f https://raw.githubusercontent
 $kubectl_pods        = "kubectl get pods -A"
 $kubectl_endpoints   = "kubectl get endpoints"
 $dos2unix_argocd     = "dos2unix kind/argocd_config.sh"
-$dos2unix_nginx_sync = "dos2unix kind/argo_nginx_sync.sh"
 
 # Docker Variables
 $DockerBuildCmd = "docker build -t $imageName ."
@@ -24,7 +23,7 @@ $Get_Pods       = "docker exec -it $containerName sh -c '$kubectl_pods'"
 # Kubernetes Environment Variables
 $K8s_Endpoints   = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
 $Bad_Interp_Fix1 = "docker exec -it $containerName sh -c '$dos2unix_argocd'"
-$Bad_Interp_Fix2 = "docker exec -it $containerName sh -c '$dos2unix_nginx_sync'"
+
 
 ## RUN commands ##
 # Build Docker container
@@ -39,10 +38,9 @@ Start-Sleep -Seconds 10
 # Argocd config
 Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
-Start-Sleep -Seconds 80
+# Start-Sleep -Seconds 80
 Invoke-Expression -Command $Get_Pods
 Invoke-Expression -Command $Bad_Interp_Fix1
-Invoke-Expression -Command $Bad_Interp_Fix2
 Invoke-Expression -Command $K8s_Endpoints
 
 Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue argocd configuration:`n"

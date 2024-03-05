@@ -6,6 +6,7 @@ $socket_volume       = "/var/run/docker.sock:/var/run/docker.sock"
 $playbook_exec       = "ansible-playbook -i ansible/inventory.ini ansible/playbook.yaml"
 $argocd_install      = "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
 $kubectl_pods        = "kubectl get pods -A"
+$kubectl_svc         = "kubectl get svc -A"
 $kubectl_endpoints   = "kubectl get endpoints"
 $dos2unix_argocd     = "dos2unix kind/argocd_config.sh"
 
@@ -19,7 +20,7 @@ $AnsiblePlaybook = "docker exec -it $containerName sh -c '$playbook_exec'"
 # ArgoCD variables
 $Install_ArgoCD = "docker exec -it $containerName sh -c '$argocd_install'"
 $Get_Pods       = "docker exec -it $containerName sh -c '$kubectl_pods'"
-
+$Get_Svc        = "docker exec -it $containerName sh -c '$kubectl_svc'"
 # Kubernetes Environment Variables
 $K8s_Endpoints   = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
 $Bad_Interp_Fix1 = "docker exec -it $containerName sh -c '$dos2unix_argocd'"
@@ -40,6 +41,7 @@ Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
 # Start-Sleep -Seconds 80
 Invoke-Expression -Command $Get_Pods
+Invoke-Expression -Command $Get_Svc
 Invoke-Expression -Command $Bad_Interp_Fix1
 Invoke-Expression -Command $K8s_Endpoints
 

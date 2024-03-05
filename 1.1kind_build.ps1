@@ -22,8 +22,8 @@ $Install_ArgoCD = "docker exec -it $containerName sh -c '$argocd_install'"
 $Get_Pods       = "docker exec -it $containerName sh -c '$kubectl_pods'"
 $Get_Svc        = "docker exec -it $containerName sh -c '$kubectl_svc'"
 # Kubernetes Environment Variables
-$K8s_Endpoints   = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
-$Bad_Interp_Fix1 = "docker exec -it $containerName sh -c '$dos2unix_argocd'"
+$K8s_Endpoints  = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
+$Bad_Interp_Fix = "docker exec -it $containerName sh -c '$dos2unix_argocd'"
 
 
 ## RUN commands ##
@@ -41,9 +41,13 @@ Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
 # Start-Sleep -Seconds 80
 Invoke-Expression -Command $Get_Pods
+Write-Output ""
 Invoke-Expression -Command $Get_Svc
-Invoke-Expression -Command $Bad_Interp_Fix1
+Write-Output ""
+Invoke-Expression -Command $Bad_Interp_Fix
 Invoke-Expression -Command $K8s_Endpoints
 
-Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue argocd configuration:`n"
-Write-Output "      $ powershell.exe -File .\2.0argocd_config.ps1'`n"
+Write-Output "Nginx server is running on http://localhost:32000"
+Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
+Write-Output "      $ powershell.exe -File .\2.0argocd_config.ps1'"
+Write-Output "      $ powershell.exe -File .\2.1nginx_config.ps1'`n"

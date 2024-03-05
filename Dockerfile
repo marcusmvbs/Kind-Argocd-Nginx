@@ -22,13 +22,14 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
     rm get-docker.sh
 
 # Storing Ansible, Kind, ArgoCD application
-RUN mkdir -p /ansible /kind /charts /usr/share/nginx/html/
+RUN mkdir -p /ansible /kind /charts nginx/html/
 COPY ansible/ /ansible/
 COPY kind/ /kind/
 COPY charts/ /charts/
-COPY nginx-webpage/index.html /usr/share/nginx/html/index.html
+COPY nginx-webpage/index.html nginx/html/index.html
 COPY application.yaml application.yaml
 RUN chmod +x /kind/argocd_config.sh
+RUN chmod +x /kind/nginx_config.sh
 
 # Expose any necessary ports
 EXPOSE 6443 8080 8443 32000

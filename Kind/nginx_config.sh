@@ -5,7 +5,7 @@ kubectl config set-context --current --namespace=webserver
 nginx_pods=$(kubectl get pods -l app=nginx-canary -n webserver --no-headers | awk '{print $1}')
 
 # File to copy
-index="../nginx/html/index.html"
+index="../web-files/index.html"
 
 # Destination directory in the pods
 destination_dir_index="/usr/share/nginx/html"

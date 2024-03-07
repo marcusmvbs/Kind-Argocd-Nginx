@@ -12,3 +12,13 @@ nginx:
     replicas: 2
     # revisionHistoryLimit: 2
     image: nginx:1.25.4
+    
+  # volume:
+  #   enabled: true
+  #   storage: 500Mi
+  #   accessMode: ReadWriteOnce
+  #   existingClaim: nginx-pvc
+  
+  # ingress:
+  #   name: nginx-ingress
+  #   number: 80

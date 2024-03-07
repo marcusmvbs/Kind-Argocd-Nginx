@@ -9,13 +9,14 @@ nginx:
 
   deployment:
     name: nginx-canary
-    replicas: 2
+    replicas: 1
     # revisionHistoryLimit: 2
     image: nginx:1.25.4
+    probePath: /index.html
     
   # volume:
   #   enabled: true
-  #   storage: 500Mi
+  #   storage: 1Gi
   #   accessMode: ReadWriteOnce
   #   existingClaim: nginx-pvc
   

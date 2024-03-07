@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: nginx-canary
+  namespace: webserver
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx-canary
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {}
+      - setWeight: 50
+      - pause: {duration: 60}
+      - setWeight: 80
+      - pause: {duration: 60}
+      - setWeight: 100
+  template:
+    metadata:
+      annotations:
+        rollout.argoproj.io/revision: "1"
+      labels:
+        app: nginx-canary
+    spec:
+      containers:
+      - name: nginx-canary
+        image: nginx:1.25.4
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "200m"  # Request 200 millicores (0.1 CPU) of CPU
+            memory: "128Mi"  # Request 128 Mebibytes of memory
+          limits:
+            cpu: "400m"  # Limit to 400 millicores (0.2 CPU) of CPU
+            memory: "256Mi"  # Limit to 256 Mebibytes of memory
+        livenessProbe: # Every 10s after the initial delay, if it fails, k8s will restart the container (namespace relevance)
+          httpGet:
+            path: "/index.html"
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe: # ..., if it fails, k8s will stop sending traffic until the app is ready to receive it (load balancer relevance)
+          httpGet:
+            path: "/index.html"
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      #   volumeMounts:
+      #     - name: nginx-volume
+      #       mountPath: "/web-files"
+      # volumes:
+      #   - name: nginx-volume
+      #     persistentVolumeClaim:
+      #       claimName: rest-api-data

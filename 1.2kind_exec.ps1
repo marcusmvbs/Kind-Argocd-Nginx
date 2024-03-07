@@ -8,10 +8,10 @@ $KindExecCommand = "docker exec -it $containerName /bin/bash"
 
 ## Run Commands ##
 Invoke-Expression -Command $KubectlGetPods
-Write-Output "`nDocker container env, welcome aboard! =) `n`n"
+Write-Output "`nDocker container env, welcome aboard! =)"
 
 
-Write-Output "Nginx service available:$ kubectl port-forward svc/nginx-svc 32000:80 -n webserver `n"
+Write-Output "`nNginx service available:$ kubectl port-forward svc/nginx-svc 32000:80 -n webserver `n"
 
 # Execute Kind Cluster
 Invoke-Expression -Command $KindExecCommand

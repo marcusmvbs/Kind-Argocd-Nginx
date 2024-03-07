@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  namespace: webserver
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+    # type: Recreate
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25.4 # Switch to latest from 1.25.4 to check rollout
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "200m"  # Request 200 millicores (0.1 CPU) of CPU
+            memory: "128Mi"  # Request 128 Mebibytes of memory
+          limits:
+            cpu: "400m"  # Limit to 400 millicores (0.2 CPU) of CPU
+            memory: "256Mi"  # Limit to 256 Mebibytes of memory
+        livenessProbe: # Every 10s after the initial delay, if it fails, k8s will restart the container (namespace relevance)
+          httpGet:
+            path: "/index.html"
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe: # ..., if it fails, k8s will stop sending traffic until the app is ready to receive it (load balancer relevance)
+          httpGet:
+            path: "/index.html"
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10

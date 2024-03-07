@@ -1,22 +1,10 @@
 apiVersion: apps/v1
-# apiVersion: argoproj.io/v1alpha1
-kind: Deployment # Rollout
+kind: Deployment
 metadata:
   name: {{ .Values.nginx.deployment.name }}
   namespace: {{ .Values.nginx.namespace }}
 spec:
   replicas: {{ .Values.nginx.deployment.replicas }}
-  # strategy:
-  #   canary:
-  #     steps:
-  #     - setWeight: 20
-  #     - pause: {}
-  #     - setWeight: 50
-  #     - pause: {duration: 60}
-  #     - setWeight: 80
-  #     - pause: {duration: 60}
-  #     - setWeight: 100
-  # revisionHistoryLimit: {{ .Values.nginx.deployment.revisionHistoryLimit }}
   selector:
     matchLabels:
       app: nginx-canary
@@ -32,12 +20,16 @@ spec:
         - name: http
           containerPort: {{ .Values.nginx.service.port }}
           protocol: TCP
-      #   volumeMounts:
-      #     - name: nginx-volume
-      #       mountPropagation: HostToContainer
-      #       mountPath: /web-files
-      # volumes:
-      #   - name: nginx-volume
-      #     hostPath:
-      #       path: /web-files
-      #       type: DirectoryOrCreate
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.nginx.deployment.probePath }}
+            port: {{ .Values.nginx.service.port }}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.nginx.deployment.probePath }}
+            port: {{ .Values.nginx.service.port }}
+          initialDelaySeconds: 30
+          periodSeconds: 10

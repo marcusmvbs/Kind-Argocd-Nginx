@@ -3,13 +3,28 @@ kind: Cluster
 nodes:
 - role: control-plane
   extraPortMappings:
-  - containerPort: 32000 # Nginx Pod
-    hostPort: 32000
-    protocol: TCP
-  - containerPort: 8443 # Kubernetes Dashboard
+  - containerPort: 8443 # Kubernetes Dashboard - kubectl port-forward svc/kubernetes-dashboard-web 8443:8000 -n kubernetes-dashboard
     hostPort: 8443
     protocol: TCP
-  - containerPort: 8080 # ArgoCD UI
+  - containerPort: 3000
+    hostPort: 3000
+    protocol: TCP
+  - containerPort: 8080
     hostPort: 8080
+    protocol: TCP
+  - containerPort: 9001
+    hostPort: 9001
+    protocol: TCP
+  - containerPort: 9090
+    hostPort: 9090
+    protocol: TCP
+  - containerPort: 30000 # No need for kubectl port-forward
+    hostPort: 30000
+    protocol: TCP
+  - containerPort: 31000
+    hostPort: 31000
+    protocol: TCP
+  - containerPort: 32000
+    hostPort: 32000
     protocol: TCP
 - role: worker

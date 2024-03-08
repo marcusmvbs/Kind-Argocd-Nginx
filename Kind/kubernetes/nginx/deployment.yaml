@@ -7,10 +7,10 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
+      maxUnavailable: 2
+      maxSurge: 2
     # type: Recreate
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: nginx
@@ -28,10 +28,10 @@ spec:
           protocol: TCP
         resources:
           requests:
-            cpu: "200m"  # Request 200 millicores (0.1 CPU) of CPU
+            cpu: "200m"  # Request 200 millicores (0.2 CPU) of CPU
             memory: "128Mi"  # Request 128 Mebibytes of memory
           limits:
-            cpu: "400m"  # Limit to 400 millicores (0.2 CPU) of CPU
+            cpu: "400m"  # Limit to 400 millicores (0.4 CPU) of CPU
             memory: "256Mi"  # Limit to 256 Mebibytes of memory
         livenessProbe: # Every 10s after the initial delay, if it fails, k8s will restart the container (namespace relevance)
           httpGet:

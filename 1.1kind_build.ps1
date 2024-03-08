@@ -45,7 +45,7 @@ Invoke-Expression -Command $Get_Svc
 Invoke-Expression -Command $Bad_Interp_Fix
 Invoke-Expression -Command $K8s_Endpoints
 
-Write-Output "`nNginx server is running on http://localhost:32000"
-Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
-Write-Output "      $ powershell.exe -File .\2.0argocd_config.ps1'"
-Write-Output "      $ powershell.exe -File .\2.1nginx_config.ps1'`n"
+# Write-Output "`nNginx server is running on http://localhost:32000"
+# Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
+# Write-Output "      $ powershell.exe -File .\2.0argocd_config.ps1'"
+# Write-Output "      $ powershell.exe -File .\2.1nginx_config.ps1'`n"

@@ -38,14 +38,18 @@ Start-Sleep -Seconds 10
 
 # Argocd config
 Invoke-Expression -Command $Install_ArgoCD
-# Write-Output "Waiting for argocd pods creation..."
-# Start-Sleep -Seconds 80
+Write-Output "Waiting for argocd pods creation..."
+Start-Sleep -Seconds 75
 Invoke-Expression -Command $Get_Pods
+Start-Sleep -Seconds 5
 Invoke-Expression -Command $Get_Svc
+Start-Sleep -Seconds 5
 Invoke-Expression -Command $Bad_Interp_Fix
 Invoke-Expression -Command $K8s_Endpoints
 
-# Write-Output "`nNginx server is running on http://localhost:32000"
-# Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
-# Write-Output "      $ powershell.exe -File .\2.0argocd_config.ps1'"
-# Write-Output "      $ powershell.exe -File .\2.1nginx_config.ps1'`n"
+Write-Output "`nNginx server is running on http://localhost:30000"
+Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
+Write-Output "     $ powershell.exe -File .\2.0argocd_config.ps1'"
+Write-Output "     $ powershell.exe -File .\2.1nginx_config.ps1'"
+Write-Output "     $ powershell.exe -File .\2.2krew_install.ps1'"
+Write-Output "     $ powershell.exe -File .\2.3kubernetes_dashboard.ps1'`n"

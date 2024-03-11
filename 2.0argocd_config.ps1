@@ -7,4 +7,6 @@ $Nginx_Pods    = "docker exec -it $containerName sh -c '$nginx_pods'"
 
 Invoke-Expression -Command $Argocd_Script
 Invoke-Expression -Command $Nginx_Pods
-Write-Output "---`nArgoCD is configured. Nginx app created and synced.`n"
+
+Write-Output "---`nArgoCD is configured. Nginx app created and synced."
+Write-Output "Argocd nodeport service enabled - https://localhost:30080`n"

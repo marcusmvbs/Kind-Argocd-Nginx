@@ -37,12 +37,11 @@ spec:
           httpGet:
             path: "/index.html"
             port: 80
-          initialDelaySeconds: 30
+          initialDelaySeconds: 15
           periodSeconds: 10
           timeoutSeconds: 5
         readinessProbe: # ..., if it fails, k8s will stop sending traffic until the app is ready to receive it (load balancer relevance)
-          httpGet:
-            path: "/index.html"
-            port: 80
-          initialDelaySeconds: 30
+          type: tcp
+          port: 80
+          initialDelaySeconds: 15
           periodSeconds: 10

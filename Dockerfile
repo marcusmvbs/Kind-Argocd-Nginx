@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     gnupg curl wget ca-certificates \
     apt-utils apt-transport-https dos2unix vim \
-    net-tools \
+    net-tools jq \
     python3 python3-pip python3-apt \
     ansible \
     && rm -rf /var/lib/apt/lists/*

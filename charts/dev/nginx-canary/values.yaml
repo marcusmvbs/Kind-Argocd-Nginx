@@ -5,7 +5,7 @@ nginx:
   service:
     name: nginx-svc
     port: 80
-    nodeport: 31000
+    nodeport: 30000
 
   deployment:
     name: nginx-canary

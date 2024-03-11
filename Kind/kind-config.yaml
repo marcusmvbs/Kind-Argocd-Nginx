@@ -3,7 +3,7 @@ kind: Cluster
 nodes:
 - role: control-plane
   extraPortMappings:
-  - containerPort: 8443 # Kubernetes Dashboard - kubectl port-forward svc/kubernetes-dashboard-web 8443:8000 -n kubernetes-dashboard
+  - containerPort: 8443 # No need for kubectl port-forward
     hostPort: 8443
     protocol: TCP
   - containerPort: 3000
@@ -15,16 +15,16 @@ nodes:
   - containerPort: 9001
     hostPort: 9001
     protocol: TCP
-  - containerPort: 9090
+  - containerPort: 9090 
     hostPort: 9090
     protocol: TCP
-  - containerPort: 30000 # No need for kubectl port-forward
+  - containerPort: 30000 # Nginx nodePort
     hostPort: 30000
     protocol: TCP
-  - containerPort: 31000
+  - containerPort: 31000 
     hostPort: 31000
     protocol: TCP
-  - containerPort: 32000
+  - containerPort: 32000 # Kubernetes-Dashboard nodePort
     hostPort: 32000
     protocol: TCP
 - role: worker

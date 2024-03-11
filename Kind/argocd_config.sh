@@ -36,4 +36,4 @@ sleep 10
 argocd app get nginx-webapp
 sleep 5
 kubectl apply -f kind/kubernetes/argocd/argocd-nodeport-svc.yaml
-echo -e "\nArgocd login password: $init_argo_pswd_output\n"
+echo -e "\nArgocd login \nUsernamme: admin \nPassword: $init_argo_pswd_output\n"

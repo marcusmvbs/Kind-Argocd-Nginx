@@ -39,7 +39,7 @@ Start-Sleep -Seconds 10
 # Argocd config
 Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
-Start-Sleep -Seconds 75
+# Start-Sleep -Seconds 75
 Invoke-Expression -Command $Get_Pods
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $Get_Svc

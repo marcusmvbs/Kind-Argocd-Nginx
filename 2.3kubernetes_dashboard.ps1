@@ -30,5 +30,5 @@ Invoke-Expression -Command $Secret_Token
 Start-Sleep -Seconds 2
 Invoke-Expression -Command $Get_Token
 
-Write-Output "`nDashboard Nodeport service enabled: https://localhost:32000`n"
+Write-Output "`nDashboard Nodeport service enabled: https://localhost:30303`n"
 Write-Output "Copy bearer token to access kubernetes dashboard on browser."

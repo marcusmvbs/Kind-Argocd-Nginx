@@ -49,7 +49,9 @@ Invoke-Expression -Command $K8s_Endpoints
 
 Write-Output "`nNginx server is running on http://localhost:30000"
 Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
-Write-Output "     $ powershell.exe -File .\2.0argocd_config.ps1'"
+Write-Output "     $ powershell.exe -File .\2.0pod_watch.ps1'"
 Write-Output "     $ powershell.exe -File .\2.1nginx_config.ps1'"
 Write-Output "     $ powershell.exe -File .\2.2krew_install.ps1'"
-Write-Output "     $ powershell.exe -File .\2.3kubernetes_dashboard.ps1'`n"
+Write-Output "     $ powershell.exe -File .\2.3kubernetes_dashboard.ps1'"
+Write-Output "     $ powershell.exe -File .\2.4prometheus_config.ps1'`n"
+Write-Output "     $ powershell.exe -File .\2.5argocd_sync.ps1'"

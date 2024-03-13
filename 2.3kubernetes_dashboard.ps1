@@ -1,7 +1,7 @@
 ### Kubernetes Dashboard NodePort Service ###
 $containerName  = "kind_container"
 $create_sa      = "kubectl create serviceaccount dashboard-sa --namespace=kubernetes-dashboard"
-$nodeport_svc   = "kubectl apply -f /kind/kubernetes/dashboard/dashboard-nodeport-svc.yaml"
+$nodeport_svc   = "kubectl apply -f /kind/kubernetes/dashboard/dashboard-np-service.yaml"
 $kubectl_svc    = "kubectl get svc -n kubernetes-dashboard"
 $cluster_role   = "kubectl apply -f /kind/kubernetes/dashboard/cluster-role.yaml"
 $cluster_rb     = "kubectl apply -f /kind/kubernetes/dashboard/cluster-rb.yaml"

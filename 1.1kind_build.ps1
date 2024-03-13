@@ -25,7 +25,6 @@ $Get_Svc        = "docker exec -it $containerName sh -c '$kubectl_svc'"
 $K8s_Endpoints  = "docker exec -it $containerName sh -c '$kubectl_endpoints'"
 $Bad_Interp_Fix = "docker exec -it $containerName sh -c '$dos2unix_argocd'"
 
-
 ## RUN commands ##
 # Build Docker container
 Invoke-Expression -Command $DockerBuildCmd
@@ -40,18 +39,16 @@ Start-Sleep -Seconds 10
 Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
 # Start-Sleep -Seconds 75
-Invoke-Expression -Command $Get_Pods
-Start-Sleep -Seconds 5
 Invoke-Expression -Command $Get_Svc
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $Bad_Interp_Fix
 Invoke-Expression -Command $K8s_Endpoints
+Invoke-Expression -Command $Get_Pods
 
 Write-Output "`nNginx server is running on http://localhost:30000"
 Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
 Write-Output "     $ powershell.exe -File .\2.0pod_watch.ps1'"
-Write-Output "     $ powershell.exe -File .\2.1nginx_config.ps1'"
+Write-Output "     $ powershell.exe -File .\2.1argocd_sync.ps1'"
 Write-Output "     $ powershell.exe -File .\2.2krew_install.ps1'"
 Write-Output "     $ powershell.exe -File .\2.3kubernetes_dashboard.ps1'"
-Write-Output "     $ powershell.exe -File .\2.4prometheus_config.ps1'"
-Write-Output "     $ powershell.exe -File .\2.5argocd_sync.ps1'`n"
+Write-Output "     $ powershell.exe -File .\2.4prometheus_config.ps1'`n"

@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx-index
-  namespace: webserver
+  name: {{ .Values.nginx.configmap.nameindex }}
+  namespace: {{ .Values.nginx.namespace }}
 data:
   index.html: |
     <!DOCTYPE html>
@@ -24,8 +24,8 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx-config
-  namespace: webserver
+  name: {{ .Values.nginx.configmap.nameconf }}
+  namespace: {{ .Values.nginx.namespace }}
 data:
   nginx.conf: |
     user nginx;

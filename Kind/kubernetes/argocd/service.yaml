@@ -12,6 +12,3 @@ spec:
       targetPort: 8080
       nodePort: 30080
   type: NodePort
-
-# kubectl get svc argocd-server -n argocd -o yaml > argocd-nodeport-svc.yaml
-# kubectl apply -f kind/kubernetes/argocd/argocd-nodeport-svc.yaml

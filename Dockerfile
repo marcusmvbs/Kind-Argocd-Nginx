@@ -30,8 +30,8 @@ RUN chmod 644 /kind/kubernetes/nginx/html/index.html
 
 # Argocd and Nginx Config
 COPY application.yaml application.yaml
-RUN chmod +x /kind/argocd_config.sh
-RUN chmod +x /kind/nginx_config.sh
+RUN chmod +x /kind/kubernetes/argocd/argocd_config.sh
+RUN chmod +x /kind/krew_install.sh
 
 # Expose any necessary ports
 EXPOSE 6443 8080 8443 32000

@@ -7,19 +7,16 @@ nginx:
     port: 80
     nodeport: 30000
 
-  deployment:
-    name: nginx-canary
+  statefulset:
+    name: nginx
     replicas: 1
-    # revisionHistoryLimit: 2
     image: nginx:1.25.4
     probePath: /index.html
-    
-  # volume:
-  #   enabled: true
-  #   storage: 1Gi
-  #   accessMode: ReadWriteOnce
-  #   existingClaim: nginx-pvc
   
+  configmap:
+    nameindex: nginx-index
+    nameconf: nginx-config
+
   # ingress:
   #   name: nginx-ingress
   #   number: 80

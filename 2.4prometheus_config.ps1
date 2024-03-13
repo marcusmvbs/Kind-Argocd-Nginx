@@ -1,6 +1,6 @@
 $containerName     = "kind_container"
-$grafana_np_svc    = "kubectl apply -f kind/kubernetes/prometheus/grafana-np-svc.yaml"
-$prometheus_np_svc = "kubectl apply -f kind/kubernetes/prometheus/prometheus-np-svc.yaml"
+$grafana_np_svc    = "kubectl apply -f kind/kubernetes/prometheus/grafana-service.yaml"
+$prometheus_np_svc = "kubectl apply -f kind/kubernetes/prometheus/prometheus-service.yaml"
 
 # admin_username=$(kubectl get secret prometheus-grafana -n monitoring -o jsonpath='{.data.admin-user}' | base64 --decode)
 # admin_password=$(kubectl get secret prometheus-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 --decode)
@@ -14,7 +14,3 @@ Invoke-Expression -Command $Prometheus_config
 
 Write-Output "Grafana nodeport service -> http://localhost:30003"
 Write-Output "Prometheus nodeport service -> http://localhost:32000 `n"
-
-### Current Task - Prometheus Data Source ###
-# Add prometheus as data source on Grafana
-# helm install grafana bitnami/grafana-loki --version 2.19.1 -n monitoring

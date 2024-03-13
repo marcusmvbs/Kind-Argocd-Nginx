@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.nginx.statefulset.name }}
+  namespace: {{ .Values.nginx.namespace }}
+spec:
+  serviceName: nginx
+  replicas: {{ .Values.nginx.statefulset.replicas }}
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: {{ .Values.nginx.statefulset.image }}
+          ports:
+            - protocol: TCP
+              name: http
+              containerPort: {{ .Values.nginx.service.port }}
+          volumeMounts:
+            - name: html-index
+              mountPath: /usr/share/nginx/html/
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.nginx.statefulset.probePath }}
+              port: {{ .Values.nginx.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.nginx.statefulset.probePath }}
+              port: {{ .Values.nginx.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      volumes:
+      - name: html-index
+        configMap:
+          name: nginx-index
+      - name: nginx-conf
+        configMap:
+          name: nginx-config
+          items:
+            - key: nginx.conf
+              path: nginx.conf

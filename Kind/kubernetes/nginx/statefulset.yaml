@@ -36,27 +36,3 @@ spec:
           items:
             - key: nginx.conf
               path: nginx.conf
-
-# Apply -> configmap.yaml -> statefulset.yaml -> service.yaml
-
-## Commands ##
-# kubectl apply -f kind/kubernetes/nginx/configmap.yaml
-# kubectl apply -f kind/kubernetes/nginx/statefulset.yaml
-# kubectl apply -f kind/kubernetes/nginx/service.yaml
-# http://localhost:30000/status
-
-# kubectl exec web-vol-0 -n webserver -it -- sh / ls /usr/share/nginx/html/
-# nginx -t / nginx -V / systemctl reload nginx
-
-## Debug ##
-# watch kubectl get pods -n webserver
-# kubectl describe pod web-vol-0 -n webserver
-# kubectl logs web-vol-0 -n webserver
-# kubectl get cm nginx-html -n webserver -o yaml > cm-html.yaml
-# kubectl describe cm nginx-html -n webserver
-
-# kubectl delete statefulsets web-vol -n webserver
-# kubectl delete cm nginx-index -n webserver
-
-# useradd --system --no-create-home --shell /bin/false nginx-exporter
-# curl localhost:9113/metrics - nginx exporter

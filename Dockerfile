@@ -26,11 +26,11 @@ RUN mkdir -p /ansible /kind /charts
 COPY ansible/ /ansible/
 COPY kind/ /kind/
 COPY charts/ /charts/
-RUN chmod 644 /kind/kubernetes/nginx/html/index.html
 
 # Argocd and Nginx Config
 COPY application.yaml application.yaml
 RUN chmod +x /kind/kubernetes/argocd/argocd_config.sh
+RUN chmod 644 /kind/kubernetes/nginx/html/index.html
 RUN chmod +x /kind/krew_install.sh
 
 # Expose any necessary ports

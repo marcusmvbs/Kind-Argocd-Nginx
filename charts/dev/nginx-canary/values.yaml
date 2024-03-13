@@ -9,7 +9,7 @@ nginx:
 
   statefulset:
     name: nginx
-    replicas: 1
+    replicas: 2
     image: nginx:1.25.4
     probePath: /index.html
   

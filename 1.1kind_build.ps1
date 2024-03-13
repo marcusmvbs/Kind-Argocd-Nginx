@@ -8,7 +8,7 @@ $argocd_install      = "kubectl apply -n argocd -f https://raw.githubusercontent
 $kubectl_pods        = "kubectl get pods -A"
 $kubectl_svc         = "kubectl get svc -A"
 $kubectl_endpoints   = "kubectl get endpoints"
-$dos2unix_argocd     = "dos2unix kind/argocd_config.sh"
+$dos2unix_argocd     = "dos2unix kind/kubernetes/argocd/argocd_config.sh"
 
 # Docker Variables
 $DockerBuildCmd = "docker build -t $imageName ."
@@ -40,6 +40,7 @@ Invoke-Expression -Command $Install_ArgoCD
 Write-Output "Waiting for argocd pods creation..."
 # Start-Sleep -Seconds 75
 Invoke-Expression -Command $Get_Svc
+
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $Bad_Interp_Fix
 Invoke-Expression -Command $K8s_Endpoints

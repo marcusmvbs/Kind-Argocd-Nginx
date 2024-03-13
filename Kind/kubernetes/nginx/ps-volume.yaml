@@ -1,13 +1,26 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: app-pv
+  name: nginx-html-pv
 spec:
   capacity:
     storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: standard
   hostPath:
-    path: "/tmp/data"
+    path: kind/kubernetes/nginx/html
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: nginx-config-pv
+# spec:
+#   capacity:
+#     storage: 1Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: standard
+#   hostPath:
+#     path: "kind/kubernetes/nginx/config/"

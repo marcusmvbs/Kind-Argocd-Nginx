@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: admin-rb
+  namespace: {{ .Values.nginx.namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ .Values.nginx.roles.admin }}
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.nginx.serviceaccount.adminRole }}
+  namespace: {{ .Values.nginx.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: readonly-rb
+  namespace: {{ .Values.nginx.namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ .Values.nginx.roles.read }}
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.nginx.serviceaccount.readRole }}
+  namespace: {{ .Values.nginx.namespace }}

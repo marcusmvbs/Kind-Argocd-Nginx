@@ -3,12 +3,6 @@ kind: Cluster
 nodes:
 - role: control-plane
   extraPortMappings:
-  - containerPort: 8080 
-    hostPort: 8080
-    protocol: TCP
-  - containerPort: 8443 # No need for kubectl port-forward
-    hostPort: 8443
-    protocol: TCP
   - containerPort: 30000 # Nginx nodePort
     hostPort: 30000
     protocol: TCP
@@ -18,7 +12,7 @@ nodes:
   - containerPort: 30080 # Argocd nodePort
     hostPort: 30080
     protocol: TCP
-  - containerPort: 30500 # Kubernetes-Dashboard nodePort
+  - containerPort: 30500 # Kubernetes-Dashboard nodePort ## No need for kubectl port-forward ##
     hostPort: 30500
     protocol: TCP
   - containerPort: 32000 # Prometheus nodePort

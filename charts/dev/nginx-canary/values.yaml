@@ -16,6 +16,14 @@ nginx:
   configmap:
     nameindex: nginx-index
     nameconf: nginx-config
+  
+  serviceaccount:
+    adminRole: admin-webserver-sa
+    readRole: readonly-webserver-sa
+  
+  roles:
+    admin: webserver-admin
+    read: webserver-readonly
 
   # ingress:
   #   name: nginx-ingress

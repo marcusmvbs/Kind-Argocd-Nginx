@@ -7,3 +7,5 @@
   tar zxvf "${KREW}.tar.gz" &&
   ./"${KREW}" install krew
 )
+sleep 2
+echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> ~/.bashrc

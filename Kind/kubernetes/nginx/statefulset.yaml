@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.nginx.statefulset.name }}
-  namespace: {{ .Values.nginx.namespace }}
+  name: nginx
+  namespace: webserver
 spec:
   serviceName: nginx
-  replicas: {{ .Values.nginx.statefulset.replicas }}
+  replicas: 2
   selector:
     matchLabels:
       app: nginx
@@ -17,11 +17,11 @@ spec:
       serviceAccountName: webserver-admin-sa
       containers:
         - name: nginx
-          image: {{ .Values.nginx.statefulset.image }}
+          image: nginx:1.25.4
           ports:
             - protocol: TCP
               name: http
-              containerPort: {{ .Values.nginx.service.port }}
+              containerPort: 80
           volumeMounts:
             - name: html-index
               mountPath: /usr/share/nginx/html/
@@ -31,15 +31,15 @@ spec:
               readOnly: true
           livenessProbe:
             httpGet:
-              path: {{ .Values.nginx.statefulset.probePath }}
-              port: {{ .Values.nginx.service.port }}
+              path: /index.html
+              port: 80
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
-              path: {{ .Values.nginx.statefulset.probePath }}
-              port: {{ .Values.nginx.service.port }}
+              path: /index.html
+              port: 80
             initialDelaySeconds: 30
             periodSeconds: 10
       volumes:

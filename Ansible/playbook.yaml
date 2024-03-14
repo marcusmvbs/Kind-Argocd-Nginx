@@ -77,11 +77,11 @@
       loop:
         - argocd
         - webserver
-        - kubernetes-dashboard
         - monitoring
+        - kubernetes-dashboard
     
-    - name: Helm installing nginx with canary deployment strategy...
-      ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
+    # - name: Helm installing nginx...
+    #   ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
 
     # - name: Helm installing kubernetes-dashboard...
     #   ansible.builtin.command: helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --version 7.1.1 --namespace kubernetes-dashboard
@@ -92,14 +92,14 @@
     - name: Helm installing prometheus-nginx-exporter...
       ansible.builtin.command: helm install prometheus prometheus-community/prometheus-nginx-exporter --version 0.2.1 --namespace webserver
 
+    # - name: Helm installing nginx-ingress...
+    #   ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 10.5.2 --namespace nginx-ingress
+
     # - name: Helm installing argo-rollouts...
     #   ansible.builtin.command: helm install argo-rollouts argo/argo-rollouts --version 2.34.3 --namespace argo-rollouts --set dashboard.enabled=true
 
     # - name: Helm installing nginx with blue-green deployment strategy...
     #   ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
-
-    # - name: Helm installing nginx-ingress...
-    #   ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 10.5.2 --namespace nginx-ingress
 
     # - name: Helm installing kyverno...
     #   ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno --version 3.1.4

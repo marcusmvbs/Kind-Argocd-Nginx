@@ -14,7 +14,7 @@ spec:
       labels:
         app: nginx
     spec:
-      serviceAccountName: webserver-admin-sa
+      serviceAccountName: {{ .Values.nginx.serviceaccount.adminRole }}
       containers:
         - name: nginx
           image: {{ .Values.nginx.statefulset.image }}

@@ -11,7 +11,7 @@ $kubectl_endpoints = "kubectl get endpoints"
 $dos2unix_argocd   = "dos2unix kind/kubernetes/argocd/argocd_config.sh"
 $apply_sa          = "kubectl apply -f /kind/kubernetes/serviceaccounts.yaml"
 $kubectl_secret    = "kubectl apply -f /kind/kubernetes/nginx/secret.yaml"
-$apply_roles       = "kubectl apply -f /kind/kubernetes/roles.yaml"
+$apply_roles       = "kubectl apply -f /kind/kubernetes/clusterroles.yaml"
 $apply_rolebinding = "kubectl apply -f /kind/kubernetes/rolebindings.yaml"
 $get_secret        = "kubectl describe secret sa-token-secret -n webserver"
 
@@ -59,14 +59,14 @@ Write-Output ""
 
 # kubernetes service accounts, roles and rolebindings 
 Invoke-Expression -Command $General_sa
-Start-Sleep -Seconds 2
-Invoke-Expression -Command $Secret_Token
+# Start-Sleep -Seconds 2
+# Invoke-Expression -Command $Secret_Token
 Start-Sleep -Seconds 2
 Invoke-Expression -Command $Apply_cRole
 Start-Sleep -Seconds 2
 Invoke-Expression -Command $Apply_crb
-Start-Sleep -Seconds 2
-Invoke-Expression -Command $Get_Token
+# Start-Sleep -Seconds 2
+# Invoke-Expression -Command $Get_Token
 
 Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
 Write-Output "     $ powershell.exe -File .\2.0pod_watch.ps1'"

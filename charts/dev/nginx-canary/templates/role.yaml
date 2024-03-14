@@ -4,12 +4,9 @@ metadata:
   name: {{ .Values.nginx.roles.admin }}
   namespace: {{ .Values.nginx.namespace }}
 rules:
-- apiGroups: [""]
-  resources: ["*"]
-  verbs: ["*"]
-- apiGroups: [""]
-  resources: ["pods/exec"]
-  verbs: ["*"]
+- apiGroups: ["*"]
+  resources: ["statefulsets", "pods", "pods/exec", "services", "configmaps", "secrets"]
+  verbs: ["create", "get", "list", "watch", "delete", "patch", "describe"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -17,6 +14,6 @@ metadata:
   name: {{ .Values.nginx.roles.read }}
   namespace: {{ .Values.nginx.namespace }}
 rules:
-- apiGroups: [""]
-  resources: ["pods", "deployments", "services", "replicasets", "statefulsets"]
-  verbs: ["get", "watch", "list"]
+- apiGroups: ["apps"]
+  resources: ["statefulsets", "pods", "services", "configmaps"]
+  verbs: ["get", "list", "watch"]

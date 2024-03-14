@@ -24,24 +24,3 @@ rules:
 - apiGroups: [""] 
   resources: ["pods", "deployments", "services", "replicasets", "statefulsets"]
   verbs: ["get", "watch", "list"]
----
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: webserver-admin
-  namespace: webserver
-rules:
-- apiGroups: ["apps"]
-  resources: ["statefulsets", "pods", "services"]
-  verbs: ["create", "get", "delete", "patch", "describe"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: webserver-readonly
-  namespace: webserver
-rules:
-- apiGroups: ["apps"]
-  resources: ["statefulsets", "pods", "services", "configmaps"]
-  verbs: ["get", "list", "watch"]

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.nginx.configmap.nameindex }}
+  name: nginx-index
   namespace: {{ .Values.nginx.namespace }}
 data:
   index.html: |
@@ -24,7 +24,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.nginx.configmap.nameconf }}
+  name: nginx-config
   namespace: {{ .Values.nginx.namespace }}
 data:
   nginx.conf: |

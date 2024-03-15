@@ -13,13 +13,11 @@ nginx:
     image: nginx:1.25.4
     probePath: /index.html
   
-  configmap:
-    nameindex: nginx-index
-    nameconf: nginx-config
-  
   serviceaccount:
     adminRole: admin-webserver-sa
+    adminSecret: admin-sa-secret
     readRole: readonly-webserver-sa
+    readSecret: readonly-sa-secret
   
   roles:
     admin: webserver-admin

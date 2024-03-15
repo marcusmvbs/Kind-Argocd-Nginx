@@ -23,6 +23,12 @@ spec:
               name: http
               containerPort: {{ .Values.nginx.service.port }}
           volumeMounts:
+            - name: admin-secret
+              mountPath: /admin-sa/secret
+              readOnly: true
+            - name: readonly-secret
+              mountPath: /readonly-sa/secret
+              readOnly: true
             - name: html-index
               mountPath: /usr/share/nginx/html/
             - name: nginx-conf
@@ -43,6 +49,12 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 10
       volumes:
+      - name: admin-secret
+        secret:
+          secretName: {{ .Values.nginx.serviceaccount.adminSecret }}
+      - name: readonly-secret
+        secret:
+          secretName: {{ .Values.nginx.serviceaccount.readSecret }}
       - name: html-index
         configMap:
           name: nginx-index

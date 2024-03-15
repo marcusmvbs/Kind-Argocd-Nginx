@@ -80,6 +80,7 @@
         - monitoring
         - kubernetes-dashboard
     
+    # Helm Install
     - name: Helm installing nginx...
       ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
 

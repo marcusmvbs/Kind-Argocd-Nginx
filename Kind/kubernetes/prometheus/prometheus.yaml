@@ -1,0 +1,51 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus-prometheus-kube-prometheus-prometheus
+  namespace: monitoring
+spec:
+  version: v2.42.0
+  serviceAccountName: prometheus-sa
+  podMonitorSelector:
+    matchLabels:
+      prometheus: prometheus-prometheus-kube-prometheus-prometheus
+  podMonitorNamespaceSelector:
+    matchLabels:
+      monitoring: prometheus
+  serviceMonitorSelector:
+    matchLabels:
+      prometheus: prometheus-prometheus-kube-prometheus-prometheus
+  serviceMonitorNamespaceSelector:
+    matchLabels:
+      monitoring: prometheus
+  probeSelector:
+    matchLabels:
+      prometheus: prometheus-prometheus-kube-prometheus-prometheus
+  probeNamespaceSelector:
+    matchLabels:
+      monitoring: prometheus
+  additionalScrapeConfigs:
+    name: scrape-config
+    key: prometheus-additional.yaml
+  resources:
+    requests:
+      cpu: 500m
+      memory: 2Gi
+    limits:
+      cpu: 500m
+      memory: 2Gi
+  replicas: 1
+  logLevel: info
+  logFormat: logfmt
+  retention: 7d
+  scrapeInterval: 15s
+  securityContext:
+    fsGroup: 0
+    runAsNonRoot: false
+    runAsUser: 0
+  storage:
+    volumeClaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 20Gi

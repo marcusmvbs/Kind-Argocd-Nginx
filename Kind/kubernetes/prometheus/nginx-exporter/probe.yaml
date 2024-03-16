@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: nginx-probe
+  namespace: monitoring
+  labels:
+    prometheus: prometheus-prometheus-nginx-exporter
+spec:
+  jobName: nginx-probe-job
+  interval: 15s
+  module: http_2xx
+  prober:
+    url: nginx-exporter-svc.monitoring:9113
+  targets:
+    staticConfig:
+      static:
+        - nginx-svc.webserver:80

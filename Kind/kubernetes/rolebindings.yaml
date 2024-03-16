@@ -4,37 +4,22 @@ metadata:
   name: admin-crb
 roleRef:
   kind: ClusterRole
-  name: worker-admin
+  name: app-admin
   apiGroup: rbac.authorization.k8s.io
 subjects:
 - kind: ServiceAccount
   name: dashboard-sa
   namespace: kubernetes-dashboard
-# ---
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: RoleBinding
-# metadata:
-#   name: admin-rb
-#   namespace: webserver
-# roleRef:
-#   kind: Role
-#   name: webserver-admin
-#   apiGroup: rbac.authorization.k8s.io
-# subjects:
-# - kind: ServiceAccount
-#   name: webserver-admin-sa
-#   namespace: webserver
-# ---
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: RoleBinding
-# metadata:
-#   name: readonly-rb
-#   namespace: webserver
-# roleRef:
-#   kind: Role
-#   name: webserver-readonly
-#   apiGroup: rbac.authorization.k8s.io
-# subjects:
-# - kind: ServiceAccount
-#   name: webserver-readonly-sa
-#   namespace: webserver
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  kind: ClusterRole
+  name: prometheus
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: prometheus-sa
+  namespace: monitoring

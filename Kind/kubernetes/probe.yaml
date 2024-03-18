@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: nginx-probe
+  namespace: monitoring
+  labels:
+    prometheus: prometheus-prometheus-kube-prometheus-prometheus
+spec:
+  jobName: nginx-exporter
+  interval: 30s
+  module: http_2xx
+  prober:
+    url: nginx-exporter-svc.monitoring:9113
+  targets:
+    staticConfig:
+      static:
+        - http://localhost:30113
+            # 30113 / 9113
+            
+  # relabelConfigs:
+  #   - sourceLabels: [__address__]
+  #     targetLabel: instance
+  #   - sourceLabels: [__address__]
+  #     targetLabel: __param_target
+  #   - targetLabel: __address__
+  #     replacement: nginx-exporter-svc.monitoring:9113
+  #   - sourceLabels: [__param_target]
+  #     targetLabel: instance
+  #   - regex: .*
+  #     action: replace
+  #     targetLabel: __metrics_path__
+  #     replacement: /metrics

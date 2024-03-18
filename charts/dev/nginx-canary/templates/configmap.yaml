@@ -35,17 +35,24 @@ data:
     }
 
     http {
+      
       server {
         listen 80;
-
-        server_name _;
-
+        server_name _nginx;
         location /status {
           stub_status;
         }
         location / {
           root /usr/share/nginx/html;
           index index.html;
+        }
+      }
+
+      server {
+        listen 9113;
+        server_name _exporter;
+        location /nginx_status {
+          stub_status;
         }
       }
     }

@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: prometheus-prometheus-nginx-exporter
   namespace: monitoring
+  labels:
+    app: nginx-exporter
 spec:
   replicas: 1
   selector:
@@ -35,3 +37,15 @@ spec:
             limits:
               memory: 256Mi
               cpu: 200m
+      #     volumeMounts:
+      #       - name: nginx-exporter-config
+      #         mountPath: /etc/nginx/nginx.conf
+      #         subPath: nginx.conf
+      #         readOnly: true
+      # volumes:
+      # - name: nginx-exporter-config
+      #   configMap:
+      #     name: nginx-exporter-config
+      #     items:
+      #       - key: nginx.conf
+      #         path: nginx.conf

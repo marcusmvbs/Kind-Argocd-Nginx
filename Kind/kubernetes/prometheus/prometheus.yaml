@@ -6,7 +6,7 @@ metadata:
 spec:
   version: v2.42.0
   serviceAccountName: prometheus-sa
-  podMonitorSelector:
+  podMonitorSelector: 
     matchLabels:
       prometheus: prometheus-prometheus-kube-prometheus-prometheus
   podMonitorNamespaceSelector:

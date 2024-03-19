@@ -5,9 +5,9 @@ $grafana_np_svc     = "kubectl apply -f kind/kubernetes/prometheus/grafana-servi
 $kubectl_delete_fix = "kubectl delete service/prometheus-operated -n monitoring"
 $prometheus_np_svc  = "kubectl apply -f kind/kubernetes/prometheus/prometheus-service.yaml"
 $additional_conf    = "kubectl apply -f kind/kubernetes/prometheus/scrape-config.yaml"
-$apply_deploy       = "kubectl apply -f kind/kubernetes/prometheus/nginx-exporter/deployment.yaml"
-$apply_service      = "kubectl apply -f kind/kubernetes/prometheus/nginx-exporter/service.yaml"
-$apply_probe        = "kubectl apply -f kind/kubernetes/prometheus/nginx-exporter/probe.yaml"
+$apply_deploy       = "kubectl apply -f kind/kubernetes/exporter/deployment.yaml"
+$apply_service      = "kubectl apply -f kind/kubernetes/exporter/service.yaml"
+$apply_probe        = "kubectl apply -f kind/kubernetes/probe.yaml"
 
 # admin_username=$(kubectl get secret prometheus-grafana -n monitoring -o jsonpath='{.data.admin-user}' | base64 --decode)
 # admin_password=$(kubectl get secret prometheus-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 --decode)
@@ -38,8 +38,8 @@ Start-Sleep -Seconds 5
 Invoke-Expression -Command $Exporter_Deploy
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $Exporter_Svc
-Start-Sleep -Seconds 5
-Invoke-Expression -Command $Exporter_Probe
+# Start-Sleep -Seconds 5
+# Invoke-Expression -Command $Exporter_Probe
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $Create_svc
 
@@ -48,5 +48,6 @@ $kubectl_svc = "kubectl get po,svc -n monitoring"
 $Get_Svc     = "docker exec -it $containerName sh -c '$kubectl_svc'"
 Invoke-Expression -Command $Get_Svc
 
-Write-Output "Grafana nodeport service -> http://localhost:30003"
-Write-Output "Prometheus nodeport service -> http://localhost:32000 `n"
+Write-Output "`nGrafana nodeport service -> http://localhost:30003"
+Write-Output "Prometheus nodeport service -> http://localhost:32000"
+Write-Output "Blackbox export service -> http://localhost:30115 `n"

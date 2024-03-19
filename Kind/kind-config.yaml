@@ -18,7 +18,7 @@ nodes:
   - containerPort: 32000 # Prometheus nodePort
     hostPort: 32000
     protocol: TCP
-  - containerPort: 30113 # Prometheus Nginx Exporter nodePort
-    hostPort: 30113
+  - containerPort: 30115 # Prometheus Nginx Exporter nodePort
+    hostPort: 30115
     protocol: TCP
 - role: worker

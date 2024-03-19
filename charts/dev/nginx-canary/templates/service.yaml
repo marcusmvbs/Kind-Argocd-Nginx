@@ -8,7 +8,10 @@ spec:
   selector:
     app: nginx
   ports:
-    - protocol: TCP
+    - name: http
       port: {{ .Values.nginx.service.port }}
       targetPort: {{ .Values.nginx.service.port }}
       nodePort: {{ .Values.nginx.service.nodeport }}
+    - name: http-metrics
+      port: {{ .Values.nginx.service.portMetrics}}
+      targetPort: {{ .Values.nginx.service.portMetrics}}

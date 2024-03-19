@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ .Values.nginx.statefulset.name }}
+  namespace: {{ .Values.nginx.namespace }}
+  labels:
+    monitoring: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  namespaceSelector:
+    matchNames:
+      - {{ .Values.nginx.namespace }}
+  podMetricsEndpoints:
+    - port: http-metrics
+      path: /metrics

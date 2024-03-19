@@ -49,10 +49,12 @@ data:
       }
 
       server {
-        listen 9113;
-        server_name _exporter;
-        location /nginx_status {
+        listen 9115;
+        server_name metrics_exporter;
+        location /metrics {
+          access_log off;
           stub_status;
+          # proxy_pass http://blackbox-exporter-svc.monitoring:9115;
         }
       }
     }

@@ -3,6 +3,8 @@ kind: StatefulSet
 metadata:
   name: {{ .Values.nginx.statefulset.name }}
   namespace: {{ .Values.nginx.namespace }}
+  labels:
+    monitoring: prometheus
 spec:
   serviceName: nginx
   replicas: {{ .Values.nginx.statefulset.replicas }}
@@ -19,9 +21,10 @@ spec:
         - name: nginx
           image: {{ .Values.nginx.statefulset.image }}
           ports:
-            - protocol: TCP
-              name: http
+            - name: http
               containerPort: {{ .Values.nginx.service.port }}
+            - name: http-metrics
+              containerPort: {{ .Values.nginx.service.portMetrics}}
           volumeMounts:
             - name: admin-secret
               mountPath: /admin-sa/secret

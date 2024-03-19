@@ -20,6 +20,7 @@ Invoke-Expression -Command $Apply_Svc
 Start-Sleep -Seconds 2
 Invoke-Expression -Command $Get_Svc
 Start-Sleep -Seconds 2
+Write-Output "`nDashboard Bearer Token (dashboard-sa):`n"
 Invoke-Expression -Command $Create_Token
 
 Write-Output "`nDashboard Nodeport service enabled: https://localhost:30500`n"

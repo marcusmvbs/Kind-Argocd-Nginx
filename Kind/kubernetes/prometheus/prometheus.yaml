@@ -4,11 +4,13 @@ metadata:
   name: prometheus-prometheus-kube-prometheus-prometheus
   namespace: monitoring
 spec:
-  version: v2.42.0
   serviceAccountName: prometheus-sa
-  podMonitorSelector: 
+  additionalScrapeConfigs:
+    name: prometheus-config
+    key: prometheus.yml
+  podMonitorSelector:
     matchLabels:
-      prometheus: prometheus-prometheus-kube-prometheus-prometheus
+      app: nginx
   podMonitorNamespaceSelector:
     matchLabels:
       monitoring: prometheus
@@ -24,9 +26,6 @@ spec:
   probeNamespaceSelector:
     matchLabels:
       monitoring: prometheus
-  additionalScrapeConfigs:
-    name: scrape-configs
-    key: prometheus-additional.yaml
   resources:
     requests:
       cpu: 500m
@@ -38,7 +37,7 @@ spec:
   logLevel: info
   logFormat: logfmt
   retention: 7d
-  scrapeInterval: 15s
+  scrapeInterval: 30s
   securityContext:
     fsGroup: 0
     runAsNonRoot: false

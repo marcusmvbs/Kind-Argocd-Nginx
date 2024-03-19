@@ -10,5 +10,4 @@ spec:
     - name: http
       port: 9115
       targetPort: 9115
-      # nodePort: 30115
   type: ClusterIP

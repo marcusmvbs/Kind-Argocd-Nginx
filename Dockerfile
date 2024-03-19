@@ -34,6 +34,6 @@ RUN chmod 644 /kind/kubernetes/nginx/html/index.html
 RUN chmod +x /kind/krew_install.sh
 
 # Expose any necessary ports
-EXPOSE 6443 8443 9090 8080 9115
+EXPOSE 6443 8443 9090 8081 9115
 
 ENTRYPOINT ["sh", "-c", "tail -f /dev/null"]

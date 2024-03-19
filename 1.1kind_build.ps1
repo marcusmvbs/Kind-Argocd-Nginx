@@ -52,6 +52,10 @@ Invoke-Expression -Command $Apply_cRole
 Start-Sleep -Seconds 2
 Invoke-Expression -Command $Apply_crb
 
+# Get pods
+$kubectl_pods = "kubectl get pods -A"
+$Get_Pods     = "docker exec -it $containerName sh -c '$kubectl_pods'"
+Invoke-Expression -Command $Get_Pods
 
 Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
 Write-Output "     $ powershell.exe -File .\2.0pod_watch.ps1"

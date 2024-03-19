@@ -1,0 +1,19 @@
+prometheus:
+  enabled: true
+  namespace: monitoring
+
+  grafana-service:
+    name: prometheus-grafana
+    port: 80
+    targetPort: 3000
+    nodeport: 30003
+  
+  prometheus-service:
+    name: prometheus-operated
+    port: 9090
+    nodeport: 32000
+  
+  prom-server:
+    name: prometheus-kube-prometheus-prometheus
+    replicas: 1
+    version: v0.72.0

@@ -1,6 +1,6 @@
 # Common Variables
 $containerName = "kind_container"
-$kubectl_pods  = "watch kubectl get pods -n monitoring"
+$kubectl_pods  = "watch kubectl get pods -A"
 
 # Docker exec bash
 $KubectlGetPods = "docker exec -it $containerName sh -c '$kubectl_pods'"

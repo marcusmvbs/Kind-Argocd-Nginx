@@ -1,31 +1,32 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: prometheus-prometheus-kube-prometheus-prometheus
-  namespace: monitoring
+  name: {{ .Values.prometheus.prom-server.name }}
+  namespace: {{ .Values.prometheus.namespace }}
 spec:
+  version: {{ .Values.prometheus.prom-server.version }}
   serviceAccountName: prometheus-sa
-  additionalScrapeConfigs:
-    name: prometheus-config
-    key: prometheus.yml
   podMonitorSelector:
     matchLabels:
-      app: nginx
+      prometheus: {{ .Values.prometheus.prom-server.name }}
   podMonitorNamespaceSelector:
     matchLabels:
       monitoring: prometheus
   serviceMonitorSelector:
     matchLabels:
-      prometheus: prometheus-prometheus-kube-prometheus-prometheus
+      prometheus: {{ .Values.prometheus.prom-server.name }}
   serviceMonitorNamespaceSelector:
     matchLabels:
       monitoring: prometheus
-  probeSelector:
-    matchLabels:
-      prometheus: prometheus-prometheus-kube-prometheus-prometheus
-  probeNamespaceSelector:
-    matchLabels:
-      monitoring: prometheus
+  # probeSelector:
+  #   matchLabels:
+  #     prometheus: {{ .Values.prometheus.prom-server.name }}
+  # probeNamespaceSelector:
+  #   matchLabels:
+  #     monitoring: prometheus
+  additionalScrapeConfigs:
+    name: prometheus-config
+    key: prometheus-additional.yml
   resources:
     requests:
       cpu: 500m
@@ -33,7 +34,7 @@ spec:
     limits:
       cpu: 500m
       memory: 2Gi
-  replicas: 1
+  replicas: {{ .Values.prometheus.prom-server.replicas }}
   logLevel: info
   logFormat: logfmt
   retention: 7d

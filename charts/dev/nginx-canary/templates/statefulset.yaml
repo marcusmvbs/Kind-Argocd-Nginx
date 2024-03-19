@@ -22,9 +22,16 @@ spec:
           image: {{ .Values.nginx.statefulset.image }}
           ports:
             - name: http
-              containerPort: {{ .Values.nginx.service.port }}
+              containerPort: {{ .Values.nginx.service1.port }}
             - name: http-metrics
-              containerPort: {{ .Values.nginx.service.portMetrics}}
+              containerPort: {{ .Values.nginx.service2.port}}
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 200m
+            limits:
+              memory: 256Mi
+              cpu: 200m
           volumeMounts:
             - name: admin-secret
               mountPath: /admin-sa/secret
@@ -41,14 +48,14 @@ spec:
           livenessProbe:
             httpGet:
               path: {{ .Values.nginx.statefulset.probePath }}
-              port: {{ .Values.nginx.service.port }}
+              port: {{ .Values.nginx.service1.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: {{ .Values.nginx.statefulset.probePath }}
-              port: {{ .Values.nginx.service.port }}
+              port: {{ .Values.nginx.service1.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
       volumes:

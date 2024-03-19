@@ -2,15 +2,18 @@ nginx:
   enabled: true
   namespace: webserver
 
-  service:
-    name: nginx-svc
+  service1:
+    name: nginx-np-svc
     port: 80
-    portMetrics: 9115
     nodeport: 30000
+  
+  service2:
+    name: nginx-metrics-svc
+    port: 8081
 
   statefulset:
     name: nginx
-    replicas: 2
+    replicas: 1
     image: nginx:1.25.4
     probePath: /index.html
   

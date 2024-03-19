@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.prometheus.prometheus-service.name }}
+  namespace: {{ .Values.prometheus.namespace }}
+spec:
+  selector:
+    app.kubernetes.io/name: prometheus
+  ports:
+    - protocol: TCP
+      port: {{ .Values.prometheus.prometheus-service.port }}
+      targetPort: {{ .Values.prometheus.prometheus-service.port }}
+      nodePort: {{ .Values.prometheus.prometheus-service.nodeport }}
+  type: NodePort

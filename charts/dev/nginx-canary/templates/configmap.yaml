@@ -29,9 +29,9 @@ metadata:
 data:
   nginx.conf: |
     user nginx;
-    worker_processes  1;
+    worker_processes 1;
     events {
-      worker_connections  10240;
+      worker_connections 10240;
     }
 
     http {
@@ -49,12 +49,12 @@ data:
       }
 
       server {
-        listen 9115;
+        listen 8081;
         server_name metrics_exporter;
         location /metrics {
           access_log off;
           stub_status;
-          # proxy_pass http://blackbox-exporter-svc.monitoring:9115;
+          proxy_pass http://blackbox-exporter-svc.monitoring:9115;
         }
       }
     }

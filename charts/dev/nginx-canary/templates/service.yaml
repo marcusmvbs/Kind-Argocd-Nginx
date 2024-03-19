@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.nginx.service.name }}
+  name: {{ .Values.nginx.service1.name }}
   namespace: {{ .Values.nginx.namespace }}
 spec:
   type: NodePort
@@ -9,9 +9,22 @@ spec:
     app: nginx
   ports:
     - name: http
-      port: {{ .Values.nginx.service.port }}
-      targetPort: {{ .Values.nginx.service.port }}
-      nodePort: {{ .Values.nginx.service.nodeport }}
+      port: {{ .Values.nginx.service1.port }}
+      targetPort: {{ .Values.nginx.service1.port }}
+      nodePort: {{ .Values.nginx.service1.nodeport }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.nginx.service2.name }}
+  namespace: {{ .Values.nginx.namespace }}
+  labels:
+    app: nginx-monitoring
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx
+  ports:
     - name: http-metrics
-      port: {{ .Values.nginx.service.portMetrics}}
-      targetPort: {{ .Values.nginx.service.portMetrics}}
+      port: {{ .Values.nginx.service2.port}}
+      targetPort: http-metrics

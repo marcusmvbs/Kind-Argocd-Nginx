@@ -1,5 +1,5 @@
 apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
+kind: ServiceMonitor
 metadata:
   name: {{ .Values.nginx.statefulset.name }}
   namespace: {{ .Values.nginx.namespace }}
@@ -8,10 +8,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-monitoring
   namespaceSelector:
     matchNames:
       - {{ .Values.nginx.namespace }}
-  podMetricsEndpoints:
+  endpoints:
     - port: http-metrics
       path: /metrics

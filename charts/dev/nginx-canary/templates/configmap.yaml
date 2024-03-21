@@ -52,9 +52,8 @@ data:
         listen 8081;
         server_name metrics_exporter;
         location /metrics {
-          access_log off;
+          # access_log off;
           stub_status;
-          proxy_pass http://blackbox-exporter-svc.monitoring:9115;
         }
       }
     }

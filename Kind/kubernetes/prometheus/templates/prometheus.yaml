@@ -1,26 +1,26 @@
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: {{ .Values.prometheus.prom-server.name }}
-  namespace: {{ .Values.prometheus.namespace }}
+  name: prometheus-kube-prometheus-prometheus
+  namespace: monitoring
 spec:
-  version: {{ .Values.prometheus.prom-server.version }}
+  # version: {{ .Values.prometheus.promserver.image }}
   serviceAccountName: prometheus-sa
   podMonitorSelector:
     matchLabels:
-      prometheus: {{ .Values.prometheus.prom-server.name }}
+      prometheus: prometheus-kube-prometheus-prometheus
   podMonitorNamespaceSelector:
     matchLabels:
       monitoring: prometheus
   serviceMonitorSelector:
     matchLabels:
-      prometheus: {{ .Values.prometheus.prom-server.name }}
+      prometheus: prometheus-kube-prometheus-prometheus
   serviceMonitorNamespaceSelector:
     matchLabels:
       monitoring: prometheus
   # probeSelector:
   #   matchLabels:
-  #     prometheus: {{ .Values.prometheus.prom-server.name }}
+  #     prometheus: prometheus-kube-prometheus-prometheus
   # probeNamespaceSelector:
   #   matchLabels:
   #     monitoring: prometheus
@@ -34,7 +34,7 @@ spec:
     limits:
       cpu: 500m
       memory: 2Gi
-  replicas: {{ .Values.prometheus.prom-server.replicas }}
+  replicas: 1
   logLevel: info
   logFormat: logfmt
   retention: 7d

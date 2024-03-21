@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mygoapp
+  namespace: webserver
+  labels:
+    monitoring: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goapp
+  template:
+    metadata:
+      labels:
+        app: goapp
+    spec:
+      containers:
+        - name: goapp
+          image: nginx:1.25.4
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 81
+            - name: http-metrics
+              containerPort: 8181
+              # command: ["./myapp"]  # Assuming your application needs a specific command to run
+              # Add any additional configuration like ports, volumes, etc.

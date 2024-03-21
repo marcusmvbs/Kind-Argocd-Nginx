@@ -9,6 +9,9 @@ nodes:
   - containerPort: 30003 # Grafana nodePort
     hostPort: 30003
     protocol: TCP
+  - containerPort: 30005 # Prometheus Nginx Exporter nodePort
+    hostPort: 30005
+    protocol: TCP
   - containerPort: 30080 # Argocd nodePort
     hostPort: 30080
     protocol: TCP

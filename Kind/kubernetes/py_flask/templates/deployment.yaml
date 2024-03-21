@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapp
+  labels:
+    monitoring: prometheus
+    # app.kubernetes.io/name: {{ include "python-app.name" . }}
+    # helm.sh/chart: {{ include "python-app.chart" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pythonapp
+    #   app.kubernetes.io/name: {{ include "python-app.name" . }}
+    #   app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: pythonapp
+    #     app.kubernetes.io/name: {{ include "python-app.name" . }}
+    #     app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: python
+          image: python:3.9-slim
+          command: ["python", "-u", "/app/app.py"]
+          ports:
+            - name: http
+              containerPort: 5000
+            - name: http-metrics
+              containerPort: 5001

@@ -5,12 +5,12 @@ import (
 	"math/rand"
 	"net/http"
 	"time"
-
+	// Fiber web framework, Prometheus Client library, Prometheus server metrics exporter
 	"github.com/gofiber/fiber/v2"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
-// Metric to measure the duration of requests at the application endpoint
+// Struct metrics, variable duration pointering to prometheus object, allowing dynamic allocation of the object during runtime
 type metrics struct { 
 	duration *prometheus.SummaryVec
 }
@@ -18,7 +18,7 @@ type metrics struct {
 func NewMetrics(reg prometheus.Registerer) *metrics {
 	m := &metrics{
 		duration: prometheus.NewSummaryVec(prometheus.SummaryOpts{
-			Namespace:  "tester",
+			Namespace:  "webserver",
 			Name:       "duration_seconds",
 			Help:       "Duration of the request.",
 			Objectives: map[float64]float64{0.9: 0.01, 0.99: 0.001},

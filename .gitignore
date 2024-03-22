@@ -8,5 +8,5 @@ docker_reinstall.ps1
 .credentials.txt
 
 # Ignore go module and sum
-./kind/kubernetes/go_app/app/go.mod
-./kind/kubernetes/go_app/app/go.sum
+/kind/kubernetes/go_app/app/go.mod
+/kind/kubernetes/go_app/app/go.sum

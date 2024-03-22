@@ -87,8 +87,8 @@
     - name: Helm installing kube-prometheus-stack...
       ansible.builtin.command: helm install prometheus prometheus-community/kube-prometheus-stack --version 57.0.3 --namespace monitoring
 
-    # - name: Helm installing nginx...
-    #   ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
+    - name: Helm installing nginx...
+      ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
 
     - name: Apply labels
       ansible.builtin.command: kubectl label {{ item }}

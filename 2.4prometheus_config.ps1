@@ -38,8 +38,8 @@ Start-Sleep -Seconds 5
 Invoke-Expression -Command $Exporter_Deploy
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $Exporter_Svc
-# Start-Sleep -Seconds 5
-# Invoke-Expression -Command $Exporter_Probe
+Start-Sleep -Seconds 5
+Invoke-Expression -Command $Exporter_Probe
 Start-Sleep -Seconds 5
 Invoke-Expression -Command $Create_svc
 

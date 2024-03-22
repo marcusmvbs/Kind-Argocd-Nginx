@@ -5,7 +5,7 @@ metadata:
   name: blackbox-exporter-svc
 spec:
   selector:
-    app: nginx
+    app: nginx # nginx / goapp
   ports:
     - name: http
       port: 9115

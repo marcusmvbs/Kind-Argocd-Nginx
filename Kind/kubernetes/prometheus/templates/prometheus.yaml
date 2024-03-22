@@ -18,12 +18,12 @@ spec:
   serviceMonitorNamespaceSelector:
     matchLabels:
       monitoring: prometheus
-  # probeSelector:
-  #   matchLabels:
-  #     prometheus: prometheus-kube-prometheus-prometheus
-  # probeNamespaceSelector:
-  #   matchLabels:
-  #     monitoring: prometheus
+  probeSelector:
+    matchLabels:
+      prometheus: prometheus-kube-prometheus-prometheus
+  probeNamespaceSelector:
+    matchLabels:
+      monitoring: prometheus
   additionalScrapeConfigs:
     name: prometheus-config
     key: prometheus-additional.yml

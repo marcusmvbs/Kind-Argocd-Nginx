@@ -1,32 +1,18 @@
-# apiVersion: monitoring.coreos.com/v1
-# kind: Probe
-# metadata:
-#   name: nginx-probe
-#   namespace: monitoring
-#   labels:
-#     prometheus: prometheus-prometheus-kube-prometheus-prometheus
-# spec:
-#   jobName: web_scrape
-#   interval: 30s
-#   module: http_2xx
-#   prober:
-#     url: nginx-exporter-svc.monitoring:9115
-#   targets:
-#     staticConfig:
-#       static:
-#         - http://localhost:8080/metrics
-            # 30113 / 9113
-            
-  # relabelConfigs:
-  #   - sourceLabels: [__address__]
-  #     targetLabel: instance
-  #   - sourceLabels: [__address__]
-  #     targetLabel: __param_target
-  #   - targetLabel: __address__
-  #     replacement: nginx-exporter-svc.monitoring:9113
-  #   - sourceLabels: [__param_target]
-  #     targetLabel: instance
-  #   - regex: .*
-  #     action: replace
-  #     targetLabel: __metrics_path__
-  #     replacement: /metrics
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: nginx-probe
+  namespace: monitoring
+  labels:
+    prometheus: prometheus-prometheus-kube-prometheus-prometheus
+spec:
+  jobName: web_scrape
+  interval: 30s
+  module: http_2xx
+  prober:
+    path: /index.html
+    url: blackbox-exporter-svc.monitoring:9115
+  targets:
+    staticConfig:
+      static:
+        - http://nginx-np-svc.webserver:80/index.html

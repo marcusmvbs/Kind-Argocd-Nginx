@@ -9,7 +9,7 @@ nginx:
   
   service2:
     name: nginx-metrics-svc
-    port: 8081
+    port: 8080
 
   statefulset:
     name: nginx

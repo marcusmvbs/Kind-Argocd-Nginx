@@ -1,4 +1,4 @@
-module github.com/marcusmvbs/Kind-argocd_nginx_prom_sql/Kind/kubernetes/nginx
+module github.com/marcusmvbs/Kind-argocd_nginx_prom_sql/Kind/kubernetes/go_app
 
 go 1.19
 

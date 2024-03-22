@@ -43,8 +43,8 @@ func main() {
 	promHandler := promhttp.HandlerFor(reg, promhttp.HandlerOpts{}) // Responsible for serving prom metrics collected by registry(reg)
 	pMux.Handle("/metrics", promHandler)
 
-	go func() { // Routine to listen port 8081
-		log.Fatal(http.ListenAndServe(":8081", pMux))
+	go func() { // Routine to listen port 8181
+		log.Fatal(http.ListenAndServe(":8181", pMux))
 	}()
 
 	go simulateTraffic(m) // Routine to simulate traffic using metrics (m) as an argument
@@ -53,7 +53,7 @@ func main() {
 
 	app.Get("/api/devices", getDevices)
 
-	log.Fatal(app.Listen(":80")) // Create fiber HTTP server 80
+	log.Fatal(app.Listen(":81")) // Create fiber HTTP server 81
 }
 
 func getDevices(c *fiber.Ctx) error {

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mygoapptest
+  name: goapp
   namespace: webserver
   labels:
     monitoring: prometheus
@@ -9,15 +9,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: goapptest
+      app: goapp
   template:
     metadata:
       labels:
-        app: goapptest
+        app: goapp
     spec:
       containers:
-        - name: goapptest
-          image: golang:alpine3.19 # https://hub.docker.com/_/golang/tags - image: golang:1.22.1-alpine3.19
+        - name: goapp
+          image: golang:1.22.1-alpine3.19
           imagePullPolicy: Always
           ports:
             - name: http
@@ -27,10 +27,10 @@ spec:
           resources:
             requests:
               memory: 256Mi
-              cpu: 300m
+              cpu: 200m
             limits:
               memory: 512Mi
-              cpu: 500m
+              cpu: 400m
           volumeMounts:
             - name: config-volume
               mountPath: /app_config
@@ -44,8 +44,8 @@ spec:
               cp /app_config/script/app_config.sh /tmp/app_config.sh &&
               cp -r /app_config/ /tmp/app_config &&
               chmod +x /tmp/app_config.sh &&
-              sh /tmp/app_config.sh || echo "Failed to execute app_config.sh"
-
+              sh /tmp/app_config.sh
+          
       # Define ConfigMaps for configuration files
       volumes:
         - name: config-volume
@@ -54,11 +54,3 @@ spec:
         - name: script-volume
           configMap:
             name: go-script
-
-      # # Add Init Container to copy configuration files
-      # initContainers:
-      # - name: copy-config-files
-      #   image: golang:1.22
-      #   volumeMounts:
-      #   - name: config-volume
-      #     mountPath: /go_app

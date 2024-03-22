@@ -13,7 +13,7 @@ sleep 2
 go mod verify
 sleep 2
 
-# Build the Go application
+# Build the Go application - it takes 240s
 go build -o /myapp main.go
 sleep 2
 

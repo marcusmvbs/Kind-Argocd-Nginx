@@ -30,8 +30,9 @@ COPY charts/ /charts/
 # Argocd and Nginx Config
 COPY application.yaml application.yaml
 RUN chmod +x /kind/kubernetes/argocd/argocd_config.sh
-RUN chmod 644 /kind/kubernetes/nginx/html/index.html
+RUN chmod +x /kind/kubernetes/go_app/script/app_config.sh
 RUN chmod +x /kind/krew_install.sh
+RUN chmod 644 /kind/kubernetes/nginx/html/index.html
 
 # Expose any necessary ports
 EXPOSE 6443 8443 9090 8081 9115

@@ -10,7 +10,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
-// Struct metrics, variable duration pointering to prometheus object, allowing dynamic allocation of the object during runtime
+// Define struct metrics, duration pointering to prometheus object, allowing dynamic allocation of the object during runtime
 type metrics struct { 
 	duration *prometheus.SummaryVec
 }
@@ -22,13 +22,14 @@ func NewMetrics(reg prometheus.Registerer) *metrics {
 			Name:       "duration_seconds",
 			Help:       "Duration of the request.",
 			Objectives: map[float64]float64{0.9: 0.01, 0.99: 0.001},
-		}, []string{"path", "status"}),
+		}, []string{"path", "status"}), // Labels
 	}
-	reg.MustRegister(m.duration)
-	return m
+	reg.MustRegister(m.duration) // Ensures the metric was registered to be scraped
+	return m // Returns the pointer value to allocate on metrics object 
 }
 
-type Device struct {
+// Device represents any physical or virtual entity that the application interacts with, such as IoT devices
+type Device struct { 
 	ID       int    `json:"id"`
 	Mac      string `json:"mac"`
 	Firmware string `json:"firmware"`
@@ -38,21 +39,21 @@ func main() {
 	reg := prometheus.NewRegistry()
 	m := NewMetrics(reg)
 
-	pMux := http.NewServeMux()
-	promHandler := promhttp.HandlerFor(reg, promhttp.HandlerOpts{})
+	pMux := http.NewServeMux() // Create HTTP server 8081
+	promHandler := promhttp.HandlerFor(reg, promhttp.HandlerOpts{}) // Responsible for serving prom metrics collected by registry(reg)
 	pMux.Handle("/metrics", promHandler)
 
-	go func() {
+	go func() { // Routine to listen port 8081
 		log.Fatal(http.ListenAndServe(":8081", pMux))
 	}()
 
-	go simulateTraffic(m)
+	go simulateTraffic(m) // Routine to simulate traffic using metrics (m) as an argument
 
-	app := fiber.New()
+	app := fiber.New() // Create new instance of Fiber web framework
 
 	app.Get("/api/devices", getDevices)
 
-	log.Fatal(app.Listen(":8080"))
+	log.Fatal(app.Listen(":80")) // Create fiber HTTP server 80
 }
 
 func getDevices(c *fiber.Ctx) error {
@@ -64,15 +65,15 @@ func getDevices(c *fiber.Ctx) error {
 
 	return c.JSON(dvs)
 }
-
+// It records the duration of a fake request using the duration metric from the metrics object 'm'
 func simulateTraffic(m *metrics) {
 	for {
 		now := time.Now()
 		sleep(1000)
-		m.duration.WithLabelValues("/fake", "200").Observe(time.Since(now).Seconds())
+		m.duration.WithLabelValues("/fake", "200").Observe(time.Since(now).Seconds()) // (path, status)
 	}
 }
-
+// Delay function (sleep + rand)
 func sleep(ms int) {
 	rand.Seed(time.Now().UnixNano())
 	now := time.Now()

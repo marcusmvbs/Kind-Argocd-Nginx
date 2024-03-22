@@ -15,6 +15,9 @@ nodes:
   - containerPort: 30080 # Argocd nodePort
     hostPort: 30080
     protocol: TCP
+  - containerPort: 30181 # Golang app
+    hostPort: 30181
+    protocol: TCP
   - containerPort: 30500 # Kubernetes-Dashboard nodePort ## No need for kubectl port-forward ##
     hostPort: 30500
     protocol: TCP

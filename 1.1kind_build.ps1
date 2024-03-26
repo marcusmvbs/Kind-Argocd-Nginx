@@ -59,6 +59,7 @@ Invoke-Expression -Command $Get_Pods
 
 Write-Output "`nArgoCD is ready on kubernetes cluster. Execute the following command to continue configuration:`n"
 Write-Output "     $ powershell.exe -File .\1.5goapp_config.ps1"
+Write-Output "     $ powershell.exe -File .\1.6pyflask_build.ps1"
 Write-Output "     $ powershell.exe -File .\2.0pod_watch.ps1"
 Write-Output "     $ powershell.exe -File .\2.1argocd_sync.ps1"
 Write-Output "     $ powershell.exe -File .\2.2krew_install.ps1"

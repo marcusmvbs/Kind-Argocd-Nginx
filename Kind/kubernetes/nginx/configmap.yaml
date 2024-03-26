@@ -28,13 +28,24 @@ metadata:
   namespace: webserver
 data:
   nginx.conf: |
-    user nginx;
-    worker_processes  1;
+    # user nginx;
+    # worker_processes 1;
     events {
-      worker_connections  10240;
+      worker_connections 1024;
     }
 
     http {
+
+      # upstream web-blue {
+      #   server web-blue-01:80;
+      #   server web-blue-02:80;
+      # }
+
+      # upstream web-green {
+      #   server web-green-01:80;
+      #   server web-green-02:80;
+      # }
+
       server {
         listen 80;
         server_name _;
@@ -47,7 +58,9 @@ data:
           index index.html;
         }
       }
+
       server {
+
         listen 9113;
         server_name exporter;
 

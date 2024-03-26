@@ -4,14 +4,14 @@ metadata:
   name: {{ .Values.nginx.service1.name }}
   namespace: {{ .Values.nginx.namespace }}
 spec:
-  type: NodePort
+  type: {{ .Values.nginx.service1.type}}
   selector:
     app: nginx
   ports:
     - name: http
       port: {{ .Values.nginx.service1.port }}
-      targetPort: {{ .Values.nginx.service1.port }}
-      nodePort: {{ .Values.nginx.service1.nodeport }}
+      targetPort: http
+      # nodePort: {{ .Values.nginx.service1.nodeport }}
 ---
 apiVersion: v1
 kind: Service
@@ -21,7 +21,7 @@ metadata:
   labels:
     app: nginx-monitoring
 spec:
-  type: ClusterIP
+  type: {{ .Values.nginx.service2.type}}
   selector:
     app: nginx
   ports:

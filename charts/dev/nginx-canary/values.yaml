@@ -3,13 +3,14 @@ nginx:
   namespace: webserver
 
   service1:
-    name: nginx-np-svc
+    name: nginx-svc
     port: 80
-    nodeport: 30000
+    type: ClusterIP
   
   service2:
     name: nginx-metrics-svc
     port: 8080
+    type: ClusterIP
 
   statefulset:
     name: nginx
@@ -27,6 +28,7 @@ nginx:
     admin: webserver-admin
     read: webserver-readonly
 
-  # ingress:
-  #   name: nginx-ingress
-  #   number: 80
+  ingress:
+    name: nginx-ingress
+    ingressClassName: nginx
+    host: localhost

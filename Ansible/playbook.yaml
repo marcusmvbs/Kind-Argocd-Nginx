@@ -79,6 +79,7 @@
         - kubernetes-dashboard
         - monitoring
         - webserver
+        - nginx-ingress
 
     # Helm Install
     - name: Helm installing kubernetes-dashboard...
@@ -100,8 +101,8 @@
     # - name: Helm installing prometheus-nginx-exporter...
     #   ansible.builtin.command: helm install nginx-exporter prometheus-community/prometheus-nginx-exporter --version 0.2.1 --namespace monitoring
 
-    # - name: Helm installing nginx-ingress...
-    #   ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 10.5.2 --namespace nginx-ingress
+    - name: Helm installing nginx-ingress...
+      ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 11.0.0 --namespace nginx-ingress
 
     # - name: Helm installing argo-rollouts...
     #   ansible.builtin.command: helm install argo-rollouts argo/argo-rollouts --version 2.34.3 --namespace argo-rollouts --set dashboard.enabled=true

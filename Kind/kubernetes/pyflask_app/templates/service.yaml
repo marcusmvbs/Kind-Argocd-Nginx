@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pyflask-svc
+  name: pyflask-np-svc
   namespace: webserver
 spec:
   selector:
-    app: pyflask_app
+    app: pyflask-app
   ports:
     - name: http
       port: 5000
@@ -16,13 +16,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pyflask-svc
+  name: pyflask-metrics-svc
   namespace: webserver
   labels:
     app: nginx-monitoring
 spec:
   selector:
-    app: pyflask_app
+    app: pyflask-app
   ports:
     - name: http-metrics
       port: 5001

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pyflask_app
+  name: pyflask-app
   namespace: webserver
   labels:
     monitoring: prometheus
@@ -11,18 +11,18 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: pyflask_app
+      app: pyflask-app
     #   app.kubernetes.io/name: {{ include "python-app.name" . }}
     #   app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: pyflask_app
+        app: pyflask-app
     #     app.kubernetes.io/name: {{ include "python-app.name" . }}
     #     app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: pyflask_app
+        - name: pyflask-app
           image: 21121953/pyflask_app
           ports:
             - name: http

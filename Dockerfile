@@ -16,6 +16,12 @@ RUN apt-get update && \
 RUN pip3 install --no-cache-dir --upgrade pip && \
     ansible-galaxy collection install community.general community.kubernetes
 
+# GCP Auth
+RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-469.0.0-linux-x86_64.tar.gz && \
+    tar -xzf google-cloud-cli-469.0.0-linux-x86_64.tar.gz -C /usr/local/ && \
+    ln -s /usr/local/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud && \
+    sh /usr/local/google-cloud-sdk/install.sh
+
 # Install Docker
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
     sh get-docker.sh && \

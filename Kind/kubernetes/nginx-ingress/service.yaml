@@ -1,14 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-ingress-nginx-ingress-controller
-  namespace: nginx-ingress
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
 spec:
-  loadBalancerIP: 34.41.215.157 # Current task GCP external IP
   ports:
   - name: http
-    # nodePort: 30080
+    nodePort: 30080
     port: 80
     protocol: TCP
     targetPort: http
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
   type: LoadBalancer
+  loadBalancerIP: 34.31.195.132 # Current task GCP external IP

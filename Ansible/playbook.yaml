@@ -1,4 +1,3 @@
----
 - name: Kind dependencies, Helm install, cluster config
   hosts: localhost
   become: yes
@@ -8,15 +7,15 @@
       apt:
         update_cache: yes
 
-    - name: Download Kind binary
+    - name: Download Kind binary # v0.21.0
       get_url:
         url: "https://github.com/kubernetes-sigs/kind/releases/download/v0.21.0/kind-linux-amd64"
         dest: "/usr/local/bin/kind"
         mode: '0755'
 
-    - name: Download kubectl binary
+    - name: Download kubectl binary # v1.29.1
       get_url:
-        url: "https://storage.googleapis.com/kubernetes-release/release/v1.26.0/bin/linux/amd64/kubectl"
+        url: "https://storage.googleapis.com/kubernetes-release/release/v1.29.1/bin/linux/amd64/kubectl"
         dest: "/usr/local/bin/kubectl"
         mode: '0755'
       

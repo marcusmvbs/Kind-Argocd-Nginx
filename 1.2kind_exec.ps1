@@ -20,3 +20,11 @@ Invoke-Expression -Command $KindExecCommand
 
 # $Rollout = "docker exec -it $containerName sh -c 'kubectl argo rollouts get rollout nginx-deploy -n webserver --watch'"
 # Invoke-Expression -Command $Rollout
+
+
+# Control plane upgrade
+# docker exec -it kind-control-plane /bin/bash
+# ssh kind-control-plane
+# apt-mark unhold kubelet kubectl
+# apt-get update && apt-get install -y kubelet='1.27.0-*' kubectl='1.27.0-*' && \
+# apt-mark hold kubelet kubectl

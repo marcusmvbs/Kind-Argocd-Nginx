@@ -38,7 +38,7 @@ Invoke-Expression -Command $AnsiblePlaybook
 Start-Sleep -Seconds 10
 
 # Argocd config
-Invoke-Expression -Command $Install_ArgoCD
+# Invoke-Expression -Command $Install_ArgoCD
 # Write-Output "Waiting for argocd pods creation..."
 # Start-Sleep -Seconds 35
 

@@ -52,6 +52,9 @@
     - name: Prometheus Helm Repo
       ansible.builtin.command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
+    - name: Prometheus Helm Repo
+      ansible.builtin.command: helm repo add apache-airflow https://airflow.apache.org
+
     # - name: Argo-rollouts Helm Repo
     #   ansible.builtin.command: helm repo add argo https://argoproj.github.io/argo-helm
 
@@ -80,8 +83,11 @@
         - webserver
 
     # Helm Install
-    # - name: Helm installing kubernetes-dashboard...
-    #   ansible.builtin.command: helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --version 7.1.1 --namespace kubernetes-dashboard
+    - name: Helm installing kubernetes-dashboard...
+      ansible.builtin.command: helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --version 7.1.1 --namespace kubernetes-dashboard
+
+    - name: Helm installing apache-airflow...
+      ansible.builtin.command: helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace
 
     # - name: Helm installing kube-prometheus-stack...
     #   ansible.builtin.command: helm install prometheus prometheus-community/kube-prometheus-stack --version 57.0.3 --namespace monitoring

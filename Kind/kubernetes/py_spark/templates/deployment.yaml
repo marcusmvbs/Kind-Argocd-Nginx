@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-env
+  namespace: webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spark
+  template:
+    metadata:
+      labels:
+        app: spark
+    spec:
+      containers:
+      - name: spark
+        image: 21121953/spark
+        ports:
+        - containerPort: 8000
+      #   volumeMounts:
+      #     - mountPath: /py_spark
+      #       name: py_spark-files
+      # volumes:
+      #   - name: py_spark-files
+      #     hostPath:
+      #       path: /kind/kubernetes/py_spark/

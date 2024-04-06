@@ -14,7 +14,8 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --no-cache-dir --upgrade pip && \
-    ansible-galaxy collection install community.general community.kubernetes
+    ansible-galaxy collection install community.general community.kubernetes && \
+    pip3 install pandas pyspark matplotlib
 
 # GCP Auth
 RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-469.0.0-linux-x86_64.tar.gz && \

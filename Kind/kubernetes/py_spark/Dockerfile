@@ -1,19 +1,20 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.8-slim-buster
-EXPOSE 8000
-# Keeps Python from generating .pyc files in the container
-ENV PYTHONDONTWRITEBYTECODE=1
-# Turns off buffering for easier container logging
-ENV PYTHONUNBUFFERED=1
-# Install pip requirements
-COPY requirements.txt .
-RUN python -m pip install -r requirements.txt
-WORKDIR /py_spark
-COPY . /py_spark
+# syntax=docker/dockerfile:1
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-# RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-# USER appuser
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["gunicorn", "--workers=3", "--bind", "0.0.0.0:8000", "app:app"]
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+
+# 1- docker volume create todo-db
+# 2- docker build -t 21121953/py_spark .
+# 3- docker login
+# 4- docker push 21121953/py_spark
+# 5- docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=/etc/tododir 21121953/py_spark
+# 6- docker exec -it 2cd9114f7de5
+# ---
+# 6- docker network create todo-app
+# 5- docker run -d --network todo-app --network-alias mysql -v todo-mysql-data:/var/lib/mysql \
+#               -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=todos mysql:8.0
+# 6- docker exec -it <container_id> mysql -u root -p

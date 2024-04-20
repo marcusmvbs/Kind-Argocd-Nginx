@@ -18,6 +18,6 @@ Invoke-Expression -Command $DockerLogin
 Start-Sleep -Seconds 2
 Invoke-Expression -Command $DockerPush
 Start-Sleep -Seconds 2
-Invoke-Expression -Command $SparkEnv_Deploy
+# Invoke-Expression -Command $SparkEnv_Deploy
 Start-Sleep -Seconds 2
 # Invoke-Expression -Command $SparkEnv_Svc

@@ -41,8 +41,6 @@
         dest: "/usr/local/bin/argocd"
         mode: "0755"
 
-    # https://helm.sh/docs/
-
     - name: Kubernetes Dashboard Helm Repo
       ansible.builtin.command: helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 
@@ -52,17 +50,11 @@
     - name: Prometheus Helm Repo
       ansible.builtin.command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
-    - name: Prometheus Helm Repo
+    - name: Airflow Helm Repo
       ansible.builtin.command: helm repo add apache-airflow https://airflow.apache.org
 
-    # - name: Argo-rollouts Helm Repo
-    #   ansible.builtin.command: helm repo add argo https://argoproj.github.io/argo-helm
-
-    # - name: Kyverno Helm Repo
-    #   ansible.builtin.command: helm repo add kyverno https://kyverno.github.io/kyverno/
-
-    # - name: Web dependency build
-    #   ansible.builtin.command: helm dependency build ../charts/dev/nginx-canary/
+    - name: Kyverno Helm Repo
+      ansible.builtin.command: helm repo add kyverno https://kyverno.github.io/kyverno/
 
     - name: Search Helm Charts
       ansible.builtin.command: helm search repo
@@ -89,33 +81,20 @@
     - name: Helm installing apache-airflow...
       ansible.builtin.command: helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace
 
-    # - name: Helm installing kube-prometheus-stack...
-    #   ansible.builtin.command: helm install prometheus prometheus-community/kube-prometheus-stack --version 57.0.3 --namespace monitoring
+    - name: Helm installing kube-prometheus-stack...
+      ansible.builtin.command: helm install prometheus prometheus-community/kube-prometheus-stack --version 57.0.3 --namespace monitoring
 
-    # - name: Helm installing nginx...
-    #   ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
-
-    # - name: Apply labels
-    #   ansible.builtin.command: kubectl label {{ item }}
-    #   loop:
-    #     - namespace monitoring monitoring=prometheus
-    #     - namespace webserver monitoring=prometheus
-    #     # - kubectl label node kind-worker node-role.kubernetes.io/worker1=worker1
+    - name: Helm installing nginx...
+      ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
 
     # - name: Helm installing prometheus-nginx-exporter...
     #   ansible.builtin.command: helm install nginx-exporter prometheus-community/prometheus-nginx-exporter --version 0.2.1 --namespace monitoring
 
-    # - name: Helm installing nginx-ingress...
-    #   ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 11.0.0 --namespace nginx-ingress
+    - name: Helm installing nginx-ingress...
+      ansible.builtin.command: helm install nginx-ingress bitnami/nginx-ingress-controller --version 11.0.0 --namespace nginx-ingress
 
-    # - name: Helm installing argo-rollouts...
-    #   ansible.builtin.command: helm install argo-rollouts argo/argo-rollouts --version 2.34.3 --namespace argo-rollouts --set dashboard.enabled=true
-
-    # - name: Helm installing nginx with blue-green deployment strategy...
-    #   ansible.builtin.command: helm install my-nginx ../charts/dev/nginx-canary --values ../charts/dev/nginx-canary/values.yaml
-
-    # - name: Helm installing kyverno...
-    #   ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno --version 3.1.4
+    - name: Helm installing kyverno...
+      ansible.builtin.command: helm install my-kyverno kyverno/kyverno --namespace kyverno --version 3.1.4
 
     # - name: Helm installing cert-manager...
     #   ansible.builtin.command: helm install cert-manager bitnami/cert-manager --version 0.22.1 --namespace cert-manager

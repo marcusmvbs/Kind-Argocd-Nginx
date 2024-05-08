@@ -43,11 +43,6 @@ Invoke-Expression -Command $Apply_cRole
 Start-Sleep -Seconds 2
 Invoke-Expression -Command $Apply_crb
 
-# Get pods
-$kubectl_pods = "kubectl get pods -A"
-$Get_Pods     = "docker exec -it $containerName sh -c '$kubectl_pods'"
-Invoke-Expression -Command $Get_Pods
-
 Write-Output "`nExecute the following command to continue configuration:`n"
 Write-Output "     $ powershell.exe -File .\1.5goapp_config.ps1"
 Write-Output "     $ powershell.exe -File .\1.6pyflask_build.ps1"

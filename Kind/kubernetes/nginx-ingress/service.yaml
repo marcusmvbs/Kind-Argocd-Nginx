@@ -15,4 +15,4 @@ spec:
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
   type: LoadBalancer
-  loadBalancerIP: 34.31.195.132 # Current task GCP external IP
+  # loadBalancerIP: 34.31.195.132 # GCP external IP

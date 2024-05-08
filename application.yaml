@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/marcusmvbs/argocd-features.git
+    repoURL: https://github.com/marcusmvbs/Kind-argocd_nginx_goapp_prom.git
     targetRevision: HEAD
     path: charts/dev/nginx-canary
   destination:

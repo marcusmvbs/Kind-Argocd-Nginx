@@ -1,6 +1,6 @@
-import pyspark # type: ignore
-from pyspark.sql import SparkSession # type: ignore
-import pandas as pd # type: ignore
+import pyspark
+from pyspark.sql import SparkSession
+import pandas as pd
 
 # Read CSV using pandas
 pd_df = pd.read_csv("test.csv")

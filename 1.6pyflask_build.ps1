@@ -3,7 +3,6 @@ $imageName     = "21121953/pyflask_app"
 $containerName = "kind_container"
 $app_deploy    = "kubectl apply -f /kind/kubernetes/pyflask_app/templates/deployment.yaml"
 $app_svc       = "kubectl apply -f /kind/kubernetes/pyflask_app/templates/service.yaml"
-# $A             = "$(sed "s/{{COLOR}}/blue/g" ./kind/kubernetes/python_app/templates/index.html.template > ./kind/kubernetes/python_app/templates/index.html)"
 
 # Docker Variables
 $DockerBuild    = "docker build -t $imageName .\kind\kubernetes\pyflask_app\"

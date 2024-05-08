@@ -1,6 +1,3 @@
-# ArgoCD-Rollouts
-Docker ✓ > Ansible ✓ > Kind ✓ > Helm Tools (nginx ✓/ kyverno ✓/ prometheus ✓/ SQL database X/)
-
 # Project execution steps
 
 1. Ensure you have a Windows machine to run PowerShell commands.
